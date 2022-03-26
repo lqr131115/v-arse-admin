@@ -6,7 +6,7 @@
                 <span
                     class="no-skip"
                     v-if="index === breadcrumbData.length - 1"
-                >{{ t(`route.${item.meta.title}`) }}</span>
+                >{{ $t(`route.${item.meta.title}`) }}</span>
                 <!-- 可以点击 -->
                 <span
                     class="skip"
@@ -14,7 +14,7 @@
                     fz15
                     fw7
                     v-else
-                >{{ t(`route.${item.meta.title}`) }}</span>
+                >{{ $t(`route.${item.meta.title}`) }}</span>
             </el-breadcrumb-item>
         </transition-group>
     </el-breadcrumb>
@@ -23,11 +23,9 @@
 <script lang="ts" setup>
 import { watch, ref } from 'vue';
 import { useRoute, RouteLocationMatched, useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n'
 const breadcrumbData = ref<RouteLocationMatched[]>([])
 const route = useRoute()
 const router = useRouter()
-const { t } = useI18n()
 const getBreadcrumbItem = (matchedRoute: RouteLocationMatched[]) => {
     breadcrumbData.value = matchedRoute.filter((mr) => mr.meta.title && mr.meta.icon)
     // 处理成自定义的格式

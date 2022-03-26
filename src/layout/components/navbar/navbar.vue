@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import Search from './components/search/search.vue'
 import Guide from './components/guide/guide.vue'
 import Locale from './components/locale/locale.vue'
@@ -12,7 +11,6 @@ type definePropsType = {
   collapse: boolean
 }
 let drawer = ref<Boolean>(false)
-const { t } = useI18n()
 const props = defineProps<definePropsType>()
 const emits = defineEmits(['update:collapse'])
 const toggle = () => {
@@ -67,10 +65,10 @@ const handleClickAction = (action: IAction, index: number) => {
         <Locale />
       </div>
       <div class="header__fullscreen">
-        <el-tooltip v-if="!collapse" effect="dark" :content="t('header.tooltipEntryFull')">
+        <el-tooltip v-if="!collapse" effect="dark" :content="$t('header.tooltipEntryFull')">
           <svg-icon name="fullscreen" style="font-size: 1.2em;" @click="fullscreen"></svg-icon>
         </el-tooltip>
-        <el-tooltip v-else class="box-item" effect="dark" :content="t('header.tooltipExitFull')">
+        <el-tooltip v-else class="box-item" effect="dark" :content="$t('header.tooltipExitFull')">
           <svg-icon name="exit-fullscreen" style="font-size: 1.3em;" @click="exitFullscreen"></svg-icon>
         </el-tooltip>
       </div>

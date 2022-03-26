@@ -9,18 +9,16 @@
                     :icon="item.icon"
                     :divided="item.divided"
                     @click="clickUserDropdownItem(item.value)"
-                >{{ t(`header.${item.text}`) }}</el-dropdown-item>
+                >{{ $t(`header.${item.text}`) }}</el-dropdown-item>
             </el-dropdown-menu>
         </template>
     </el-dropdown>
 </template>
 <script lang='ts' setup>
-import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/store/user'
 import { msgSuccess } from '@/utils/notice'
 import { userDropDownList, USER_DD } from '@/settings'
 
-const { t } = useI18n()
 const userStore = useUserStore()
 /**
  * 退出

@@ -1,7 +1,6 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue';
-import { useI18n } from 'vue-i18n'
 import type { IMenuItem } from '@/types/component';
 defineProps({
     data: {
@@ -43,7 +42,6 @@ defineProps({
         default: 'children'
     },
 })
-const { t } = useI18n()
 </script>
 
 <template>
@@ -61,15 +59,15 @@ const { t } = useI18n()
                 <el-icon v-if="item[icon]">
                     <component :is="item[icon]" />
                 </el-icon>
-                <template v-if="showPop" #title>{{ t(`route.${item[name]}`) }}</template>
-                <span v-if="!showPop">{{ t(`route.${item[name]}`) }}</span>
+                <template v-if="showPop" #title>{{ $t(`route.${item[name]}`) }}</template>
+                <span v-if="!showPop">{{ $t(`route.${item[name]}`) }}</span>
             </el-menu-item>
             <el-sub-menu v-if="item[children] && item[children].length" :index="item[index]">
                 <template #title>
                     <el-icon v-if="item[icon]">
                         <component :is="item[icon]" />
                     </el-icon>
-                    <span>{{ t(`route.${item[name]}`) }}</span>
+                    <span>{{ $t(`route.${item[name]}`) }}</span>
                 </template>
                 <el-menu-item
                     v-for="subItem in item[children]"
@@ -79,7 +77,7 @@ const { t } = useI18n()
                     <el-icon v-if="subItem[icon]">
                         <component :is="subItem[icon]" />
                     </el-icon>
-                    <span>{{ t(`route.${subItem[name]}`) }}</span>
+                    <span>{{ $t(`route.${subItem[name]}`) }}</span>
                 </el-menu-item>
             </el-sub-menu>
         </template>
