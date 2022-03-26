@@ -1,20 +1,22 @@
 <template>
     <el-breadcrumb v-bind="$attrs">
-        <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
-            <!-- 不可点击 -->
-            <span
-                class="no-skip"
-                v-if="index === breadcrumbData.length - 1"
-            >{{ t(`route.${item.meta.title}`) }}</span>
-            <!-- 可以点击 -->
-            <span
-                class="skip"
-                @click="onLinkClick(item)"
-                fz15
-                fw7
-                v-else
-            >{{ t(`route.${item.meta.title}`) }}</span>
-        </el-breadcrumb-item>
+        <transition-group name="breadcrumb">
+            <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
+                <!-- 不可点击 -->
+                <span
+                    class="no-skip"
+                    v-if="index === breadcrumbData.length - 1"
+                >{{ t(`route.${item.meta.title}`) }}</span>
+                <!-- 可以点击 -->
+                <span
+                    class="skip"
+                    @click="onLinkClick(item)"
+                    fz15
+                    fw7
+                    v-else
+                >{{ t(`route.${item.meta.title}`) }}</span>
+            </el-breadcrumb-item>
+        </transition-group>
     </el-breadcrumb>
 </template>
 
