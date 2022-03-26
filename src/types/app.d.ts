@@ -18,3 +18,16 @@ export type DropDown = {
   divided?: boolean;
   icon?: string;
 };
+
+export type menuTheme = {
+  menuBgColor?:string,
+  menuHoverBgColor?:string,
+  textColor?:string,
+  textActiveColor?:string,
+  submenuBgColor?:string,
+  submenuHoverBgColor?:string,
+}
+
+export type navBarTheme = {
+  navBarBgColor?:string,
+}

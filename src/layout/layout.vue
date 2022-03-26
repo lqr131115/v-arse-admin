@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useThemeStore } from '@/store/theme'
 import SideBar from './components/sidebar/sidebar.vue'
 import NavBar from './components/navbar/navbar.vue'
 import AppMain from './components/appmain/appmain.vue'
-// import menuScssVar from '@/styles/setting/menu.scss'
+const themeStore = useThemeStore()
 let collapse = ref<boolean>(false)
+const navBarTheme = computed(() => {
+  const backgroundColor = themeStore.getNavbarTheme.navBarBgColor
+  return {
+    backgroundColor
+  }
+})
 </script>
 
 <template>
@@ -14,7 +21,7 @@ let collapse = ref<boolean>(false)
         <side-bar :collapse="collapse"></side-bar>
       </el-aside>
       <el-container>
-        <el-header>
+        <el-header :style="navBarTheme">
           <nav-bar v-model:collapse="collapse"></nav-bar>
         </el-header>
         <el-main>

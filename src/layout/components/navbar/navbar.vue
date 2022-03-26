@@ -6,6 +6,7 @@ import Locale from './components/locale/locale.vue'
 import Notify from './components/notify/notify.vue'
 import NoticeList from './components/notify/noticelist.vue'
 import UserDropdown from './components/user-dropdown/user-dropdown.vue'
+import Setting from './components/setting/setting.vue'
 import { IListItem, IAction, tabListData, actionsData } from './components/notify/data'
 type definePropsType = {
   collapse: boolean
@@ -80,8 +81,11 @@ const handleClickAction = (action: IAction, index: number) => {
       </div>
     </div>
   </div>
-  <el-drawer v-model="drawer" :show-close="false">
-    <span>Hi, Theme!</span>
+  <el-drawer v-model="drawer">
+    <template #title>
+      <span fz20 fw7>{{ $t(`setting.drawerTitle`) }}</span>
+    </template>
+    <Setting />
   </el-drawer>
 </template>
 

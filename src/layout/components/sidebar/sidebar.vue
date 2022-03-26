@@ -5,8 +5,9 @@
       :data="menuData"
       :collapse="collapse"
       :defaultActive="defaultActive"
+      :background-color="menuBgColor"
+      :active-text-color="textActiveColor"
       router
-      active-text-color="#ffd04b"
     >
       <template #logo>
         <el-menu-item index="/">
@@ -20,12 +21,16 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute, useRouter, } from 'vue-router'
+import { useThemeStore } from '@/store/theme'
 import { filterRoutes, generateMenus, formatMenus } from '@/utils/route'
 interface ISidebarProps { collapse: boolean }
 defineProps<ISidebarProps>();
 const router = useRouter()
 const route = useRoute()
+const themeStore = useThemeStore()
 const menuData = computed(() => (formatMenus(generateMenus(filterRoutes(router.getRoutes())))))
+const menuBgColor = computed(() => themeStore.getMenuTheme.menuBgColor)
+const textActiveColor = computed(() => themeStore.getMenuTheme.textActiveColor)
 const defaultActive = computed(() => route.path)
 
 </script>
