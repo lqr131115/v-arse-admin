@@ -1,0 +1,39 @@
+$direction: (l left, r right, t top, b bottom);
+$tlist: (m, p, v, h);
+@for $i from 1 through 30 {
+  [pa#{$i}] {
+    padding: 1px * $i;
+  }
+  [ma#{$i}] {
+    margin: 1px * $i;
+  }
+  @each $type in $tlist {
+    @if $type == m {
+      @each $d in $direction {
+        [m#{nth($d, 1)}#{$i}] {
+          margin-#{nth($d, 2)}: 1px * $i;
+        }
+      }
+    } @else if $type == p {
+      @each $d in $direction {
+        [p#{nth($d, 1)}#{$i}] {
+          padding-#{nth($d, 2)}: 1px * $i;
+        }
+      }
+    } @else if $type == h {
+      [ph#{$i}] {
+        padding: 0px 1px * $i;
+      }
+      [mh#{$i}] {
+        margin: 0px 1px * $i;
+      }
+    } @else {
+      [pv#{$i}] {
+        padding: 1px * $i 0px;
+      }
+      [mv#{$i}] {
+        padding: 1px * $i 0px;
+      }
+    }
+  }
+}

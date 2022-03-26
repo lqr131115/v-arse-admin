@@ -1,0 +1,6 @@
+@for $i from 1 through 10 {
+  [radius#{$i}] {
+    border-radius: 1px * $i;
+    overflow: hidden;
+  }
+}

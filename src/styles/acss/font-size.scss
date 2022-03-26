@@ -1,0 +1,11 @@
+@for $i from 1 through 30 {
+  [fz#{$i}] {
+    font-size: 1px * $i;
+  }
+}
+
+@for $i from 1 through 9 {
+  [fw#{$i}] {
+    font-weight: 100 * $i;
+  }
+}
