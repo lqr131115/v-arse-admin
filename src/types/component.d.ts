@@ -8,3 +8,8 @@ export interface IMenuItem {
   i?: string; // 无限嵌套时的icon
   children?: IMenuItem[];
 }
+
+export interface IBreadcrumbItem {
+  title: string;
+  path: string;
+}

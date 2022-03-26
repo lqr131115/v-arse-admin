@@ -21,28 +21,18 @@ const toggle = () => {
 const fullscreen = () => { alert`fullscreen` }
 const exitFullscreen = () => { alert`exitFullscreen` }
 const setting = () => { drawer.value = true }
-/**
- * 退出
- *  1.主动退出
- *  2.被动退出
- *      2.1 主动处理
- *          - token失效 前端设置token过期时间
- *      2.2 被动处理
- *          - token失效 服务端设置token过期时间 返回特定状态码
- *          - 单点登录 服务端返回特定状态码
- */
-
-
 const handleClickItem = (item: IListItem, index: number) => {
   console.log('handleClickItem', item);
 }
-const handleClickAction = (action: IAction, index: number) => { }
+const handleClickAction = (action: IAction, index: number) => {
+  console.log('handleClickAction', action);
+}
 </script>
 
 <template>
   <div class="header">
-    <div class="header__toggle">
-      <span @click="toggle">
+    <div class="header__left">
+      <span class="header__left--toggle" @click="toggle" mr20>
         <el-icon v-if="collapse">
           <expand />
         </el-icon>
@@ -50,8 +40,11 @@ const handleClickAction = (action: IAction, index: number) => { }
           <fold />
         </el-icon>
       </span>
+      <span class="header__left--breadcrumb">
+        <m-breadcrumb />
+      </span>
     </div>
-    <div class="header__tools">
+    <div class="header__right">
       <div class="header__search">
         <Search />
       </div>
@@ -74,19 +67,10 @@ const handleClickAction = (action: IAction, index: number) => { }
         <Locale />
       </div>
       <div class="header__fullscreen">
-        <el-tooltip
-          v-if="!collapse"
-          effect="dark"
-          :content="t('header.tooltipEntryFull')"
-        >
+        <el-tooltip v-if="!collapse" effect="dark" :content="t('header.tooltipEntryFull')">
           <svg-icon name="fullscreen" style="font-size: 1.2em;" @click="fullscreen"></svg-icon>
         </el-tooltip>
-        <el-tooltip
-          v-else
-          class="box-item"
-          effect="dark"
-          :content="t('header.tooltipExitFull')"
-        >
+        <el-tooltip v-else class="box-item" effect="dark" :content="t('header.tooltipExitFull')">
           <svg-icon name="exit-fullscreen" style="font-size: 1.3em;" @click="exitFullscreen"></svg-icon>
         </el-tooltip>
       </div>
@@ -111,11 +95,16 @@ const handleClickAction = (action: IAction, index: number) => { }
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #eee;
-  @include e(toggle) {
-    cursor: pointer;
+  @include e(left) {
+    display: flex;
+    @include m(breadcrumb) {
+    }
+    @include m(toggle) {
+      cursor: pointer;
+    }
   }
 
-  @include e(tools) {
+  @include e(right) {
     display: flex;
     align-items: center;
     & > div {

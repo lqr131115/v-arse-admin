@@ -30,7 +30,7 @@ export const filterRoutes = (routes: RouteRecord[]): RouteRecord[] => {
 };
 
 /**
- * @param routes 注册路由
+ * @param routes 注册路由 只有meta中title和icon有值才能在菜单栏中显示
  * @returns 左侧菜单显示的路由
  */
 type TRoute = RouteRecord | RouteRecordRaw;

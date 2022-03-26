@@ -22,6 +22,16 @@ import { userDropDownList, USER_DD } from '@/settings'
 
 const { t } = useI18n()
 const userStore = useUserStore()
+/**
+ * 退出
+ *  1.主动退出
+ *  2.被动退出
+ *      2.1 主动处理
+ *          - token失效 前端设置token过期时间
+ *      2.2 被动处理
+ *          - token失效 服务端设置token过期时间 返回特定状态码
+ *          - 单点登录 服务端返回特定状态码
+ */
 const logout = () => {
     userStore.logout()
     msgSuccess('退出登录')
