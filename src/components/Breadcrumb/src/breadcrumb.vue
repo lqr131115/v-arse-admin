@@ -3,18 +3,24 @@
         <transition-group name="breadcrumb">
             <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
                 <!-- 不可点击 -->
-                <span
-                    class="no-skip"
-                    v-if="index === breadcrumbData.length - 1"
-                >{{ $t(`route.${item.meta.title}`) }}</span>
+                <template v-if="index === breadcrumbData.length - 1">
+                    <span class="no-skip">{{ $t(`route.${item.meta.title}`) }}</span>
+                </template>
                 <!-- 可以点击 -->
-                <span
-                    class="skip"
-                    @click="onLinkClick(item)"
-                    fz15
-                    fw7
-                    v-else
-                >{{ $t(`route.${item.meta.title}`) }}</span>
+                <template v-else>
+                    <el-dropdown @command="onCommand" :max-height="130">
+                        <span class="skip" fz15 fw7>{{ $t(`route.${item.meta.title}`) }}</span>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item
+                                    v-for="child in item.children"
+                                    :key="child.path"
+                                    :command="child.path"
+                                >{{ $t(`route.${child.meta!.title}`) }}</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                </template>
             </el-breadcrumb-item>
         </transition-group>
     </el-breadcrumb>
@@ -36,7 +42,8 @@ const getBreadcrumbItem = (matchedRoute: RouteLocationMatched[]) => {
     //     return item
     // })
 }
-const onLinkClick = (route: RouteLocationMatched) => { router.push(route.path) }
+const onCommand = (path: string) => { router.push(path) }
+
 watch(() => route.matched, (newVal) => { getBreadcrumbItem(newVal) }, { immediate: true })
 </script>
 
