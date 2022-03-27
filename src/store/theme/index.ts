@@ -1,8 +1,13 @@
 import { defineStore } from "pinia";
-import { HEADER_PRESET_BG_KEY, SIDE_BAR_BG_KEY } from "@/enums/cacheEnum";
-import type { menuTheme, navBarTheme } from "@/types/app";
+import {
+  HEADER_PRESET_BG_KEY,
+  SIDE_BAR_BG_KEY,
+  APP_PRESET_UI_KEY,
+} from "@/enums/cacheEnum";
+import type { appTheme, menuTheme, navBarTheme } from "@/types/app";
 import { getItem, setItem } from "@/utils/storage";
 
+const defaultAppTheme: appTheme = { primary: "#409eff" };
 const defaultMenuTheme: menuTheme = {
   menuBgColor: "#ffffff",
   textActiveColor: "#ffd04b",
@@ -12,10 +17,14 @@ const defaultNavbarTheme: navBarTheme = { navBarBgColor: "#ffffff" };
 export const useThemeStore = defineStore({
   id: "theme",
   state: () => ({
+    appTheme: getItem(APP_PRESET_UI_KEY) || defaultAppTheme,
     menuTheme: getItem(SIDE_BAR_BG_KEY) || defaultMenuTheme,
     navbarTheme: getItem(HEADER_PRESET_BG_KEY) || defaultNavbarTheme,
   }),
   getters: {
+    getAppTheme: (state): appTheme => {
+      return state.appTheme;
+    },
     getMenuTheme: (state): menuTheme => {
       return state.menuTheme;
     },
@@ -24,6 +33,12 @@ export const useThemeStore = defineStore({
     },
   },
   actions: {
+    setAppTheme(theme: appTheme) {
+      const oldAppTheme = this.appTheme;
+      const newAppTheme = { ...oldAppTheme, ...theme };
+      this.menuTheme = newAppTheme;
+      setItem(APP_PRESET_UI_KEY, newAppTheme);
+    },
     setMenuTheme(theme: menuTheme) {
       const oldMenuTheme = this.getMenuTheme;
       const newMenuTheme = { ...oldMenuTheme, ...theme };

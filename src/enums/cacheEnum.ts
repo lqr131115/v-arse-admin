@@ -7,6 +7,9 @@ export const TOKEN_TIME_STAMP = 'TOKEN_TIME_STAMP__'
 export const LOCALE_KEY = 'LOCALE__';
 
 // theme key
+
+export const APP_PRESET_UI_KEY = 'APP_PRESET_UI_KEY__'
+
 export const HEADER_PRESET_BG_KEY = 'HEADER_PRESET_BG_KEY__'
 
 export const SIDE_BAR_BG_KEY = 'SIDE_BAR_BG_KEY__'

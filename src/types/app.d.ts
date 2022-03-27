@@ -19,6 +19,11 @@ export type DropDown = {
   icon?: string;
 };
 
+
+export type appTheme = {
+  primary?:string,
+}
+
 export type menuTheme = {
   menuBgColor?:string,
   menuHoverBgColor?:string,

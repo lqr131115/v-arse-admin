@@ -39,6 +39,7 @@ const symbolId = computed(() => (`#${props.prefix}-${props.name}`))
 </template>
 
 <style lang="scss" scoped>
+@use '@/styles/tools/mixin/BEM' as *;
 @include b(svg-icon) {
     width: 1em;
     height: 1em;

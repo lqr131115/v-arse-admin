@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-checkbox v-model="checked2">Not disabled</el-checkbox>
+    <el-button type="primary">Primary</el-button>
     <el-pagination
       :page-sizes="[100, 200, 300, 400]"
       layout="total, sizes, prev, pager, next, jumper"
@@ -9,8 +9,12 @@
   </div>
 </template>
 <script lang='ts' setup>
-import {ref} from 'vue'
-let checked2 = ref<boolean>(false)
+import { generateColors } from '@/utils/theme'
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  generateColors('#ff00ff')
+})
 </script>
 <style lang='scss' scoped>
 </style>

@@ -1,10 +1,10 @@
-@import "./setting/var.scss";
+@use "./setting/var.scss";
 
-@import "./tools/function/decimal";
+@use "./tools/function/decimal";
 
-@import './tools/mixin/BEM';
-@import "./tools/mixin/box-center";
-@import "./tools/mixin/box-clamp";
-@import './tools/mixin/calc';
-@import "./tools/mixin/position";
-@import "./tools/mixin/sprite-spirit";
+@use "./tools/mixin/BEM";
+@use "./tools/mixin/box-center";
+@use "./tools/mixin/box-clamp";
+@use "./tools/mixin/calc";
+@use "./tools/mixin/position";
+@use "./tools/mixin/sprite-spirit";

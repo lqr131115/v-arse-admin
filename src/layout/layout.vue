@@ -33,6 +33,8 @@ const navBarTheme = computed(() => {
 </template>
 
 <style lang="scss" scoped>
+@use '@/styles/tools/mixin/BEM' as *;
+@use '@/styles/tools/mixin/sprite-spirit' as *;
 @include b(layout) {
   @include dimensions(100%, 100%);
   .el-container {

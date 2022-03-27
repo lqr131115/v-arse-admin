@@ -93,6 +93,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 </template>
 
 <style lang="scss" scoped>
+@use '@/styles/tools/mixin/BEM' as *;
+@use '@/styles/tools/mixin/box-center' as *;
+@use '@/styles/setting/var.scss' as *;
 @include b(login) {
   @include box-center(center, center);
   text-align: center;

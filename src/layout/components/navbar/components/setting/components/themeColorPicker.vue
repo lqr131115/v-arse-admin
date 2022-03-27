@@ -14,25 +14,31 @@
 import { PropType, computed } from 'vue'
 import { HandlerEnum } from '../enum'
 import { useThemeStore } from '@/store/theme'
-import type { menuTheme, navBarTheme } from '@/types/app'
 import { SIDE_BAR_THEME_COLOR_LIST } from '@/settings'
+import { genNewStyle, writeNewStyle } from '@/utils/theme'
+import type { appTheme, menuTheme, navBarTheme } from '@/types/app'
+
 const props = defineProps({
    colorList: {
       type: Array as PropType<any[]>,
       default: [],
    },
    event: {
-      type: Number,
+      type: String as PropType<HandlerEnum>,
    },
    // def: {
    //    type: String
    // },
 })
 const themeStore = useThemeStore()
-const baseHandler = (event: HandlerEnum, value: string) => {
+const baseHandler = async (event: HandlerEnum, value: string) => {
    switch (event) {
       case HandlerEnum.CHANGE_THEME_COLOR:
-         alert(HandlerEnum.CHANGE_THEME_COLOR)
+         const appTheme: appTheme = {}
+         appTheme.primary = value
+         // const newStyle = await genNewStyle(value)
+         // writeNewStyle(newStyle)
+         themeStore.setAppTheme(appTheme)
          break;
       case HandlerEnum.HEADER_THEME:
          const navbarTheme: navBarTheme = {}
@@ -52,7 +58,7 @@ const getDef = (): string => {
    let def = ''
    switch (props.event) {
       case HandlerEnum.CHANGE_THEME_COLOR:
-         def = '#f00'
+         def = themeStore.getAppTheme.primary!
          break;
       case HandlerEnum.HEADER_THEME:
          def = themeStore.getNavbarTheme.navBarBgColor!
@@ -65,13 +71,16 @@ const getDef = (): string => {
    }
    return def
 }
-const handleClick = (color: string) => {
-   props.event && props.event >= 0 && baseHandler(props.event, color);
+const handleClick = async (color: string) => {
+   if (props.event) {
+      await baseHandler(props.event, color)
+   }
 }
 const def = computed(() => getDef())
 
 </script>
 <style lang="scss" scoped>
+@use '@/styles/tools/mixin/BEM' as *;
 @include b(picker) {
    display: flex;
    width: inherit;

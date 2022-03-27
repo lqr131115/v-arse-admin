@@ -90,6 +90,7 @@ const handleClickAction = (action: IAction, index: number) => {
 </template>
 
 <style lang="scss" scoped>
+@use '@/styles/tools/mixin/BEM' as *; 
 @include b(header) {
   height: 60px;
   display: flex;

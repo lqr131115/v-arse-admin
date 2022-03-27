@@ -1,14 +1,14 @@
 
-@import './base/article.scss';
-@import './base/form.scss';
-@import './base/img.scss';
-@import './base/link.scss';
+@use './base/article.scss';
+@use './base/form.scss';
+@use './base/img.scss';
+@use './base/link.scss';
 
-@import './acss/border.scss';
-@import './acss/font-size.scss';
-@import './acss/white-space.scss';
-@import './acss/z-index.scss';
+@use './acss/border.scss';
+@use './acss/font-size.scss';
+@use './acss/white-space.scss';
+@use './acss/z-index.scss';
 
-@import './objects/ul.scss';
+@use './objects/ul.scss';
 
-@import './transition.scss'
+@use './transition.scss'
