@@ -6,6 +6,7 @@
       :collapse="collapse"
       :defaultActive="defaultActive"
       :background-color="menuBgColor"
+      :text-color="textColor"
       :active-text-color="textActiveColor"
       router
     >
@@ -31,6 +32,7 @@ const themeStore = useThemeStore()
 const menuData = computed(() => (formatMenus(generateMenus(filterRoutes(router.getRoutes())))))
 const menuBgColor = computed(() => themeStore.getMenuTheme.menuBgColor)
 const textActiveColor = computed(() => themeStore.getMenuTheme.textActiveColor)
+const textColor = computed(() => themeStore.getMenuTheme.textColor)
 const defaultActive = computed(() => route.path)
 
 </script>

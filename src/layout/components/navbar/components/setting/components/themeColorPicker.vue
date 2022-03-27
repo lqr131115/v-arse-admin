@@ -1,24 +1,24 @@
 <template>
    <div class="picker">
-      <template v-for="(color, index) in colorList || []" :key="color">
+      <template v-for="color in colorList || []" :key="color">
          <span
-            @click="handleClick(color, index)"
+            @click="handleClick(color)"
             class="picker__item"
-            :class="{ 'picker__item--active': def === index }"
+            :class="{ 'picker__item--active': def === color }"
             :style="{ background: color }"
          ></span>
       </template>
    </div>
 </template>
 <script lang='ts' setup>
-import { onMounted, PropType } from 'vue'
+import { PropType, computed } from 'vue'
 import { HandlerEnum } from '../enum'
 import { useThemeStore } from '@/store/theme'
 import type { menuTheme, navBarTheme } from '@/types/app'
-import { computed } from '@vue/reactivity';
+import { SIDE_BAR_THEME_COLOR_LIST } from '@/settings'
 const props = defineProps({
    colorList: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<any[]>,
       default: [],
    },
    event: {
@@ -42,7 +42,7 @@ const baseHandler = (event: HandlerEnum, value: string) => {
       case HandlerEnum.MENU_THEME:
          const menuTheme: menuTheme = {}
          menuTheme.menuBgColor = value
-         themeStore.setMenuTheme(menuTheme)
+         themeStore.setMenuTheme({ ...menuTheme, ...SIDE_BAR_THEME_COLOR_LIST[value] })
          break;
       default:
          break;
@@ -55,25 +55,20 @@ const getDef = (): string => {
          def = '#f00'
          break;
       case HandlerEnum.HEADER_THEME:
-         def = themeStore.getNavbarTheme.navBarBgColor
+         def = themeStore.getNavbarTheme.navBarBgColor!
          break;
       case HandlerEnum.MENU_THEME:
-         def = themeStore.getMenuTheme.menuBgColor
+         def = themeStore.getMenuTheme.menuBgColor!
          break;
       default:
          break;
    }
    return def
 }
-const handleClick = (color: string, index: number) => {
-   props.event >= 0 && baseHandler(props.event, color);
+const handleClick = (color: string) => {
+   props.event && props.event >= 0 && baseHandler(props.event, color);
 }
-onMounted(() => {
-
-})
 const def = computed(() => getDef())
-console.log('xxxdefxxx', def.value);
-
 
 </script>
 <style lang="scss" scoped>

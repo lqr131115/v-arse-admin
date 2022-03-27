@@ -52,7 +52,7 @@ const privateRoutes: RouteRecordRaw[] = [
         meta: { title: "articleCreate", icon: "edit-pen" },
       },
     ],
-    meta: { title: "article", icon: "notebook" },
+    meta: { title: "article", icon: "management" },
   },
   {
     path: "/component",
@@ -92,7 +92,7 @@ const publicRoutes: RouteRecordRaw[] = [
         path: "/profile",
         name: "profile",
         component: () => import("../views/profile/profile.vue"),
-        meta: { title: "profile", icon: "user" },
+        meta: { title: "profile", icon: "user-filled" },
       },
       {
         path: "/chart",
