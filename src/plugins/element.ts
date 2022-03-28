@@ -8,7 +8,7 @@ import { LOCALE } from "@/settings";
 export default {
   install(app: App) {
     app.use(ElementPlus, {
-      locale: useAppStore().currLanguage === LOCALE.ZH_CN ? zhCn : en,
+      locale: useAppStore().getLanguage === LOCALE.ZH_CN ? zhCn : en,
     });
   },
 };

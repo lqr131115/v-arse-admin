@@ -60,6 +60,8 @@ export default {
     menuTypeMix: "Top Menu Mix mode",
     menuTypeTopMenu: "Top menu mode",
 
+    defaultTheme:'Default Theme',
+
     on: "On",
     off: "Off",
     minute: "Minute",

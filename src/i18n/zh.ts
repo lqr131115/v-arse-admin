@@ -61,6 +61,8 @@ export default {
     menuTypeMix: '顶部菜单混合模式',
     menuTypeTopMenu: '顶部菜单模式',
 
+    defaultTheme:'默认主题',
+
     on: '开',
     off: '关',
     minute: '分钟',

@@ -6,12 +6,11 @@ import i18n from './i18n'
 import element from './plugins/element'
 import MUI from './components'
 import Icons from './icons'
-// import '@/styles/element/index.scss'
 import 'virtual:svg-icons-register'
 import './mock'
 import './permission'
 import 'normalize.css'
-// import './styles/index.scss'
+import './styles/index.scss'
 
 const app = createApp(App)
 app.use(router)

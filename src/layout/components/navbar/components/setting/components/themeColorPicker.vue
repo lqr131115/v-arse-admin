@@ -17,6 +17,7 @@ import { useThemeStore } from '@/store/theme'
 import { SIDE_BAR_THEME_COLOR_LIST } from '@/settings'
 import { genNewStyle, writeNewStyle } from '@/utils/theme'
 import type { appTheme, menuTheme, navBarTheme } from '@/types/app'
+import { useAppStore } from '@/store/app'
 
 const props = defineProps({
    colorList: {
@@ -32,7 +33,9 @@ const props = defineProps({
 })
 let border = ref<string>('')
 const themeStore = useThemeStore()
+const appStore = useAppStore()
 const baseHandler = (event: HandlerEnum, value: string) => {
+   appStore.setProjectConfig({ defaultTheme: false })
    switch (event) {
       case HandlerEnum.CHANGE_THEME_COLOR:
          const appTheme: appTheme = {}

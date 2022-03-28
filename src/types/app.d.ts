@@ -19,20 +19,24 @@ export type DropDown = {
   icon?: string;
 };
 
-
 export type appTheme = {
-  primary?:string,
-}
+  primary?: string;
+};
 
 export type menuTheme = {
-  menuBgColor?:string,
-  menuHoverBgColor?:string,
-  textColor?:string,
-  textActiveColor?:string,
-  submenuBgColor?:string,
-  submenuHoverBgColor?:string,
-}
+  menuBgColor?: string;
+  menuHoverBgColor?: string;
+  textColor?: string;
+  textActiveColor?: string;
+  submenuBgColor?: string;
+  submenuHoverBgColor?: string;
+};
 
 export type navBarTheme = {
-  navBarBgColor?:string,
-}
+  navBarBgColor?: string;
+};
+
+export type ProjectConfig = {
+  showLogo?: boolean;
+  defaultTheme?: boolean;
+};

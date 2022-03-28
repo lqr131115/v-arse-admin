@@ -5,12 +5,12 @@
       :data="menuData"
       :collapse="collapse"
       :defaultActive="defaultActive"
-      :background-color="menuBgColor"
-      :text-color="textColor"
-      :active-text-color="textActiveColor"
+      :background-color="getMenuBgColor"
+      :text-color="getMenuTextColor"
+      :active-text-color="getMenuActiveTextColor"
       router
     >
-      <template #logo>
+      <template #logo v-if="getShowLogo">
         <el-menu-item index="/">
           <img src="https://element-plus.gitee.io/images/element-plus-logo.svg" alt="logo" />
         </el-menu-item>
@@ -22,17 +22,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute, useRouter, } from 'vue-router'
-import { useThemeStore } from '@/store/theme'
+import { useSetting } from '@/hooks';
 import { filterRoutes, generateMenus, formatMenus } from '@/utils/route'
 interface ISidebarProps { collapse: boolean }
 defineProps<ISidebarProps>();
 const router = useRouter()
 const route = useRoute()
-const themeStore = useThemeStore()
+const { getShowLogo ,getMenuBgColor,getMenuTextColor,getMenuActiveTextColor} = useSetting()
 const menuData = computed(() => (formatMenus(generateMenus(filterRoutes(router.getRoutes())))))
-const menuBgColor = computed(() => themeStore.getMenuTheme.menuBgColor)
-const textActiveColor = computed(() => themeStore.getMenuTheme.textActiveColor)
-const textColor = computed(() => themeStore.getMenuTheme.textColor)
 const defaultActive = computed(() => route.path)
 
 </script>

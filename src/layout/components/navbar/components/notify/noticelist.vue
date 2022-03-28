@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, ref } from 'vue'
+import { ref } from 'vue'
 import { ITabItem, IAction, IListItem } from './data'
 const TAG_TYPE: { [key: string | number]: string } = {
     '1': 'success',

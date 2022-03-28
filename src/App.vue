@@ -5,7 +5,7 @@ import { genNewStyle, writeNewStyle } from '@/utils/theme'
 const themeStore = useThemeStore()
 onMounted(async () => {
   const primary = themeStore.getAppTheme.primary!
-  if (primary) {
+  if (primary !== '#409eff') {
     const newStyle = await genNewStyle(primary)
     writeNewStyle(newStyle)
   }

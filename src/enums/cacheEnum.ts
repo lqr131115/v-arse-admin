@@ -14,3 +14,6 @@ export const HEADER_PRESET_BG_KEY = 'HEADER_PRESET_BG_KEY__'
 
 export const SIDE_BAR_BG_KEY = 'SIDE_BAR_BG_KEY__'
 
+// projectConfig key
+
+export const PROJECT_CONFIG_KEY = 'PROJECT_CONFIG_KEY__'
