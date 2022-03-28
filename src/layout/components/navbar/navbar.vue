@@ -5,6 +5,7 @@ import Guide from './components/guide/guide.vue'
 import Locale from './components/locale/locale.vue'
 import Notify from './components/notify/notify.vue'
 import NoticeList from './components/notify/noticelist.vue'
+import FullScreen from './components/fullscreen/fullscreen.vue'
 import UserDropdown from './components/user-dropdown/user-dropdown.vue'
 import Setting from './components/setting/setting.vue'
 import { IListItem, IAction, tabListData, actionsData } from './components/notify/data'
@@ -17,8 +18,6 @@ const emits = defineEmits(['update:collapse'])
 const toggle = () => {
   emits('update:collapse', !props.collapse)
 }
-const fullscreen = () => { alert`fullscreen` }
-const exitFullscreen = () => { alert`exitFullscreen` }
 const setting = () => { drawer.value = true }
 const handleClickItem = (item: IListItem, index: number) => {
   console.log('handleClickItem', item);
@@ -66,12 +65,7 @@ const handleClickAction = (action: IAction, index: number) => {
         <Locale />
       </div>
       <div class="header__fullscreen">
-        <el-tooltip v-if="!collapse" effect="dark" :content="$t('header.tooltipEntryFull')">
-          <svg-icon name="fullscreen" style="font-size: 1.2em;" @click="fullscreen"></svg-icon>
-        </el-tooltip>
-        <el-tooltip v-else class="box-item" effect="dark" :content="$t('header.tooltipExitFull')">
-          <svg-icon name="exit-fullscreen" style="font-size: 1.3em;" @click="exitFullscreen"></svg-icon>
-        </el-tooltip>
+        <FullScreen />
       </div>
       <div class="header__info">
         <UserDropdown />
@@ -90,7 +84,7 @@ const handleClickAction = (action: IAction, index: number) => {
 </template>
 
 <style lang="scss" scoped>
-@use '@/styles/tools/mixin/BEM' as *; 
+@use '@/styles/tools/mixin/BEM' as *;
 @include b(header) {
   height: 60px;
   display: flex;
@@ -124,9 +118,6 @@ const handleClickAction = (action: IAction, index: number) => {
         width: 50px;
       }
     }
-  }
-
-  @include e(locale) {
   }
   @include e(info) {
     cursor: pointer;
