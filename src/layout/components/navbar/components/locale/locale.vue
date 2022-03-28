@@ -22,7 +22,7 @@ import { localeList } from '@/settings'
 import type { LocaleType } from '@/types/app'
 const { locale } = useI18n()
 const appStore = useAppStore()
-const language = computed(() => appStore.currLanguage)
+const language = computed(() => appStore.getLanguage)
 const changeLanguage = (lang: LocaleType) => {
     locale.value = lang
     appStore.setLanguage(lang)

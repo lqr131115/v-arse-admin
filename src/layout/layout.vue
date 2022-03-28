@@ -43,6 +43,12 @@ const navBarTheme = computed(() => {
     .el-header {
       padding: 0;
     }
+
+    .el-main {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
   }
 }
 </style>

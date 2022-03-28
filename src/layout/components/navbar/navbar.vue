@@ -109,7 +109,7 @@ const handleClickAction = (action: IAction, index: number) => {
       align-items: center;
       display: flex;
       height: 60px;
-      width: 45px;
+      min-width: 45px;
       cursor: pointer;
       &:hover {
         background-color: #eee;
