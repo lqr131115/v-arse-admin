@@ -1,5 +1,15 @@
 <script setup lang="ts">
-
+import { onMounted } from 'vue';
+import { useThemeStore } from '@/store/theme'
+import { genNewStyle, writeNewStyle } from '@/utils/theme'
+const themeStore = useThemeStore()
+onMounted(async () => {
+  const primary = themeStore.getAppTheme.primary!
+  if (primary) {
+    const newStyle = await genNewStyle(primary)
+    writeNewStyle(newStyle)
+  }
+})
 </script>
 
 <template>

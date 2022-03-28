@@ -7,7 +7,7 @@ import {
 import type { appTheme, menuTheme, navBarTheme } from "@/types/app";
 import { getItem, setItem } from "@/utils/storage";
 
-const defaultAppTheme: appTheme = { primary: "#409eff" };
+const defaultAppTheme: appTheme = { primary: '' };
 const defaultMenuTheme: menuTheme = {
   menuBgColor: "#ffffff",
   textActiveColor: "#ffd04b",
@@ -34,9 +34,9 @@ export const useThemeStore = defineStore({
   },
   actions: {
     setAppTheme(theme: appTheme) {
-      const oldAppTheme = this.appTheme;
+      const oldAppTheme = this.getAppTheme;
       const newAppTheme = { ...oldAppTheme, ...theme };
-      this.menuTheme = newAppTheme;
+      this.appTheme = newAppTheme;
       setItem(APP_PRESET_UI_KEY, newAppTheme);
     },
     setMenuTheme(theme: menuTheme) {

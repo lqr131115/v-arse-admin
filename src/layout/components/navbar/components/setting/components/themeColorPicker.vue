@@ -4,14 +4,14 @@
          <span
             @click="handleClick(color)"
             class="picker__item"
-            :class="{ 'picker__item--active': def === color }"
+            :class="{ 'picker__item--active': def && def === color }"
             :style="{ background: color }"
          ></span>
       </template>
    </div>
 </template>
 <script lang='ts' setup>
-import { PropType, computed } from 'vue'
+import { PropType, watch, ref } from 'vue'
 import { HandlerEnum } from '../enum'
 import { useThemeStore } from '@/store/theme'
 import { SIDE_BAR_THEME_COLOR_LIST } from '@/settings'
@@ -26,18 +26,20 @@ const props = defineProps({
    event: {
       type: String as PropType<HandlerEnum>,
    },
-   // def: {
-   //    type: String
-   // },
+   def: {
+      type: String
+   },
 })
+let border = ref<string>('')
 const themeStore = useThemeStore()
-const baseHandler = async (event: HandlerEnum, value: string) => {
+const baseHandler = (event: HandlerEnum, value: string) => {
    switch (event) {
       case HandlerEnum.CHANGE_THEME_COLOR:
          const appTheme: appTheme = {}
          appTheme.primary = value
-         // const newStyle = await genNewStyle(value)
-         // writeNewStyle(newStyle)
+         genNewStyle(value).then(res => {
+            writeNewStyle(res)
+         })
          themeStore.setAppTheme(appTheme)
          break;
       case HandlerEnum.HEADER_THEME:
@@ -54,29 +56,16 @@ const baseHandler = async (event: HandlerEnum, value: string) => {
          break;
    }
 }
-const getDef = (): string => {
-   let def = ''
-   switch (props.event) {
-      case HandlerEnum.CHANGE_THEME_COLOR:
-         def = themeStore.getAppTheme.primary!
-         break;
-      case HandlerEnum.HEADER_THEME:
-         def = themeStore.getNavbarTheme.navBarBgColor!
-         break;
-      case HandlerEnum.MENU_THEME:
-         def = themeStore.getMenuTheme.menuBgColor!
-         break;
-      default:
-         break;
-   }
-   return def
+const handleClick = (color: string) => {
+   props.event && baseHandler(props.event, color)
 }
-const handleClick = async (color: string) => {
-   if (props.event) {
-      await baseHandler(props.event, color)
+watch(() => props.def, (newVal) => {
+   if (newVal === '#ffffff') {
+      border.value = `2px solid #000`
+   } else {
+      border.value = `2px solid #fff`
    }
-}
-const def = computed(() => getDef())
+}, { immediate: true })
 
 </script>
 <style lang="scss" scoped>
@@ -103,7 +92,7 @@ const def = computed(() => getDef())
             display: block;
             width: 10px;
             height: 6px;
-            border: 2px solid #fff;
+            border: v-bind(border);
             border-right: none;
             border-top: none;
             transform: rotate(-60deg) translate(7px, -10px);

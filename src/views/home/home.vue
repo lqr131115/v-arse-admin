@@ -9,12 +9,6 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { generateColors } from '@/utils/theme'
-import { onMounted } from 'vue';
-
-onMounted(() => {
-  generateColors('#ff00ff')
-})
 </script>
 <style lang='scss' scoped>
 </style>

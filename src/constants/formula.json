@@ -1,5 +1,5 @@
 {
-  "shade-1": "color(primary,shade(1))",
+  "dark-1": "color(primary,shade(1))",
   "light-1": "color(primary,tint(1))",
   "light-2": "color(primary,tint(2))",
   "light-3": "color(primary,tint(3))",
