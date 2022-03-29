@@ -5,14 +5,16 @@
     <el-select
         v-if="show"
         v-model="selectValue"
+        v-focus
         ref="searchSelectRef"
         class="search__select"
         filterable
         remote
         clearable
-        mh10
+        default-first-option
         :remote-method="remoteMethod"
         @change="onChange"
+        mh10
     >
         <template #prefix>
             <el-icon>
@@ -29,7 +31,7 @@
 </template>
 
 <script lang='ts' setup>
-import { watch, ref, computed } from 'vue'
+import { watch, ref, computed} from 'vue'
 import { useRouter } from 'vue-router';
 import { ElSelect } from 'element-plus';
 import { generateRoutes, initFuse } from './fues'
@@ -50,7 +52,6 @@ let fuse = initFuse(searchPool.value)
 const onChange = (path: string) => { router.push(path) }
 const onClick = () => {
     show.value = !show.value
-    searchSelectRef.value?.focus()
 }
 const onClose = () => {
     searchSelectRef.value?.blur()
