@@ -1,7 +1,7 @@
 import { RouteRecord, RouteRecordRaw } from "vue-router";
 import Fuse from "fuse.js";
-import i18n from "@/i18n";
 import path from "path-browserify";
+import { genRouteTitle } from "@/utils/i18n";
 
 export interface IFuseDataItem {
   path: string;
@@ -20,7 +20,7 @@ export const generateRoutes = (
     // 动态路由不允许被检测
     const reg = /.*\/:.*/;
     if (r.meta && r.meta.title && !reg.test(r.path)) {
-      const i18Title = i18n.global.t(`route.${r.meta.title}`);
+      const i18Title = genRouteTitle(r.meta.title as string);
       item.title = [...item.title, i18Title];
       result.push(item);
     }

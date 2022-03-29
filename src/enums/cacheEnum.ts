@@ -17,3 +17,7 @@ export const SIDE_BAR_BG_KEY = 'SIDE_BAR_BG_KEY__'
 // projectConfig key
 
 export const PROJECT_CONFIG_KEY = 'PROJECT_CONFIG_KEY__'
+
+// tagView key
+
+export const TAG_VIEW_LIST_KEY = 'TAG_VIEW_LIST_KEY'

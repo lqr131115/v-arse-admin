@@ -106,7 +106,7 @@ const publicRoutes: RouteRecordRaw[] = [
         component: () => import("../views/sys/error/401.vue"),
       },
       {
-        path: "/404",
+        path: "/:pathMatch(.*)",
         name: "404",
         component: () => import("../views/sys/error/404.vue"),
       },
@@ -117,11 +117,11 @@ const publicRoutes: RouteRecordRaw[] = [
     name: "Login",
     component: () => import("../views/sys/login/login.vue"),
   },
-  {
-    path: "/:pathMatch(.*)",
-    name: "error",
-    component: () => import("../views/sys/error/404.vue"),
-  },
+  // {
+  //   path: "/:pathMatch(.*)",
+  //   name: "error",
+  //   component: () => import("../views/sys/error/404.vue"),
+  // },
 ];
 
 const router = createRouter({

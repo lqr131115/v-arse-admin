@@ -1,6 +1,10 @@
 import { defineStore } from "pinia";
 import { getItem, setItem } from "@/utils/storage";
-import { LOCALE_KEY, PROJECT_CONFIG_KEY } from "@/enums/cacheEnum";
+import {
+  LOCALE_KEY,
+  PROJECT_CONFIG_KEY,
+  TAG_VIEW_LIST_KEY,
+} from "@/enums/cacheEnum";
 import { LOCALE } from "@/settings";
 import type { LocaleType, ProjectConfig } from "@/types/app";
 const defaultProjectConfig: ProjectConfig = {
@@ -12,6 +16,7 @@ export const useAppStore = defineStore({
   state: () => ({
     language: getItem(LOCALE_KEY) || LOCALE.ZH_CN,
     projectConfig: getItem(PROJECT_CONFIG_KEY) || defaultProjectConfig,
+    tagViewList: getItem(TAG_VIEW_LIST_KEY) || [],
   }),
   getters: {
     getLanguage: (state) => {
@@ -19,6 +24,9 @@ export const useAppStore = defineStore({
     },
     getProjectConfig: (state) => {
       return state.projectConfig;
+    },
+    getTagViewList: (state) => {
+      return state.tagViewList;
     },
   },
   actions: {
@@ -31,6 +39,18 @@ export const useAppStore = defineStore({
       const newConfig = { ...oldConfig, ...config };
       this.projectConfig = newConfig;
       setItem(PROJECT_CONFIG_KEY, newConfig);
+    },
+    setTagViewList(list: any[]) {
+      this.tagViewList = list;
+      setItem(TAG_VIEW_LIST_KEY, list);
+    },
+    addTagViewItem(item: any) {
+      const oldList = this.getTagViewList;
+      const isFind = oldList.find((t: any) => t.path === item.path);
+      if (!isFind) {
+        oldList.push(item);
+      }
+      this.setTagViewList(oldList);
     },
   },
 });
