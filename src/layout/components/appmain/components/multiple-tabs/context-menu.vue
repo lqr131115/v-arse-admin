@@ -1,7 +1,12 @@
 <template>
     <el-card class="card" :body-style="{ padding: '0px' }">
         <template v-for="item in getDropMenuList" :key="item.icon">
-            <el-row class="card__item" align="middle">
+            <el-row
+                class="card__item"
+                :class="{ 'is-disabled': item.disabled }"
+                align="middle"
+                @click="handleClick(item.event)"
+            >
                 <el-col :span="4">
                     <svg-icon :name="item.icon"></svg-icon>
                 </el-col>
@@ -14,8 +19,24 @@
     </el-card>
 </template>
 <script lang='ts' setup>
+import { onMounted, PropType } from 'vue'
+import { RouteLocationNormalized } from 'vue-router'
 import { useTabDropdown } from './useTabDropdown'
-const { getDropMenuList } = useTabDropdown()
+const emits = defineEmits(['event'])
+const props = defineProps({
+    item: {
+        type: Object as PropType<RouteLocationNormalized>,
+        default: null,
+    },
+})
+const handleClick = (event: any) => {
+    emits('event', event)
+}
+const { getDropMenuList, handleContextMenu } = useTabDropdown()
+
+onMounted(() => {
+    props.item && handleContextMenu(props.item)
+})
 </script>
 <style lang='scss' scoped>
 @use '@/styles/tools/mixin/BEM'  as *;
@@ -35,6 +56,10 @@ const { getDropMenuList } = useTabDropdown()
         height: 1px;
         width: 100%;
         border-top: 1px solid #dcdfe6;
+    }
+    .is-disabled {
+        cursor: not-allowed;
+        color: #c0c4cc;
     }
 }
 .text {

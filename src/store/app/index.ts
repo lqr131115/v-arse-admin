@@ -1,4 +1,5 @@
-import { defineStore, setActivePinia } from "pinia";
+import { defineStore } from "pinia";
+import { Router, RouteLocationNormalized } from "vue-router";
 import { getItem, setItem } from "@/utils/storage";
 import {
   LOCALE_KEY,
@@ -7,6 +8,7 @@ import {
 } from "@/enums/cacheEnum";
 import { LOCALE } from "@/settings";
 import type { LocaleType, ProjectConfig } from "@/types/app";
+import router from "@/router";
 const defaultProjectConfig: ProjectConfig = {
   showLogo: true,
   defaultTheme: true,
@@ -16,7 +18,7 @@ export const useAppStore = defineStore({
   state: () => ({
     language: getItem(LOCALE_KEY) || LOCALE.ZH_CN,
     projectConfig: getItem(PROJECT_CONFIG_KEY) || defaultProjectConfig,
-    tagViewList: getItem(TAG_VIEW_LIST_KEY) || [],
+    tabList: getItem(TAG_VIEW_LIST_KEY) || [],
   }),
   getters: {
     getLanguage: (state) => {
@@ -25,8 +27,11 @@ export const useAppStore = defineStore({
     getProjectConfig: (state) => {
       return state.projectConfig;
     },
-    getTagViewList: (state) => {
-      return state.tagViewList;
+    getTabList: (state) => {
+      return state.tabList;
+    },
+    showMultipleTabs: (state) => {
+      return state.tabList && state.tabList.length;
     },
   },
   actions: {
@@ -40,17 +45,48 @@ export const useAppStore = defineStore({
       this.projectConfig = newConfig;
       setItem(PROJECT_CONFIG_KEY, newConfig);
     },
-    setTagViewList(list: any[]) {
-      this.tagViewList = list;
+    setTabList(list: any[]) {
+      this.tabList = list;
       setItem(TAG_VIEW_LIST_KEY, list);
     },
-    addTagViewItem(item: any) {
-      const oldList = this.getTagViewList;
+    addTabItem(item: any) {
+      const oldList = this.getTabList;
       const isFind = oldList.find((t: any) => t.path === item.path);
       if (!isFind) {
         oldList.push(item);
       }
-      this.setTagViewList(oldList);
+      this.setTabList(oldList);
+    },
+    refreshPage(item: RouteLocationNormalized, router: Router) {
+      const path = item.path;
+      router.push(path);
+    },
+    closeAllTab() {
+      this.setTabList([]);
+    },
+    closeLeftTabs(item: RouteLocationNormalized, router: Router) {
+      const oldList = this.getTabList;
+      const index = oldList.findIndex((t: any) => t.path === item.path);
+      if (~index) {
+        this.setTabList(oldList.splice(index - 1));
+      }
+    },
+    closeRightTabs(item: RouteLocationNormalized, router: Router) {
+      const oldList = this.getTabList;
+      const index = oldList.findIndex((t: any) => t.path === item.path);
+      if (~index) {
+        this.setTabList(oldList.splice(0, index + 1));
+      }
+    },
+    closeOtherTabs(item: RouteLocationNormalized, router: Router) {
+      const oldList = this.getTabList;
+      const newList = oldList.filter((t:any) => t.path === item.path)
+      this.setTabList(newList)
+    },
+    closeTab(item: RouteLocationNormalized, router: Router) {
+      const oldList = this.getTabList;
+      const newList = oldList.filter((t:any) => t.path !== item.path)
+      this.setTabList(newList)
     },
   },
 });

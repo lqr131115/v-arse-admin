@@ -1,4 +1,5 @@
-import { computed } from "vue";
+import { computed, unref } from "vue";
+import { Router, useRouter } from "vue-router";
 import { useThemeStore } from "@/store/theme";
 import { useAppStore } from "@/store/app";
 export const useSetting = () => {
@@ -29,16 +30,18 @@ export const useConfig = () => {
     () => appStore.getProjectConfig.defaultTheme
   );
   const getLanguage = computed(() => appStore.getLanguage);
-  const getTagViewList = computed(() => appStore.getTagViewList);
+  const getTabList = computed(() => appStore.getTabList);
+  const showMultipleTabs = computed(() => appStore.showMultipleTabs);
   return {
     getShowLogo,
     getDefaultTheme,
     getLanguage,
-    getTagViewList,
+    getTabList,
+    showMultipleTabs,
   };
 };
 
-enum TableActionEnum {
+enum MenuEventEnum {
   REFRESH,
   CLOSE_ALL,
   CLOSE_LEFT,
@@ -48,49 +51,46 @@ enum TableActionEnum {
   CLOSE,
 }
 
-export const useTabs = () => {
+export const useTabs = (_router?: Router) => {
   const appStore = useAppStore();
-  async function handleTabAction(action: TableActionEnum, tab?: any) {
+  const router = _router || useRouter();
+  const { currentRoute } = router;
+
+  function getCurrentTab() {
+    const route = unref(currentRoute);
+    return appStore.getTabList.find((item: any) => item.path === route.path)!;
+  }
+
+  function handleTabAction(action: MenuEventEnum, tab?: any) {
+    const currentTab = getCurrentTab();
     switch (action) {
-      case TableActionEnum.REFRESH:
-        // await appStore.refreshPage(router);
-        console.log("action", TableActionEnum.REFRESH);
+      case MenuEventEnum.REFRESH:
+        appStore.refreshPage(currentTab, router);
         break;
-
-      case TableActionEnum.CLOSE_ALL:
-        // await appStore.closeAllTab(router);
-        console.log("action", TableActionEnum.CLOSE_ALL);
-
+      case MenuEventEnum.CLOSE_ALL:
+        appStore.closeAllTab();
         break;
-
-      case TableActionEnum.CLOSE_LEFT:
-        // await appStore.closeLeftTabs(currentTab, router);
-        console.log("action", TableActionEnum.CLOSE_LEFT);
-
+      case MenuEventEnum.CLOSE_LEFT:
+        appStore.closeLeftTabs(currentTab, router);
         break;
-
-      case TableActionEnum.CLOSE_RIGHT:
-        // await appStore.closeRightTabs(currentTab, router);
-        console.log("action", TableActionEnum.CLOSE_RIGHT);
+      case MenuEventEnum.CLOSE_RIGHT:
+        appStore.closeRightTabs(currentTab, router);
         break;
-      case TableActionEnum.CLOSE_OTHER:
-        // await appStore.closeOtherTabs(currentTab, router);
-        console.log("action", TableActionEnum.CLOSE_OTHER);
+      case MenuEventEnum.CLOSE_OTHER:
+        appStore.closeOtherTabs(currentTab, router);
         break;
-      case TableActionEnum.CLOSE_CURRENT:
-      case TableActionEnum.CLOSE:
-        // await appStore.closeTab(tab || currentTab, router);
-        console.log("close");
+      case MenuEventEnum.CLOSE_CURRENT:
+        appStore.closeTab(currentTab, router);
         break;
     }
   }
   return {
-    refreshPage: () => handleTabAction(TableActionEnum.REFRESH),
-    closeAll: () => handleTabAction(TableActionEnum.CLOSE_ALL),
-    closeLeft: () => handleTabAction(TableActionEnum.CLOSE_LEFT),
-    closeRight: () => handleTabAction(TableActionEnum.CLOSE_RIGHT),
-    closeOther: () => handleTabAction(TableActionEnum.CLOSE_OTHER),
-    closeCurrent: () => handleTabAction(TableActionEnum.CLOSE_CURRENT),
-    close: (tab?: any) => handleTabAction(TableActionEnum.CLOSE, tab),
+    refreshPage: () => handleTabAction(MenuEventEnum.REFRESH),
+    closeAll: () => handleTabAction(MenuEventEnum.CLOSE_ALL),
+    closeLeft: () => handleTabAction(MenuEventEnum.CLOSE_LEFT),
+    closeRight: () => handleTabAction(MenuEventEnum.CLOSE_RIGHT),
+    closeOther: () => handleTabAction(MenuEventEnum.CLOSE_OTHER),
+    closeCurrent: (tab?: any) =>
+      handleTabAction(MenuEventEnum.CLOSE_CURRENT, tab),
   };
 };

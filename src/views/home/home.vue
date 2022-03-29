@@ -8,15 +8,7 @@
     />
   </div>
 </template>
-<script lang='ts' setup>import { TAG_VIEW_LIST_KEY } from '@/enums/cacheEnum';
-import { removeItem } from '@/utils/storage';
-import { onMounted } from 'vue';
-
-onMounted(
-  () => {
-    // removeItem(TAG_VIEW_LIST_KEY)
-  }
-)
+<script lang='ts' setup>
 </script>
 <style lang='scss' scoped>
 </style>
