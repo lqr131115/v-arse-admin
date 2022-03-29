@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore, setActivePinia } from "pinia";
 import { getItem, setItem } from "@/utils/storage";
 import {
   LOCALE_KEY,

@@ -42,6 +42,13 @@ export default {
 
     home: "Home",
   },
+  tabsView: {
+    reload: 'Refresh current',
+    closeLeft: 'Close Left',
+    closeRight: 'Close Right',
+    closeOther: 'Close Other',
+    closeAll: 'Close All',
+  },
   setting: {
     // content mode
     contentModeFull: "Full",

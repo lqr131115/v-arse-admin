@@ -43,6 +43,13 @@ export default {
 
     home: "首页",
   },
+  tabsView: {
+    reload: '重新加载',
+    closeLeft: '关闭左侧标签页',
+    closeRight: '关闭右侧标签页',
+    closeOther: '关闭其它标签页',
+    closeAll: '关闭全部标签页',
+  },
   setting: {
     // content mode
     contentModeFull: '流式',
