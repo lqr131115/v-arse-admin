@@ -20,14 +20,20 @@ import { useI18n } from 'vue-i18n'
 import { useAppStore } from '@/store/app'
 import { localeList } from '@/settings'
 import type { LocaleType } from '@/types/app'
+const props = defineProps({
+    reload: {
+        type: Boolean,
+        default: true
+    }
+})
 const { locale } = useI18n()
 const appStore = useAppStore()
 const language = computed(() => appStore.getLanguage)
 const changeLanguage = (lang: LocaleType) => {
     locale.value = lang
     appStore.setLanguage(lang)
-    // element-plus国际化刷新后生效
-    // location.reload()
+    // 登录界面切换语言时不需要reload
+    props.reload && location.reload()
 }
 </script>
 <style lang='scss' scoped>

@@ -36,7 +36,6 @@ import { useRouter } from 'vue-router';
 import { ElSelect } from 'element-plus';
 import { generateRoutes, initFuse } from './fues'
 import { filterRoutes } from '@/utils/route'
-// import { watchSwitchLanguage } from '@/utils/i18n'
 
 interface ListItem {
     value: string
@@ -68,7 +67,6 @@ const remoteMethod = (query: string) => {
         })
     }
 }
-
 watch(() => show.value, (newVal) => {
     if (newVal) {
         document.body.addEventListener('click', onClose)
@@ -76,10 +74,6 @@ watch(() => show.value, (newVal) => {
         document.body.removeEventListener('click', onClose)
     }
 })
-// watchSwitchLanguage(() => {
-//     // 可以在语言切换时 调用location.reload() 代替  --> 参见locale.vue
-//     initFuse(generateRoutes(filterRoutes(router.getRoutes())))
-// })
 </script>
 <style lang='scss' scoped>
 @use '@/styles/tools/mixin/BEM' as *;

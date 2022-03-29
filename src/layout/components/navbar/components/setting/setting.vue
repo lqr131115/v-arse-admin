@@ -38,11 +38,12 @@
 <script lang='ts' setup>
 import { unref } from 'vue'
 import { HandlerEnum } from './enum'
-import { useSetting } from '@/hooks'
+import { useConfig, useSetting } from '@/hooks'
 import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from '@/settings'
 import themeColorPickerVue from './components/themeColorPicker.vue';
 import switchItem from './components/switchItem.vue';
-const { getAppThemeColor, getNavbarBgColor, getMenuBgColor, getShowLogo, getDefaultTheme } = useSetting()
+const { getAppThemeColor, getNavbarBgColor, getMenuBgColor } = useSetting()
+const { getShowLogo, getDefaultTheme } = useConfig()
 </script>
 <style lang='scss' scoped>
 </style>
