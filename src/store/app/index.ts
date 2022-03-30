@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { Router, RouteLocationNormalized } from "vue-router";
 import { getItem, setItem } from "@/utils/storage";
 import {
   LOCALE_KEY,
@@ -26,12 +25,6 @@ export const useAppStore = defineStore({
     getProjectConfig: (state) => {
       return state.projectConfig;
     },
-    getTabList: (state) => {
-      return state.tabList;
-    },
-    showMultipleTabs: (state) => {
-      return state.tabList && state.tabList.length;
-    },
   },
   actions: {
     setLanguage(language: LocaleType) {
@@ -47,50 +40,6 @@ export const useAppStore = defineStore({
     setTabList(list: any[]) {
       this.tabList = list;
       setItem(TAG_VIEW_LIST_KEY, list);
-    },
-    addTabItem(item: any) {
-      const oldList = this.getTabList;
-      const isFind = oldList.find((t: any) => t.path === item.path);
-      if (!isFind) {
-        oldList.push(item);
-      }
-      this.setTabList(oldList);
-    },
-    refreshPage(router: Router) {
-      router.go(0);
-    },
-    closeAllTab() {
-      this.setTabList([]);
-    },
-    closeLeftTabs(item: RouteLocationNormalized) {
-      const oldList = this.getTabList;
-      const index = oldList.findIndex((t: any) => t.path === item.path);
-      if (~index) {
-        if (index === 0) {
-          return
-        }
-        this.setTabList(oldList.splice(index));
-      }
-    },
-    closeRightTabs(item: RouteLocationNormalized) {
-      const oldList = this.getTabList;
-      const index = oldList.findIndex((t: any) => t.path === item.path);
-      if (~index) {
-        if (index === oldList.length - 1) {
-          return
-        }
-        this.setTabList(oldList.splice(0, index + 1));
-      }
-    },
-    closeOtherTabs(item: RouteLocationNormalized) {
-      const oldList = this.getTabList;
-      const newList = oldList.filter((t: any) => t.path === item.path);
-      this.setTabList(newList);
-    },
-    closeCurrentTab(item: RouteLocationNormalized) {
-      const oldList = this.getTabList;
-      const newList = oldList.filter((t: any) => t.path !== item.path);
-      this.setTabList(newList);
     },
   },
 });

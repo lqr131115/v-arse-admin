@@ -1,7 +1,7 @@
 import { computed, reactive } from "vue";
 import { useRouter, RouteLocationNormalized } from "vue-router";
 import i18n from "@/i18n";
-import { useAppStore } from "@/store/app";
+import { useTabStore } from "@/store/tab";
 import { MenuEventEnum, DropMenu } from "../type";
 import { useTabs } from "@/hooks";
 import { isNull } from "@/utils/validate";
@@ -9,12 +9,12 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
   if (!tabItem) {
     return;
   }
-  const appStore = useAppStore();
+  const tabStore = useTabStore();
   const state = reactive({
     currentClickItem: tabItem,
     currentClickIndex: 0,
   });
-  state.currentClickIndex = appStore.getTabList.findIndex((tab: any) => tab.path === tabItem!.path);
+  state.currentClickIndex = tabStore.getTabList.findIndex((tab: any) => tab.path === tabItem!.path);
   const { currentRoute } = useRouter();
   const {
     refreshPage,
@@ -22,7 +22,7 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
     closeLeft,
     closeRight,
     closeOther,
-    closeCurrent,
+    closeTab,
   } = useTabs(tabItem);
   const getDropMenuList = computed(() => {
     const curClickItem = state.currentClickItem;
@@ -31,8 +31,8 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
       ? (curClickItem as any).path !== currentRoute.value.path
       : true;
     const closeLeftDisabled = curClickIndex === 0;
-    const closeRightDisabled = curClickIndex === appStore.getTabList.length - 1;
-    const disabled = appStore.getTabList.length === 1;
+    const closeRightDisabled = curClickIndex === tabStore.getTabList.length - 1;
+    const disabled = tabStore.getTabList.length === 1;
 
     const dropMenuList: DropMenu[] = [
       {
@@ -76,9 +76,6 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
       case MenuEventEnum.REFRESH_PAGE:
         refreshPage();
         break;
-      case MenuEventEnum.CLOSE_CURRENT:
-        closeCurrent();
-        break;
       case MenuEventEnum.CLOSE_LEFT:
         closeLeft();
         break;
@@ -90,6 +87,9 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
         break;
       case MenuEventEnum.CLOSE_ALL:
         closeAll();
+        break;
+      case MenuEventEnum.CLOSE:
+        closeTab()
         break;
     }
   }

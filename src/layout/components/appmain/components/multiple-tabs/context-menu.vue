@@ -29,15 +29,12 @@ const props = defineProps({
         default: null,
     },
 })
+const { getDropMenuList, handleMenuEvent } = useTabDropdown(props.item)!
 const handleClick = (event: number | string, disabled: boolean) => {
-    if (disabled) {
-        return
-    }
+    if (disabled) { return }
     handleMenuEvent(event)
     emits('hide', false)
 }
-const { getDropMenuList, handleMenuEvent } = useTabDropdown(props.item)!
-
 </script>
 <style lang='scss' scoped>
 @use '@/styles/tools/mixin/BEM'  as *;

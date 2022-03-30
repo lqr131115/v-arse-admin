@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { watch } from 'vue';
 import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router';
-import { useAppStore } from '@/store/app';
+import { useTabStore } from '@/store/tab';
 import { inWhiteList } from '@/utils/tabs'
 import { genRouteTitle, watchSwitchLanguage } from '@/utils/i18n'
+import { useTabs } from '@/hooks';
 import MultipleTabs from './components/multiple-tabs/multiple-tabs.vue'
-import { useConfig } from '@/hooks';
 
 const route = useRoute()
-const appStore = useAppStore()
-const { showMultipleTabs } = useConfig()
+const tabStore = useTabStore()
+const { showMultipleTabs } = useTabs()
 const genItemTitle = (route: RouteLocationNormalizedLoaded): string => {
   let result = ''
   if (route.meta && route.meta.title) {
@@ -26,18 +26,18 @@ watch(() => route, (to, from) => {
     return
   }
   const { fullPath, path, name, meta, params, query } = to
-  appStore.addTabItem({
+  tabStore.addTabItem({
     fullPath, path, name, meta, params, query,
     title: genItemTitle(to)
   })
 }, { deep: true })
 
 watchSwitchLanguage(() => {
-  let oldList = appStore.getTabList
+  let oldList = tabStore.getTabList
   oldList = oldList.map((route: any) => {
     return { ...route, title: genRouteTitle(route.meta.title as string) }
   })
-  appStore.setTabList(oldList)
+  tabStore.setTabList(oldList)
 })
 </script>
 

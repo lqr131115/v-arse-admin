@@ -1,11 +1,11 @@
 <template>
     <div class="view">
         <el-tag
-            v-for="(tab, index) in getTabList"
+            v-for="tab in getTabList"
             :key="tab.path"
-            :closable="index !== 0"
             :effect="tab.path === $route.path ? 'dark' : 'plain'"
             hit
+            closable
             mr5
             class="view__tab"
             @close="handleClose(tab)"
@@ -18,7 +18,7 @@
 <script lang='ts' setup>
 import { ref, watch } from 'vue';
 import { useRouter, RouteLocationNormalized } from 'vue-router';
-import { useConfig, useTabs } from '@/hooks';
+import { useTabs } from '@/hooks';
 import ContextMenu from './context-menu.vue';
 interface IContextMenuStyle {
     left: string,
@@ -26,13 +26,13 @@ interface IContextMenuStyle {
     [key: string]: string
 }
 const router = useRouter()
-const { closeCurrent } = useTabs()
-const { getTabList } = useConfig()
+const { closeTab } = useTabs()
+const { getTabList } = useTabs()
 let visible = ref<boolean>(false)
 let currItem = ref<RouteLocationNormalized>()
 let contextMenuStyle = ref<IContextMenuStyle>({ left: '0px', top: '0px', position: 'absolute' })
 const onHide = () => { visible.value = false }
-const handleClose = (tab: any) => { closeCurrent(tab) }
+const handleClose = (tab: any) => { closeTab(tab) }
 const handleClick = (tab: any) => { router.push(tab.path) }
 
 let timer: any;

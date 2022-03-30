@@ -1,18 +1,15 @@
 import { computed } from "vue";
-import { useRouter } from "vue-router";
+import { Router, useRouter } from "vue-router";
 import { useThemeStore } from "@/store/theme";
 import { useAppStore } from "@/store/app";
-export const useSetting = () => {
+import { useTabStore } from "@/store/tab";
+export const useTheme = () => {
   const themeStore = useThemeStore();
   const getAppThemeColor = computed(() => themeStore.getAppTheme.primary);
   const getMenuBgColor = computed(() => themeStore.getMenuTheme.menuBgColor);
   const getMenuTextColor = computed(() => themeStore.getMenuTheme.textColor);
-  const getMenuActiveTextColor = computed(
-    () => themeStore.getMenuTheme.textActiveColor
-  );
-  const getNavbarBgColor = computed(
-    () => themeStore.getNavbarTheme.navBarBgColor
-  );
+  const getMenuActiveTextColor = computed(() => themeStore.getMenuTheme.textActiveColor);
+  const getNavbarBgColor = computed(() => themeStore.getNavbarTheme.navBarBgColor);
 
   return {
     getAppThemeColor,
@@ -25,19 +22,13 @@ export const useSetting = () => {
 
 export const useConfig = () => {
   const appStore = useAppStore();
-  const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
-  const getDefaultTheme = computed(
-    () => appStore.getProjectConfig.defaultTheme
-  );
   const getLanguage = computed(() => appStore.getLanguage);
-  const getTabList = computed(() => appStore.getTabList);
-  const showMultipleTabs = computed(() => appStore.showMultipleTabs);
+  const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
+  const getDefaultTheme = computed(() => appStore.getProjectConfig.defaultTheme);
   return {
+    getLanguage,
     getShowLogo,
     getDefaultTheme,
-    getLanguage,
-    getTabList,
-    showMultipleTabs,
   };
 };
 
@@ -47,42 +38,43 @@ enum MenuEventEnum {
   CLOSE_LEFT,
   CLOSE_RIGHT,
   CLOSE_OTHER,
-  CLOSE_CURRENT,
   CLOSE,
 }
 
 export const useTabs = (tabItem?: any) => {
-  const appStore = useAppStore();
+  const tabStore = useTabStore();
   const router = useRouter();
-  function handleTabAction(action: MenuEventEnum, tab?: any) {
+  const getTabList = computed(() => tabStore.getTabList);
+  const showMultipleTabs = computed(() => tabStore.showMultipleTabs);
+  function handleTabAction(action: MenuEventEnum, tab: any = tabItem, _router:Router = router) {
     switch (action) {
       case MenuEventEnum.REFRESH:
-        appStore.refreshPage(router);
+        tabStore.refreshPage(_router);
         break;
       case MenuEventEnum.CLOSE_ALL:
-        appStore.closeAllTab();
+        tabStore.closeAllTab();
         break;
       case MenuEventEnum.CLOSE_LEFT:
-        appStore.closeLeftTabs(tabItem);
+        tabStore.closeLeftTabs(tab);
         break;
       case MenuEventEnum.CLOSE_RIGHT:
-        appStore.closeRightTabs(tabItem);
+        tabStore.closeRightTabs(tab);
         break;
       case MenuEventEnum.CLOSE_OTHER:
-        appStore.closeOtherTabs(tabItem);
+        tabStore.closeOtherTabs(tab);
         break;
-      case MenuEventEnum.CLOSE_CURRENT:
-        appStore.closeCurrentTab(tab || tabItem);
+      case MenuEventEnum.CLOSE:
+        tabStore.closeTab(tab,_router);
         break;
-    }
+    } 
   }
   return {
+    getTabList,
+    showMultipleTabs,
     refreshPage: () => handleTabAction(MenuEventEnum.REFRESH),
     closeAll: () => handleTabAction(MenuEventEnum.CLOSE_ALL),
     closeLeft: () => handleTabAction(MenuEventEnum.CLOSE_LEFT),
     closeRight: () => handleTabAction(MenuEventEnum.CLOSE_RIGHT),
     closeOther: () => handleTabAction(MenuEventEnum.CLOSE_OTHER),
-    closeCurrent: (tab?: any) =>
-      handleTabAction(MenuEventEnum.CLOSE_CURRENT, tab),
-  };
+    closeTab: (tab?: any) =>handleTabAction(MenuEventEnum.CLOSE, tab)};
 };
