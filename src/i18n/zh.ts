@@ -26,7 +26,7 @@ export default {
     search: "搜索",
 
     // guide
-    guide: "指南",
+    guide: "引导",
 
     // tooltip
     tooltipErrorLog: "错误日志",
@@ -87,6 +87,10 @@ export default {
     darkMode: '主题',
     navMode: '导航栏模式',
     interfaceFunction: '界面功能',
+    searchBar:'搜索栏',
+    guideBar:'引导栏',
+    localeBar:'语言切换栏',
+    screenBar:'进入或退出全幕栏',
     interfaceDisplay: '界面显示',
     animation: '动画',
     splitMenu: '分割菜单',

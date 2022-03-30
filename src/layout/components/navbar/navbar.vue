@@ -15,7 +15,7 @@ type definePropsType = {
 }
 let drawer = ref<Boolean>(false)
 const props = defineProps<definePropsType>()
-const { getShowBreadcrumb } = useAppConfig()
+const { getShowBreadcrumb, getOpenSearchBar, getOpenGuideBar, getOpenLocaleBar, getOpenScreenBar } = useAppConfig()
 const emits = defineEmits(['update:collapse'])
 const toggle = () => { emits('update:collapse', !props.collapse) }
 const setting = () => { drawer.value = true }
@@ -43,7 +43,7 @@ const handleClickAction = (action: IAction, index: number) => {
       </span>
     </div>
     <div class="header__right">
-      <div class="header__search">
+      <div class="header__search" v-if="getOpenSearchBar">
         <Search />
       </div>
       <div class="header__msg">
@@ -58,13 +58,13 @@ const handleClickAction = (action: IAction, index: number) => {
           </template>
         </Notify>
       </div>
-      <div class="header__guide">
+      <div class="header__guide" v-if="getOpenGuideBar">
         <Guide />
       </div>
-      <div class="header__locale">
+      <div class="header__locale" v-if="getOpenLocaleBar">
         <Locale />
       </div>
-      <div class="header__fullscreen">
+      <div class="header__fullscreen" v-if="getOpenScreenBar">
         <FullScreen />
       </div>
       <div class="header__info">

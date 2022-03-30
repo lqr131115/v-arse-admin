@@ -34,6 +34,18 @@ export const baseHandler = (event: HandlerEnum, value: any) => {
       });
       appStore.setProjectConfig({ defaultTheme: false });
       break;
+    case HandlerEnum.OPEN_SEARCH_BAR:
+      appStore.setProjectConfig({ openSearchBar: !!value });
+      break;
+    case HandlerEnum.OPEN_GUIDE_BAR:
+      appStore.setProjectConfig({ openGuideBar: !!value });
+      break;
+    case HandlerEnum.OPEN_LOCALE_BAR:
+      appStore.setProjectConfig({ openLocaleBar: !!value });
+      break;
+    case HandlerEnum.OPEN_SCREEN_BAR:
+      appStore.setProjectConfig({ openScreenBar: !!value });
+      break;
     case HandlerEnum.SHOW_LOGO:
       appStore.setProjectConfig({ showLogo: !!value });
       break;
@@ -60,7 +72,7 @@ export const baseHandler = (event: HandlerEnum, value: any) => {
       break;
     case HandlerEnum.ROUTER_TRANSITION:
       if (!value) {
-        return
+        return;
       }
       appStore.setProjectConfig({ animation: value });
       break;

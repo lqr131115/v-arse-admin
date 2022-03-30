@@ -28,6 +28,10 @@ export const useAppConfig = () => {
   const getShowQuickTabs = computed(() => appStore.getProjectConfig.showQuick);
   const getShowBreadcrumb = computed(() => appStore.getProjectConfig.showBreadcrumb);
   const getOpenBreadcrumbAn = computed(() => appStore.getProjectConfig.breadCrumbAnimation);
+  const getOpenSearchBar = computed(() => appStore.getProjectConfig.openSearchBar);
+  const getOpenGuideBar = computed(() => appStore.getProjectConfig.openGuideBar);
+  const getOpenLocaleBar = computed(() => appStore.getProjectConfig.openLocaleBar);
+  const getOpenScreenBar = computed(() => appStore.getProjectConfig.openScreenBar);
   
   return {
     getLanguage,
@@ -36,7 +40,11 @@ export const useAppConfig = () => {
     getAnimationType,
     getShowQuickTabs,
     getShowBreadcrumb,
-    getOpenBreadcrumbAn
+    getOpenBreadcrumbAn,
+    getOpenSearchBar,
+    getOpenGuideBar,
+    getOpenLocaleBar,
+    getOpenScreenBar,
   };
 };
 

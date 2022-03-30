@@ -47,6 +47,10 @@ export type ProjectConfig = {
   showQuick?:boolean,
   showBreadcrumb?:boolean,
   breadcrumbAnimation?:boolean,
+  openSearchBar?:boolean,
+  openGuideBar?:boolean,
+  openLocaleBar?:boolean,
+  openScreenBar?:boolean,
 };
 
 export type LabelValueOptions = {

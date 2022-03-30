@@ -26,6 +26,30 @@
         />
 
         <el-divider>
+            <span fz18>{{ $t('setting.interfaceFunction') }}</span>
+        </el-divider>
+        <switchItem
+            :title="$t('setting.searchBar')"
+            :event="HandlerEnum.OPEN_SEARCH_BAR"
+            :def="unref(getOpenSearchBar)"
+        />
+        <switchItem
+            :title="$t('setting.guideBar')"
+            :event="HandlerEnum.OPEN_GUIDE_BAR"
+            :def="unref(getOpenGuideBar)"
+        />
+        <switchItem
+            :title="$t('setting.localeBar')"
+            :event="HandlerEnum.OPEN_LOCALE_BAR"
+            :def="unref(getOpenLocaleBar)"
+        />
+        <switchItem
+            :title="$t('setting.screenBar')"
+            :event="HandlerEnum.OPEN_SCREEN_BAR"
+            :def="unref(getOpenScreenBar)"
+        />
+
+        <el-divider>
             <span fz18>{{ $t('setting.interfaceDisplay') }}</span>
         </el-divider>
         <switchItem title="Logo" :event="HandlerEnum.SHOW_LOGO" :def="unref(getShowLogo)" />
@@ -75,7 +99,8 @@ import themeColorPickerVue from './components/themeColorPicker.vue';
 import switchItem from './components/switchItem.vue';
 import selectItem from './components/selectItem.vue';
 const { getAppThemeColor, getNavbarBgColor, getMenuBgColor } = useTheme()
-const { getShowLogo, getDefaultTheme, getAnimationType, getShowQuickTabs, getShowBreadcrumb,getOpenBreadcrumbAn } = useAppConfig()
+const { getShowLogo, getDefaultTheme, getAnimationType, getShowQuickTabs, getShowBreadcrumb, getOpenBreadcrumbAn,
+    getOpenSearchBar, getOpenGuideBar, getOpenLocaleBar, getOpenScreenBar } = useAppConfig()
 </script>
 <style lang='scss' scoped>
 </style>

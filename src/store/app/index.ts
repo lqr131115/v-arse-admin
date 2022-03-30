@@ -10,6 +10,10 @@ const defaultProjectConfig: ProjectConfig = {
   showQuick: true,
   showBreadcrumb: true,
   breadcrumbAnimation: true,
+  openSearchBar: true,
+  openGuideBar: true,
+  openLocaleBar: true,
+  openScreenBar: true,
 };
 export const useAppStore = defineStore({
   id: "app",
