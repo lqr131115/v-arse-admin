@@ -22,14 +22,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute, useRouter, } from 'vue-router'
-import { useConfig, useTheme } from '@/hooks';
+import { useAppConfig, useTheme } from '@/hooks';
 import { filterRoutes, generateMenus, formatMenus } from '@/utils/route'
 interface ISidebarProps { collapse: boolean }
 defineProps<ISidebarProps>();
 const router = useRouter()
 const route = useRoute()
 const { getMenuBgColor, getMenuTextColor, getMenuActiveTextColor } = useTheme()
-const { getShowLogo } = useConfig()
+const { getShowLogo } = useAppConfig()
 const menuData = computed(() => (formatMenus(generateMenus(filterRoutes(router.getRoutes())))))
 const defaultActive = computed(() => route.path)
 

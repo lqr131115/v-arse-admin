@@ -1,11 +1,13 @@
-export type EnvMODE = "development" | "production";
+export type EnvMode = "development" | "production";
 
-export type BaseConfig = {
+export type ApiUrlConfig = {
   mockUrl: string;
   baseUrl: string;
+  [key: string]: string;
 };
-export type Config = {
-  [P in EnvMODE]: BaseConfig;
+
+export type EnvBaseConfig = {
+  [P in EnvMode]: ApiUrlConfig;
 };
 
 export type LocaleType = "zh_CN" | "en";
@@ -19,11 +21,11 @@ export type DropDown = {
   icon?: string;
 };
 
-export type appTheme = {
+export type AppTheme = {
   primary?: string;
 };
 
-export type menuTheme = {
+export type MenuTheme = {
   menuBgColor?: string;
   menuHoverBgColor?: string;
   textColor?: string;
@@ -32,11 +34,23 @@ export type menuTheme = {
   submenuHoverBgColor?: string;
 };
 
-export type navBarTheme = {
+export type NavBarTheme = {
   navBarBgColor?: string;
 };
+
+export type AnimationType = 'zoom-fade' | 'zoom-out' | 'fade-slide' | 'fade' | 'fade-bottom' | 'fade-scale'
 
 export type ProjectConfig = {
   showLogo?: boolean;
   defaultTheme?: boolean;
+  animation?: AnimationType;
+  showQuick?:boolean,
+  showBreadcrumb?:boolean,
+  breadcrumbAnimation?:boolean,
 };
+
+export type LabelValueOptions = {
+  label: string;
+  value: any;
+  [key: string]: string | number | boolean;
+}[];

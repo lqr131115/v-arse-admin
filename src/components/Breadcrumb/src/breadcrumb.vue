@@ -1,9 +1,9 @@
 <template>
     <el-breadcrumb v-bind="$attrs">
         <transition-group name="breadcrumb">
-            <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
+            <el-breadcrumb-item v-for="(item, index) in data" :key="item.path">
                 <!-- 不可点击 -->
-                <template v-if="index === breadcrumbData.length - 1">
+                <template v-if="index === data.length - 1">
                     <span class="no-skip">{{ $t(`route.${item.meta.title}`) }}</span>
                 </template>
                 <!-- 可以点击 -->
@@ -29,18 +29,17 @@
 <script lang="ts" setup>
 import { watch, ref } from 'vue';
 import { useRoute, RouteLocationMatched, useRouter } from 'vue-router';
-const breadcrumbData = ref<RouteLocationMatched[]>([])
+defineExpose({
+    animation: {
+        type: Boolean,
+        default: true
+    }
+})
+const data = ref<RouteLocationMatched[]>([])
 const route = useRoute()
 const router = useRouter()
 const getBreadcrumbItem = (matchedRoute: RouteLocationMatched[]) => {
-    breadcrumbData.value = matchedRoute.filter((mr) => mr.meta.title && mr.meta.icon)
-    // 处理成自定义的格式
-    // breadcrumbData.value = matchedRoute.filter((mr) => mr.meta.title && mr.meta.icon).map((mr) => {
-    //     const item: IBreadcrumbItem = { title: '', path: '' }
-    //     item.title = mr.meta.title as string
-    //     item.path = mr.path
-    //     return item
-    // })
+    data.value = matchedRoute.filter((mr) => mr.meta.title && mr.meta.icon)
 }
 const onCommand = (path: string) => { router.push(path) }
 

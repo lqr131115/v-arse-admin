@@ -9,15 +9,15 @@ import FullScreen from './components/fullscreen/fullscreen.vue'
 import UserDropdown from './components/user-dropdown/user-dropdown.vue'
 import Setting from './components/setting/setting.vue'
 import { IListItem, IAction, tabListData, actionsData } from './components/notify/data'
+import { useAppConfig } from '@/hooks'
 type definePropsType = {
   collapse: boolean
 }
 let drawer = ref<Boolean>(false)
 const props = defineProps<definePropsType>()
+const { getShowBreadcrumb } = useAppConfig()
 const emits = defineEmits(['update:collapse'])
-const toggle = () => {
-  emits('update:collapse', !props.collapse)
-}
+const toggle = () => { emits('update:collapse', !props.collapse) }
 const setting = () => { drawer.value = true }
 const handleClickItem = (item: IListItem, index: number) => {
   console.log('handleClickItem', item);
@@ -39,7 +39,7 @@ const handleClickAction = (action: IAction, index: number) => {
         </el-icon>
       </span>
       <span class="header__left--breadcrumb">
-        <m-breadcrumb />
+        <m-breadcrumb v-if="getShowBreadcrumb" />
       </span>
     </div>
     <div class="header__right">

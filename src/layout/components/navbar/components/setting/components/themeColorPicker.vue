@@ -13,12 +13,7 @@
 <script lang='ts' setup>
 import { PropType, watch, ref } from 'vue'
 import { HandlerEnum } from '../enum'
-import { useThemeStore } from '@/store/theme'
-import { SIDE_BAR_THEME_COLOR_LIST } from '@/settings'
-import { genNewStyle, writeNewStyle } from '@/utils/theme'
-import type { appTheme, menuTheme, navBarTheme } from '@/types/app'
-import { useAppStore } from '@/store/app'
-
+import { baseHandler } from "../handler"
 const props = defineProps({
    colorList: {
       type: Array as PropType<any[]>,
@@ -31,42 +26,15 @@ const props = defineProps({
       type: String
    },
 })
-let border = ref<string>('')
-const themeStore = useThemeStore()
-const appStore = useAppStore()
-const baseHandler = (event: HandlerEnum, value: string) => {
-   appStore.setProjectConfig({ defaultTheme: false })
-   switch (event) {
-      case HandlerEnum.CHANGE_THEME_COLOR:
-         const appTheme: appTheme = {}
-         appTheme.primary = value
-         genNewStyle(value).then(res => {
-            writeNewStyle(res)
-         })
-         themeStore.setAppTheme(appTheme)
-         break;
-      case HandlerEnum.HEADER_THEME:
-         const navbarTheme: navBarTheme = {}
-         navbarTheme.navBarBgColor = value
-         themeStore.setNavbarTheme(navbarTheme)
-         break;
-      case HandlerEnum.MENU_THEME:
-         const menuTheme: menuTheme = {}
-         menuTheme.menuBgColor = value
-         themeStore.setMenuTheme({ ...menuTheme, ...SIDE_BAR_THEME_COLOR_LIST[value] })
-         break;
-      default:
-         break;
-   }
-}
+let borderStyle = ref<string>('')
 const handleClick = (color: string) => {
    props.event && baseHandler(props.event, color)
 }
 watch(() => props.def, (newVal) => {
    if (newVal === '#ffffff') {
-      border.value = `2px solid #000`
+      borderStyle.value = `2px solid #000`
    } else {
-      border.value = `2px solid #fff`
+      borderStyle.value = `2px solid #fff`
    }
 }, { immediate: true })
 
@@ -95,7 +63,7 @@ watch(() => props.def, (newVal) => {
             display: block;
             width: 10px;
             height: 6px;
-            border: v-bind(border);
+            border: v-bind(borderStyle);
             border-right: none;
             border-top: none;
             transform: rotate(-60deg) translate(7px, -10px);

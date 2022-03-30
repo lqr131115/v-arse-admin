@@ -1,22 +1,21 @@
 import { defineStore } from "pinia";
 import { getItem, setItem } from "@/utils/storage";
-import {
-  LOCALE_KEY,
-  PROJECT_CONFIG_KEY,
-  TAG_VIEW_LIST_KEY,
-} from "@/enums/cacheEnum";
+import { LOCALE_KEY, PROJECT_CONFIG_KEY } from "@/enums/cacheEnum";
 import { LOCALE } from "@/settings";
 import type { LocaleType, ProjectConfig } from "@/types/app";
 const defaultProjectConfig: ProjectConfig = {
   showLogo: true,
   defaultTheme: true,
+  animation: "fade",
+  showQuick: true,
+  showBreadcrumb: true,
+  breadcrumbAnimation: true,
 };
 export const useAppStore = defineStore({
   id: "app",
   state: () => ({
     language: getItem(LOCALE_KEY) || LOCALE.ZH_CN,
     projectConfig: getItem(PROJECT_CONFIG_KEY) || defaultProjectConfig,
-    tabList: getItem(TAG_VIEW_LIST_KEY) || [],
   }),
   getters: {
     getLanguage: (state) => {
@@ -36,10 +35,6 @@ export const useAppStore = defineStore({
       const newConfig = { ...oldConfig, ...config };
       this.projectConfig = newConfig;
       setItem(PROJECT_CONFIG_KEY, newConfig);
-    },
-    setTabList(list: any[]) {
-      this.tabList = list;
-      setItem(TAG_VIEW_LIST_KEY, list);
     },
   },
 });

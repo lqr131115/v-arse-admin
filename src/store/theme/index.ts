@@ -4,16 +4,16 @@ import {
   SIDE_BAR_BG_KEY,
   APP_PRESET_UI_KEY,
 } from "@/enums/cacheEnum";
-import type { appTheme, menuTheme, navBarTheme } from "@/types/app";
 import { getItem, setItem } from "@/utils/storage";
+import type { AppTheme, MenuTheme, NavBarTheme } from "@/types/app";
 
-export const defaultAppTheme: appTheme = { primary: '#409eff' };
-export const defaultMenuTheme: menuTheme = {
+export const defaultAppTheme: AppTheme = { primary: '#409eff' };
+export const defaultMenuTheme: MenuTheme = {
   menuBgColor: "#ffffff",
   textActiveColor: "#ffd04b",
   textColor: "#000000",
 };
-export const defaultNavbarTheme: navBarTheme = { navBarBgColor: "#ffffff" };
+export const defaultNavbarTheme: NavBarTheme = { navBarBgColor: "#ffffff" };
 export const useThemeStore = defineStore({
   id: "theme",
   state: () => ({
@@ -22,30 +22,30 @@ export const useThemeStore = defineStore({
     navbarTheme: getItem(HEADER_PRESET_BG_KEY) || defaultNavbarTheme,
   }),
   getters: {
-    getAppTheme: (state): appTheme => {
+    getAppTheme: (state): AppTheme => {
       return state.appTheme;
     },
-    getMenuTheme: (state): menuTheme => {
+    getMenuTheme: (state): MenuTheme => {
       return state.menuTheme;
     },
-    getNavbarTheme: (state): navBarTheme => {
+    getNavbarTheme: (state):NavBarTheme  => {
       return state.navbarTheme;
     },
   },
   actions: {
-    setAppTheme(theme: appTheme) {
+    setAppTheme(theme: AppTheme) {
       const oldAppTheme = this.getAppTheme;
       const newAppTheme = { ...oldAppTheme, ...theme };
       this.appTheme = newAppTheme;
       setItem(APP_PRESET_UI_KEY, newAppTheme);
     },
-    setMenuTheme(theme: menuTheme) {
+    setMenuTheme(theme: MenuTheme) {
       const oldMenuTheme = this.getMenuTheme;
       const newMenuTheme = { ...oldMenuTheme, ...theme };
       this.menuTheme = newMenuTheme;
       setItem(SIDE_BAR_BG_KEY, newMenuTheme);
     },
-    setNavbarTheme(theme: navBarTheme) {
+    setNavbarTheme(theme: NavBarTheme) {
       const oldMenuTheme = this.getNavbarTheme;
       const newNavbarTheme = { ...oldMenuTheme, ...theme };
       this.navbarTheme = newNavbarTheme;

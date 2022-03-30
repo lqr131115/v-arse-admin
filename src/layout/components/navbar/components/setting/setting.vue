@@ -24,26 +24,58 @@
             :event="HandlerEnum.MENU_THEME"
             :def="unref(getMenuBgColor)"
         />
+
         <el-divider>
             <span fz18>{{ $t('setting.interfaceDisplay') }}</span>
         </el-divider>
         <switchItem title="Logo" :event="HandlerEnum.SHOW_LOGO" :def="unref(getShowLogo)" />
         <switchItem
+            :title="$t('setting.breadcrumb')"
+            :event="HandlerEnum.SHOW_BREADCRUMB"
+            :def="unref(getShowBreadcrumb)"
+        />
+        <switchItem
+            :title="$t('setting.tabsQuickBtn')"
+            :event="HandlerEnum.TABS_SHOW_QUICK"
+            :def="unref(getShowQuickTabs)"
+        />
+
+        <el-divider>
+            <span fz18>{{ $t('setting.animation') }}</span>
+        </el-divider>
+        <switchItem
+            :title="$t('setting.breadcrumbAnimation')"
+            :event="HandlerEnum.BREADCRUMB_ANIMATION"
+            :def="unref(getOpenBreadcrumbAn)"
+            disabled
+        />
+        <selectItem
+            :title="$t('setting.animationType')"
+            :event="HandlerEnum.ROUTER_TRANSITION"
+            :options="routerTransitionOptions"
+            :def="unref(getAnimationType)"
+        />
+
+        <el-divider>
+            <span fz18>{{ $t('setting.defaultSetting') }}</span>
+        </el-divider>
+        <switchItem
             :title="$t('setting.defaultTheme')"
             :event="HandlerEnum.DEFAULT_THEME"
-            :def="getDefaultTheme"
+            :def="unref(getDefaultTheme)"
         />
     </el-scrollbar>
 </template>
 <script lang='ts' setup>
 import { unref } from 'vue'
-import { HandlerEnum } from './enum'
-import { useConfig, useTheme } from '@/hooks'
+import { HandlerEnum, routerTransitionOptions } from './enum'
+import { useAppConfig, useTheme } from '@/hooks'
 import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from '@/settings'
 import themeColorPickerVue from './components/themeColorPicker.vue';
 import switchItem from './components/switchItem.vue';
+import selectItem from './components/selectItem.vue';
 const { getAppThemeColor, getNavbarBgColor, getMenuBgColor } = useTheme()
-const { getShowLogo, getDefaultTheme } = useConfig()
+const { getShowLogo, getDefaultTheme, getAnimationType, getShowQuickTabs, getShowBreadcrumb,getOpenBreadcrumbAn } = useAppConfig()
 </script>
 <style lang='scss' scoped>
 </style>

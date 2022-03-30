@@ -18,6 +18,6 @@ export const SIDE_BAR_BG_KEY = 'SIDE_BAR_BG_KEY__'
 
 export const PROJECT_CONFIG_KEY = 'PROJECT_CONFIG_KEY__'
 
-// tagView key
+// multipleTab key
 
-export const TAG_VIEW_LIST_KEY = 'TAG_VIEW_LIST_KEY'
+export const MULTIPLE_TAB_LIST_KEY = 'MULTIPLE_TAB_LIST_KEY__'

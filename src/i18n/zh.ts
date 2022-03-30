@@ -68,6 +68,7 @@ export default {
     menuTypeMix: '顶部菜单混合模式',
     menuTypeTopMenu: '顶部菜单模式',
 
+    defaultSetting: '默认设置',
     defaultTheme:'默认主题',
 
     on: '开',
@@ -107,6 +108,7 @@ export default {
 
     breadcrumb: '面包屑',
     breadcrumbIcon: '面包屑图标',
+    breadcrumbAnimation: '面包屑动画',
     tabs: '标签页',
     tabsQuickBtn: '标签页快捷按钮',
     tabsRedoBtn: '标签页刷新按钮',

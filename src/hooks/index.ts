@@ -10,7 +10,6 @@ export const useTheme = () => {
   const getMenuTextColor = computed(() => themeStore.getMenuTheme.textColor);
   const getMenuActiveTextColor = computed(() => themeStore.getMenuTheme.textActiveColor);
   const getNavbarBgColor = computed(() => themeStore.getNavbarTheme.navBarBgColor);
-
   return {
     getAppThemeColor,
     getMenuBgColor,
@@ -20,15 +19,24 @@ export const useTheme = () => {
   };
 };
 
-export const useConfig = () => {
+export const useAppConfig = () => {
   const appStore = useAppStore();
   const getLanguage = computed(() => appStore.getLanguage);
   const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
   const getDefaultTheme = computed(() => appStore.getProjectConfig.defaultTheme);
+  const getAnimationType = computed(() => appStore.getProjectConfig.animation);
+  const getShowQuickTabs = computed(() => appStore.getProjectConfig.showQuick);
+  const getShowBreadcrumb = computed(() => appStore.getProjectConfig.showBreadcrumb);
+  const getOpenBreadcrumbAn = computed(() => appStore.getProjectConfig.breadCrumbAnimation);
+  
   return {
     getLanguage,
     getShowLogo,
     getDefaultTheme,
+    getAnimationType,
+    getShowQuickTabs,
+    getShowBreadcrumb,
+    getOpenBreadcrumbAn
   };
 };
 

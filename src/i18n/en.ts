@@ -66,7 +66,7 @@ export default {
     menuTypeMixSidebar: "Left menu mixed mode",
     menuTypeMix: "Top Menu Mix mode",
     menuTypeTopMenu: "Top menu mode",
-
+    defaultSetting:'Default Setting',
     defaultTheme:'Default Theme',
 
     on: "On",
@@ -107,6 +107,7 @@ export default {
 
     breadcrumb: "Breadcrumbs",
     breadcrumbIcon: "Breadcrumbs Icon",
+    breadcrumbAnimation:"Breadcrumbs Animation",
     tabs: "Tabs",
     tabsQuickBtn: "Tabs quick button",
     tabsRedoBtn: "Tabs redo button",

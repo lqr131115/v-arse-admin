@@ -1,7 +1,7 @@
-import type { Config } from "@/types/app";
+import type { EnvBaseConfig } from "@/types/app";
 
 const env: string = import.meta.env.MODE;
-const config: Config = {
+const config: EnvBaseConfig = {
   development: {
     mockUrl: "/mock",
     baseUrl: "/api",

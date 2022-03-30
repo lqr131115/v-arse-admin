@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
 import { Router, RouteLocationNormalized } from "vue-router";
 import { getItem, setItem } from "@/utils/storage";
-import { TAG_VIEW_LIST_KEY } from "@/enums/cacheEnum";
+import { MULTIPLE_TAB_LIST_KEY } from "@/enums/cacheEnum";
 export const useTabStore = defineStore({
   id: "tab",
   state: () => ({
-    tabList: getItem(TAG_VIEW_LIST_KEY) || [],
+    tabList: getItem(MULTIPLE_TAB_LIST_KEY) || [],
   }),
   getters: {
     getTabList: (state) => {
@@ -18,7 +18,7 @@ export const useTabStore = defineStore({
   actions: {
     setTabList(list: any[]) {
       this.tabList = list;
-      setItem(TAG_VIEW_LIST_KEY, list);
+      setItem(MULTIPLE_TAB_LIST_KEY, list);
     },
     addTabItem(item: any) {
       const oldList = this.getTabList;

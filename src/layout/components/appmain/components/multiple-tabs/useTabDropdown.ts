@@ -32,7 +32,7 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
       : true;
     const closeLeftDisabled = curClickIndex === 0;
     const closeRightDisabled = curClickIndex === tabStore.getTabList.length - 1;
-    const disabled = tabStore.getTabList.length === 1;
+    const closeOtherOrAllDisabled = tabStore.getTabList.length === 1;
 
     const dropMenuList: DropMenu[] = [
       {
@@ -59,18 +59,18 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
         icon: "close-other",
         event: MenuEventEnum.CLOSE_OTHER,
         text: i18n.global.t("tabsView.closeOther"),
-        disabled: disabled,
+        disabled: closeOtherOrAllDisabled,
       },
       {
         icon: "close-all",
         event: MenuEventEnum.CLOSE_ALL,
         text: i18n.global.t("tabsView.closeAll"),
-        disabled: disabled,
+        disabled: closeOtherOrAllDisabled,
       },
     ];
     return dropMenuList;
   });
-
+  
   function handleMenuEvent(event: string | number): void {
     switch (event) {
       case MenuEventEnum.REFRESH_PAGE:
