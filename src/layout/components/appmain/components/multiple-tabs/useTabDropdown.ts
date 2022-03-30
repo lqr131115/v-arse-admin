@@ -6,22 +6,32 @@ import { MenuEventEnum, DropMenu } from "../type";
 import { useTabs } from "@/hooks";
 import { isNull } from "@/utils/validate";
 export function useTabDropdown(tabItem?: RouteLocationNormalized) {
-  const state = reactive({
-    current: {},
-    currentIndex: 0,
-  });
+  if (!tabItem) {
+    return;
+  }
   const appStore = useAppStore();
+  const state = reactive({
+    currentClickItem: tabItem,
+    currentClickIndex: 0,
+  });
+  state.currentClickIndex = appStore.getTabList.findIndex((tab: any) => tab.path === tabItem!.path);
   const { currentRoute } = useRouter();
-  const { refreshPage, closeAll, closeLeft, closeRight, closeOther, closeCurrent } =
-    useTabs();
+  const {
+    refreshPage,
+    closeAll,
+    closeLeft,
+    closeRight,
+    closeOther,
+    closeCurrent,
+  } = useTabs(tabItem);
   const getDropMenuList = computed(() => {
-    const curItem = state.current;
-    const index = state.currentIndex;
-    const refreshDisabled = !isNull(curItem)
-      ? (curItem as any).path !== currentRoute.value.path
+    const curClickItem = state.currentClickItem;
+    const curClickIndex = state.currentClickIndex;
+    const refreshDisabled = !isNull(curClickItem)
+      ? (curClickItem as any).path !== currentRoute.value.path
       : true;
-    const closeLeftDisabled = index === 0;
-    const closeRightDisabled = index === appStore.getTabList.length - 1;
+    const closeLeftDisabled = curClickIndex === 0;
+    const closeRightDisabled = curClickIndex === appStore.getTabList.length - 1;
     const disabled = appStore.getTabList.length === 1;
 
     const dropMenuList: DropMenu[] = [
@@ -83,16 +93,5 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
         break;
     }
   }
-  function handleContextMenu(tabItem: RouteLocationNormalized) {
-    if (!tabItem) {
-      return;
-    }
-    const index = appStore.getTabList.findIndex(
-      (tab: any) => tab.path === tabItem.path
-    );
-    state.current = tabItem as RouteLocationNormalized;
-    state.currentIndex = index;
-  }
-
-  return { getDropMenuList, handleMenuEvent, handleContextMenu };
+  return { getDropMenuList, handleMenuEvent };
 }

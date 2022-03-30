@@ -1,48 +1,39 @@
 <template>
-    <div class="view" v-if="showMultipleTabs">
+    <div class="view">
         <el-tag
             v-for="(tab, index) in getTabList"
             :key="tab.path"
-            class="view__tab"
-            style="cursor: pointer;"
             :closable="index !== 0"
+            :effect="tab.path === $route.path ? 'dark' : 'plain'"
             hit
             mr5
-            :effect="tab.path === $route.path ? 'dark' : 'plain'"
-            @close="handleClose"
-            @click="handleClick(tab.path)"
+            class="view__tab"
+            @close="handleClose(tab)"
+            @click="handleClick(tab)"
             @contextmenu.prevent="(e: PointerEvent) => { handleContext(e, tab) }"
         >{{ tab.title }}</el-tag>
-        <el-button @click="onClear">清除</el-button>
     </div>
-    <ContextMenu v-if="visible" :style="contextMenuStyle" :item="currItem" @event="handleEvent" />
+    <ContextMenu v-if="visible" :style="contextMenuStyle" :item="currItem" @hide="onHide" />
 </template>
 <script lang='ts' setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter, RouteLocationNormalized } from 'vue-router';
-import { MenuEventEnum } from '../type';
+import { useConfig, useTabs } from '@/hooks';
 import ContextMenu from './context-menu.vue';
-import { useTabDropdown } from './useTabDropdown';
-import { useConfig } from '@/hooks';
-import { useAppStore } from '@/store/app';
 interface IContextMenuStyle {
     left: string,
     top: string,
     [key: string]: string
 }
 const router = useRouter()
-const { showMultipleTabs, getTabList } = useConfig()
-const { handleMenuEvent } = useTabDropdown()
+const { closeCurrent } = useTabs()
+const { getTabList } = useConfig()
 let visible = ref<boolean>(false)
 let currItem = ref<RouteLocationNormalized>()
 let contextMenuStyle = ref<IContextMenuStyle>({ left: '0px', top: '0px', position: 'absolute' })
-const onClear = () => {
-    const appStore = useAppStore()
-    appStore.setTabList([])
-}
-const handleClose = () => { handleEvent(MenuEventEnum.CLOSE_CURRENT) }
-const handleClick = (path: string) => { router.push(path) }
-const handleEvent = (event: string | number) => { event && handleMenuEvent(event) }
+const onHide = () => { visible.value = false }
+const handleClose = (tab: any) => { closeCurrent(tab) }
+const handleClick = (tab: any) => { router.push(tab.path) }
 
 let timer: any;
 const handleContext = (e: PointerEvent, tabItem: RouteLocationNormalized) => {
@@ -60,6 +51,13 @@ const handleContext = (e: PointerEvent, tabItem: RouteLocationNormalized) => {
         visible.value = true
     }, 100)
 }
+watch(() => visible.value, (newVal) => {
+    if (newVal) {
+        document.body.addEventListener('click', onHide)
+    } else {
+        document.body.removeEventListener('click', onHide)
+    }
+})
 </script>
 <style lang='scss' scoped>
 @use '@/styles/tools/mixin/BEM' as *;
@@ -68,6 +66,7 @@ const handleContext = (e: PointerEvent, tabItem: RouteLocationNormalized) => {
     padding: 5px;
     border-bottom: 1px solid #eee;
     @include e(tab) {
+        cursor: pointer;
         border-radius: 0;
     }
 }

@@ -1,5 +1,5 @@
-import { computed, unref } from "vue";
-import { Router, useRouter } from "vue-router";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
 import { useThemeStore } from "@/store/theme";
 import { useAppStore } from "@/store/app";
 export const useSetting = () => {
@@ -51,36 +51,28 @@ enum MenuEventEnum {
   CLOSE,
 }
 
-export const useTabs = (_router?: Router) => {
+export const useTabs = (tabItem?: any) => {
   const appStore = useAppStore();
-  const router = _router || useRouter();
-  const { currentRoute } = router;
-
-  function getCurrentTab() {
-    const route = unref(currentRoute);
-    return appStore.getTabList.find((item: any) => item.path === route.path)!;
-  }
-
+  const router = useRouter();
   function handleTabAction(action: MenuEventEnum, tab?: any) {
-    const currentTab = getCurrentTab();
     switch (action) {
       case MenuEventEnum.REFRESH:
-        appStore.refreshPage(currentTab, router);
+        appStore.refreshPage(router);
         break;
       case MenuEventEnum.CLOSE_ALL:
         appStore.closeAllTab();
         break;
       case MenuEventEnum.CLOSE_LEFT:
-        appStore.closeLeftTabs(currentTab, router);
+        appStore.closeLeftTabs(tabItem);
         break;
       case MenuEventEnum.CLOSE_RIGHT:
-        appStore.closeRightTabs(currentTab, router);
+        appStore.closeRightTabs(tabItem);
         break;
       case MenuEventEnum.CLOSE_OTHER:
-        appStore.closeOtherTabs(currentTab, router);
+        appStore.closeOtherTabs(tabItem);
         break;
       case MenuEventEnum.CLOSE_CURRENT:
-        appStore.closeTab(currentTab, router);
+        appStore.closeCurrentTab(tab || tabItem);
         break;
     }
   }

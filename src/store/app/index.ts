@@ -8,7 +8,6 @@ import {
 } from "@/enums/cacheEnum";
 import { LOCALE } from "@/settings";
 import type { LocaleType, ProjectConfig } from "@/types/app";
-import router from "@/router";
 const defaultProjectConfig: ProjectConfig = {
   showLogo: true,
   defaultTheme: true,
@@ -57,36 +56,41 @@ export const useAppStore = defineStore({
       }
       this.setTabList(oldList);
     },
-    refreshPage(item: RouteLocationNormalized, router: Router) {
-      const path = item.path;
-      router.push(path);
+    refreshPage(router: Router) {
+      router.go(0);
     },
     closeAllTab() {
       this.setTabList([]);
     },
-    closeLeftTabs(item: RouteLocationNormalized, router: Router) {
+    closeLeftTabs(item: RouteLocationNormalized) {
       const oldList = this.getTabList;
       const index = oldList.findIndex((t: any) => t.path === item.path);
       if (~index) {
-        this.setTabList(oldList.splice(index - 1));
+        if (index === 0) {
+          return
+        }
+        this.setTabList(oldList.splice(index));
       }
     },
-    closeRightTabs(item: RouteLocationNormalized, router: Router) {
+    closeRightTabs(item: RouteLocationNormalized) {
       const oldList = this.getTabList;
       const index = oldList.findIndex((t: any) => t.path === item.path);
       if (~index) {
+        if (index === oldList.length - 1) {
+          return
+        }
         this.setTabList(oldList.splice(0, index + 1));
       }
     },
-    closeOtherTabs(item: RouteLocationNormalized, router: Router) {
+    closeOtherTabs(item: RouteLocationNormalized) {
       const oldList = this.getTabList;
-      const newList = oldList.filter((t:any) => t.path === item.path)
-      this.setTabList(newList)
+      const newList = oldList.filter((t: any) => t.path === item.path);
+      this.setTabList(newList);
     },
-    closeTab(item: RouteLocationNormalized, router: Router) {
+    closeCurrentTab(item: RouteLocationNormalized) {
       const oldList = this.getTabList;
-      const newList = oldList.filter((t:any) => t.path !== item.path)
-      this.setTabList(newList)
+      const newList = oldList.filter((t: any) => t.path !== item.path);
+      this.setTabList(newList);
     },
   },
 });

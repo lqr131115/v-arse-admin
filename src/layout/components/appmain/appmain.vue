@@ -2,12 +2,14 @@
 import { watch } from 'vue';
 import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router';
 import { useAppStore } from '@/store/app';
-import { isTag } from '@/utils/tags'
+import { inWhiteList } from '@/utils/tabs'
 import { genRouteTitle, watchSwitchLanguage } from '@/utils/i18n'
 import MultipleTabs from './components/multiple-tabs/multiple-tabs.vue'
+import { useConfig } from '@/hooks';
 
 const route = useRoute()
 const appStore = useAppStore()
+const { showMultipleTabs } = useConfig()
 const genItemTitle = (route: RouteLocationNormalizedLoaded): string => {
   let result = ''
   if (route.meta && route.meta.title) {
@@ -20,7 +22,7 @@ const genItemTitle = (route: RouteLocationNormalizedLoaded): string => {
   return result
 }
 watch(() => route, (to, from) => {
-  if (!isTag(to.path)) {
+  if (inWhiteList(to.path)) {
     return
   }
   const { fullPath, path, name, meta, params, query } = to
@@ -40,7 +42,7 @@ watchSwitchLanguage(() => {
 </script>
 
 <template>
-  <MultipleTabs />
+  <MultipleTabs v-if="showMultipleTabs" />
   <router-view v-slot="{ Component }">
     <template v-if="Component">
       <transition mode="out-in">
