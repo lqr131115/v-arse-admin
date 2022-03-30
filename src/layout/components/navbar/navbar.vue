@@ -30,7 +30,7 @@ const handleClickAction = (action: IAction, index: number) => {
 <template>
   <div class="header">
     <div class="header__left">
-      <span class="header__left--toggle" @click="toggle" mr20>
+      <span class="header__left--toggle" id="forth-collapse" @click="toggle" mr20>
         <el-icon v-if="collapse">
           <expand />
         </el-icon>
@@ -71,7 +71,7 @@ const handleClickAction = (action: IAction, index: number) => {
         <UserDropdown />
       </div>
       <div class="header__setting">
-        <svg-icon name="setting" style="font-size: 1.3em;" @click="setting"></svg-icon>
+        <svg-icon name="setting" id="third-setting" style="font-size: 1.3em;" @click="setting"></svg-icon>
       </div>
     </div>
   </div>

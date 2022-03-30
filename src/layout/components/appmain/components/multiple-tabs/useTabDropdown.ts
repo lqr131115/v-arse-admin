@@ -38,33 +38,33 @@ export function useTabDropdown(tabItem?: RouteLocationNormalized) {
       {
         icon: "reload",
         event: MenuEventEnum.REFRESH_PAGE,
-        text: i18n.global.t("tabsView.reload"),
+        text: i18n.global.t("multipleTabs.reload"),
         disabled: refreshDisabled,
         divider: true,
       },
       {
         icon: "close-left",
         event: MenuEventEnum.CLOSE_LEFT,
-        text: i18n.global.t("tabsView.closeLeft"),
+        text: i18n.global.t("multipleTabs.closeLeft"),
         disabled: closeLeftDisabled,
       },
       {
         icon: "close-right",
         event: MenuEventEnum.CLOSE_RIGHT,
-        text: i18n.global.t("tabsView.closeRight"),
+        text: i18n.global.t("multipleTabs.closeRight"),
         disabled: closeRightDisabled,
         divider: true,
       },
       {
         icon: "close-other",
         event: MenuEventEnum.CLOSE_OTHER,
-        text: i18n.global.t("tabsView.closeOther"),
+        text: i18n.global.t("multipleTabs.closeOther"),
         disabled: closeOtherOrAllDisabled,
       },
       {
         icon: "close-all",
         event: MenuEventEnum.CLOSE_ALL,
-        text: i18n.global.t("tabsView.closeAll"),
+        text: i18n.global.t("multipleTabs.closeAll"),
         disabled: closeOtherOrAllDisabled,
       },
     ];

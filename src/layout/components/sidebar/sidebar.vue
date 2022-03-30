@@ -2,6 +2,7 @@
   <el-scrollbar view-class="scrollbar__view--menu" noresize>
     <!-- <span class="logo">LOGO</span> -->
     <m-menu
+      id="fifth-menu"
       :data="menuData"
       :collapse="collapse"
       :defaultActive="defaultActive"

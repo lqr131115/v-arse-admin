@@ -1,6 +1,6 @@
 <template>
     <el-tooltip effect="dark" :content="$t('header.search')" v-if="!show">
-        <svg-icon name="search" style="font-size: 1.3em;" @click.stop="onClick"></svg-icon>
+        <svg-icon name="search" id="first-search" style="font-size: 1.3em;" @click.stop="onClick"></svg-icon>
     </el-tooltip>
     <el-select
         v-if="show"

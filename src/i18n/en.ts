@@ -42,7 +42,7 @@ export default {
 
     home: "Home",
   },
-  tabsView: {
+  multipleTabs: {
     reload: 'Refresh current',
     closeLeft: 'Close Left',
     closeRight: 'Close Right',
@@ -140,4 +140,22 @@ export default {
 
     mixSidebarFixed: "Fixed expanded menu",
   },
+  driver: {
+    searchTitle: "Search Bar",
+    searchDesc: "Enter the Keyword for Fuzzy Route Search",
+    guideTitle: "Guide Bar",
+    guideDesc: "Operation Guide, which can be closed in Settings",
+    settingTitle: "Settings",
+    settingDesc: "Theme setting and project configuration are Available",
+    collapseTitle: "Folding",
+    collapseDesc: "Expand or Collapse the Left Menu Bar",
+    menuTitle: "Menu Bar",
+    menuDesc: "Enter and Browse Interfaces of the System here",
+  },
+  buttons:{
+    close:'Close',
+    next:'Next',
+    prev:'Prev',
+    done:'Done'
+  }
 };
