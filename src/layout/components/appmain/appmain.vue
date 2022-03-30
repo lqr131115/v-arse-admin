@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watch } from 'vue';
-import { useRoute, RouteLocationNormalizedLoaded } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useTabStore } from '@/store/tab';
 import { inWhiteList } from '@/utils/tabs'
 import { genRouteTitle, watchSwitchLanguage } from '@/utils/i18n'
@@ -10,26 +10,23 @@ import MultipleTabs from './components/multiple-tabs/multiple-tabs.vue'
 const route = useRoute()
 const tabStore = useTabStore()
 const { showMultipleTabs } = useTabs()
-const genItemTitle = (route: RouteLocationNormalizedLoaded): string => {
-  let result = ''
-  if (route.meta && route.meta.title) {
-    result = genRouteTitle(route.meta.title as string)
-  }
-  // else {
-  //   const pathArr = route.path.split('/')
-  //   result = pathArr[pathArr.length - 1]
-  // }
-  return result
+const genItemTitle = (title: string): string => {
+  return genRouteTitle(title)
 }
-watch(() => route, (to, from) => {
+watch(() => route, (to, _) => {
   if (inWhiteList(to.path)) {
     return
   }
-  const { fullPath, path, name, meta, params, query } = to
-  tabStore.addTabItem({
-    fullPath, path, name, meta, params, query,
-    title: genItemTitle(to)
-  })
+  const title = to.meta && to.meta.title
+  if (title) {
+    const { fullPath, path, name, meta, params, query } = to
+    tabStore.addTabItem({
+      fullPath, path, name, meta, params, query,
+      title: genItemTitle(title as string)
+    })
+  }else{
+    return
+  }
 }, { deep: true })
 
 watchSwitchLanguage(() => {
