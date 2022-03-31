@@ -1,6 +1,6 @@
-import type { IMenuItem } from "@/types/component";
+import type { MenuItem } from "@/types/component";
 
-export const menusDemo: IMenuItem[] = [
+export const menusDemo: MenuItem[] = [
   {
     index: "/home",
     name: "home",

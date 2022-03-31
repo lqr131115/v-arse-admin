@@ -1,10 +1,10 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue';
-import type { IMenuItem } from '@/types/component';
+import type { MenuItem } from '@/types/component';
 defineProps({
     data: {
-        type: Array as PropType<IMenuItem[]>,
+        type: Array as PropType<MenuItem[]>,
         required: true,
         default: () => []
     },

@@ -14,6 +14,7 @@ export default {
     articleEditor: "ArticleEditor",
     component: "Component",
     cityPicker: "CityPicker",
+    baseTable: "Table",
     excelImport: "ExcelImport",
     userInfo: "UserInfo",
   },

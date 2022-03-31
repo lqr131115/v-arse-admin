@@ -2,7 +2,7 @@ import { RouteRecord, RouteRecordRaw } from "vue-router";
 // Module "path" has been externalized for browser compatibility and cannot be accessed in client code.
 import path from "path-browserify";
 import { isNull } from "./validate";
-import type { IMenuItem } from '@/types/component';
+import type { MenuItem } from '@/types/component';
 
 /**
  * @param routes 注册路由
@@ -78,10 +78,10 @@ export const generateMenus = (
  * @param routes 左侧菜单显示的路由
  * @returns 符合Menu组件data格式的路由
  */
-export const formatMenus = (routes: any[]): IMenuItem[] => {
-  const result: IMenuItem[] = [];
+export const formatMenus = (routes: any[]): MenuItem[] => {
+  const result: MenuItem[] = [];
   routes.forEach((r) => {
-    let item: IMenuItem = { name: "", index: "" };
+    let item: MenuItem = { name: "", index: "" };
     item.index = r.path;
     item.name = r.meta.title;
     item.icon = r.meta.icon;

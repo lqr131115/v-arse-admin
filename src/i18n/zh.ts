@@ -14,6 +14,7 @@ export default {
     articleEditor: "文章编辑",
     component: "组件库",
     cityPicker: "城市选择器",
+    baseTable: "表格组件",
     excelImport: "Excel导入",
     userInfo: "员工信息",
   },

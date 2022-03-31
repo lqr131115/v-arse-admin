@@ -65,6 +65,12 @@ const privateRoutes: RouteRecordRaw[] = [
         component: () => import("../views/component/picker/cityPicker.vue"),
         meta: { title: "cityPicker", icon: "location" },
       },
+      {
+        path: "/component/table",
+        name: "component-table",
+        component: () => import("../views/component/table/mTable.vue"),
+        meta: { title: "baseTable", icon: "present" },
+      },
     ],
     meta: { title: "component", icon: "grid" },
   },
