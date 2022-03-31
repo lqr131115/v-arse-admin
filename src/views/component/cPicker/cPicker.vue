@@ -1,5 +1,5 @@
 <template>
-   <div>I AM CITYPICKER</div>
+   <div>I AM Picker</div>
 </template>
 <script lang='ts' setup>
 </script>

@@ -61,9 +61,9 @@ export const menusDemo: MenuItem[] = [
     icon: "grid",
     children: [
       {
-        index: "/component/cityPicker",
-        icon: "location",
-        name: "cityPicker",
+        index: "/component/picker",
+        icon: "aim",
+        name: "cPicker",
       },
     ],
   },

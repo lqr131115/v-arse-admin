@@ -56,20 +56,20 @@ const privateRoutes: RouteRecordRaw[] = [
   },
   {
     path: "/component",
-    redirect: "/component/cityPicker",
+    redirect: "/component/picker",
     component: layout,
     children: [
       {
-        path: "/component/cityPicker",
-        name: "component-cityPicker",
-        component: () => import("../views/component/picker/cityPicker.vue"),
-        meta: { title: "cityPicker", icon: "location" },
+        path: "/component/picker",
+        name: "component-picker",
+        component: () => import("../views/component/cPicker/cPicker.vue"),
+        meta: { title: "cPicker", icon: "aim" },
       },
       {
         path: "/component/table",
         name: "component-table",
-        component: () => import("../views/component/table/mTable.vue"),
-        meta: { title: "baseTable", icon: "present" },
+        component: () => import("../views/component/cTable/cTable.vue"),
+        meta: { title: "cTable", icon: "present" },
       },
     ],
     meta: { title: "component", icon: "grid" },
