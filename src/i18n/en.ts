@@ -3,6 +3,7 @@ export default {
     home: "Home",
     profile: "Profile",
     chart: "Chart",
+    about: "About",
     user: "User",
     staffManage: "StaffManage",
     roleManage: "RoleManage",

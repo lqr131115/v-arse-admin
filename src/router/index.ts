@@ -107,6 +107,12 @@ const publicRoutes: RouteRecordRaw[] = [
         meta: { title: "chart", icon: "trend-charts" },
       },
       {
+        path: "/about",
+        name: "about",
+        component: () => import("../views/about/about.vue"),
+        meta: { title: "about", icon: "shop" },
+      },
+      {
         path: "/401",
         name: "401",
         component: () => import("../views/sys/error/401.vue"),

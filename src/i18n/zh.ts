@@ -3,6 +3,7 @@ export default {
     home: "首页",
     profile: "个人中心",
     chart: "图表",
+    about: "关于",
     user: "用户",
     staffManage: "员工管理",
     roleManage: "角色管理",

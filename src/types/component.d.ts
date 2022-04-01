@@ -30,3 +30,13 @@ export type TableOption = {
   // 分页
   pagination?: boolean;
 };
+
+export type DescriptionsItem = {
+  label: string;
+  labelAlign?: "left" | "center" | "right";
+  icon?: string;
+  slot?: string;
+  content: any;
+  align?: "left" | "center" | "right";
+  width?: number;
+};

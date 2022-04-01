@@ -58,7 +58,4 @@ watchSwitchLanguage(() => {
 </template>
 
 <style lang="scss" scoped>
-.main {
-  padding: 10px;
-}
 </style>

@@ -1,0 +1,66 @@
+<template>
+    <el-descriptions :border="border" :column="column" v-bind="$attrs">
+        <template #title>
+            <slot name="title"></slot>
+        </template>
+        <template #extra>
+            <slot name="extra"></slot>
+        </template>
+        <el-descriptions-item
+            v-for="item in data"
+            :key="item.label"
+            :width="item.width"
+            :align="item.align"
+            :label-align="item.labelAlign"
+        >
+            <template #label>
+                <el-icon mr5 v-if="item.icon">
+                    <component :is="item.icon" />
+                </el-icon>
+                <span>{{ item.label }}</span>
+            </template>
+            <template #default>
+                <span v-if="item.slot">
+                    <slot :name="item.slot" :item="item"></slot>
+                </span>
+                <span v-else>{{ item.content }}</span>
+            </template>
+        </el-descriptions-item>
+    </el-descriptions>
+</template>
+
+<script setup lang="ts">
+import { getCurrentInstance, onMounted, PropType } from 'vue'
+import type { DescriptionsItem } from '@/types/component'
+import { computed } from '@vue/reactivity';
+defineProps({
+    data: {
+        type: Array as PropType<DescriptionsItem[]>,
+        default: () => []
+    },
+    border: {
+        type: Boolean,
+        default: true,
+    },
+    column: {
+        type: Number,
+        default: 3,
+    }
+})
+
+const _this = getCurrentInstance()
+const showHeader = computed(() => {
+    if (_this && _this.slots && (_this.slots.title || _this.slots.extra)) {
+        return 'flex'
+    }else{
+        return 'none'
+    }
+})
+
+</script>
+
+<style lang="scss" scoped>
+:deep(.el-descriptions__header) {
+    display: v-bind(showHeader);
+}
+</style>
