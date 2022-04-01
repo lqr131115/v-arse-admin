@@ -7,11 +7,15 @@ export function iSExternal(path: string): boolean {
   return /^(https?:|mailto:|tel:)/.test(path);
 }
 
-type TNull = 'TNull'
+type TNull = "TNull";
 export function isNull(val: any): val is TNull {
   return !val || JSON.stringify(val) === "{}" || JSON.stringify(val) === "[]";
 }
 
 export function isNumber(val: any): val is Number {
   return typeof val === "number";
+}
+
+export function isString(val: any): val is String {
+  return typeof val === "string";
 }

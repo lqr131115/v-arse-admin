@@ -74,7 +74,7 @@
       <el-pagination
          v-model:current-page="currentPage"
          v-model:page-size="pageSize"
-         :total="data.length"
+         :total="total || data.length"
          v-bind="pageOptions"
          @size-change="handleSizeChange"
          @current-change="handleCurrentChange"
@@ -101,8 +101,8 @@ const props = defineProps({
       type: Boolean,
       default: false
    },
-   // 行编辑操作的标识
-   editRowActionIndex: {
+   // 行操作的标识
+   rowOperation: {
       type: String,
       default: 'edit'
    },
@@ -126,6 +126,10 @@ const props = defineProps({
          layout: "pager, next, jumper",
       })
    },
+   total: {
+      type: Number,
+      default: 0
+   },
    // loading配置
    elementLoadingText: {
       type: String
@@ -144,10 +148,10 @@ const props = defineProps({
    },
 
 })
-const emits = defineEmits(['on-save-column-edit', 'on-close-column-edit','on-pagesize-change','on-current-page-change', 'on-prev-click', 'on-next-click'])
+const emits = defineEmits(['on-save-column-edit', 'on-close-column-edit', 'on-pagesize-change', 'on-current-page-change', 'on-prev-click', 'on-next-click'])
 let editingId = ref<string>()
 let tableData = ref<any[]>(cloneDeep(props.data))
-let editRowAction = ref<string>(props.editRowActionIndex)
+let editRowAction = ref<string>(props.rowOperation)
 const currentPage = ref<number>(props.defaultCurrentPage)
 const pageSize = ref<number>(props.defaultPagesize)
 const isLoading = computed(() => !props.data || !props.data.length)
@@ -166,6 +170,9 @@ const handleCloseColumnEdit = (scope: any) => {
 }
 const handleRowClick = (row: any, column: any) => {
    if (column.label === actionOptions.value?.label) {
+      console.log('row',row);
+      console.log('column',column);
+      
       if (props.editable && editRowAction.value === 'edit') {
          row.isEditing = !row.isEditing
          // 其他行恢复为非编辑态
@@ -189,7 +196,7 @@ watch(() => props.data, newVal => {
    })
 }, { deep: true })
 
-watch(() => props.editRowActionIndex, newVal => {
+watch(() => props.rowOperation, newVal => {
    editRowAction.value = newVal
 })
 onMounted(() => {
