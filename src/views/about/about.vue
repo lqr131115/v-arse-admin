@@ -11,11 +11,18 @@
             <div class="about__content--card">
                 <ProjectInfo />
             </div>
+            <div class="about__content--card">
+                <Dependency title="生产环境依赖" />
+            </div>
+            <div class="about__content--card">
+                <Dependency key="devDependencies" title="开发环境依赖" />
+            </div>
         </div>
     </div>
 </template>
 <script lang='ts' setup>
 import ProjectInfo from './projectInfo.vue';
+import Dependency from './dependency.vue';
 </script>
 <style lang='scss' scoped>
 @use '@/styles/tools/mixin/BEM' as *;
@@ -24,6 +31,10 @@ import ProjectInfo from './projectInfo.vue';
     flex-direction: column;
     background-color: #eee;
     @include e(header) {
+        display: flex;
+        flex-direction: column;
+        min-height: 80px;
+        justify-content: center;
         padding: 10px 20px;
         background-color: #fff;
         @include m(title) {
@@ -47,5 +58,4 @@ import ProjectInfo from './projectInfo.vue';
         }
     }
 }
-
 </style>

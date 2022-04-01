@@ -1,5 +1,5 @@
 <template>
-    <el-card class="box-card" shadow="always">
+    <el-card shadow="always">
         <template #header>
             <span>项目信息</span>
         </template>
