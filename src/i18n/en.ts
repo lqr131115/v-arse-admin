@@ -1,7 +1,7 @@
 export default {
   route: {
     home: "Home",
-    profile: "Profile",
+    workbench: "Workbench",
     chart: "Chart",
     about: "About",
     user: "User",

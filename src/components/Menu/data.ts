@@ -68,8 +68,8 @@ export const menusDemo: MenuItem[] = [
     ],
   },
   {
-    index: "/profile",
-    name: "profile",
-    icon: "user-filled",
+    index: "/workbench",
+    name: "workbench",
+    icon: "user",
   },
 ];

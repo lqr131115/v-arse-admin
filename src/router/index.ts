@@ -85,7 +85,8 @@ const publicRoutes: RouteRecordRaw[] = [
   {
     path: "/layout",
     name: "Layout",
-    redirect: "/home",
+    redirect: "/workbench",
+    
     component: layout,
     children: [
       {
@@ -95,10 +96,10 @@ const publicRoutes: RouteRecordRaw[] = [
         meta: { title: "home", icon: "home-filled" },
       },
       {
-        path: "/profile",
-        name: "profile",
-        component: () => import("../views/profile/profile.vue"),
-        meta: { title: "profile", icon: "user-filled" },
+        path: "/workbench",
+        name: "workbench",
+        component: () => import("../views/workbench/workbench.vue"),
+        meta: { title: "workbench", icon: "briefcase" },
       },
       {
         path: "/chart",

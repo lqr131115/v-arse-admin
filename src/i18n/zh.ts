@@ -1,7 +1,7 @@
 export default {
   route: {
     home: "首页",
-    profile: "个人中心",
+    workbench: "工作台",
     chart: "图表",
     about: "关于",
     user: "用户",

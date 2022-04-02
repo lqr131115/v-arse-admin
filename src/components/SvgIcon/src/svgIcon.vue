@@ -5,11 +5,13 @@ import { iSExternal } from '../../../utils/validate'
 
 interface IProps {
     name: string,
-    prefix?: string
+    prefix?: string,
+    size?: number,
+    color?: string,
     className?: string
 }
 
-const props = withDefaults(defineProps<IProps>(), { className: '', prefix: 'icon' })
+const props = withDefaults(defineProps<IProps>(), { className: '', prefix: 'icon',size: 1 })
 
 // 是否是外部图标
 const isExternal = computed(() => (iSExternal(props.name)))
@@ -22,6 +24,9 @@ const styleExternalIcon = computed(() => ({
 
 // 项目内部图标
 const symbolId = computed(() => (`#${props.prefix}-${props.name}`))
+
+// 项目大小
+const sizeStyle = computed(() => (`${props.size}em`))
 </script>
 
 <template>
@@ -32,7 +37,7 @@ const symbolId = computed(() => (`#${props.prefix}-${props.name}`))
             class="svg-icon-external svg-icon"
             :class="className"
         ></div>
-        <svg v-else class="svg-icon" :class="className" aria-hidden="true">
+        <svg v-else class="svg-icon" :class="className" :color="color" aria-hidden="true">
             <use :xlink:href="symbolId" />
         </svg>
     </div>
@@ -41,8 +46,8 @@ const symbolId = computed(() => (`#${props.prefix}-${props.name}`))
 <style lang="scss" scoped>
 @use '@/styles/tools/mixin/BEM' as *;
 @include b(svg-icon) {
-    width: 1em;
-    height: 1em;
+    width: v-bind(sizeStyle);
+    height: v-bind(sizeStyle);
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
