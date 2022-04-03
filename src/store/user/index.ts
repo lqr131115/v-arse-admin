@@ -13,6 +13,9 @@ export const useUserStore = defineStore({
     hasUserInfo: (state) => {
       return JSON.stringify(state.userInfo) !== "{}";
     },
+    gotUserInfo: (state) => {
+      return state.userInfo;
+    }
   },
   actions: {
     setToken(token: string) {

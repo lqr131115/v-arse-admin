@@ -3,6 +3,17 @@ import { Router, useRouter } from "vue-router";
 import { useThemeStore } from "@/store/theme";
 import { useAppStore } from "@/store/app";
 import { useTabStore } from "@/store/tab";
+import { useUserStore } from "@/store/user";
+
+export const useUser = () => {
+  const userStore = useUserStore();
+  const getUserInfo = computed(() => userStore.gotUserInfo);
+
+  return {
+    getUserInfo
+  }
+}
+
 export const useTheme = () => {
   const themeStore = useThemeStore();
   const getAppThemeColor = computed(() => themeStore.getAppTheme.primary);

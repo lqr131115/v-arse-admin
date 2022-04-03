@@ -13,13 +13,17 @@
             </el-dropdown-menu>
         </template>
     </el-dropdown>
+    <lockModal v-model:visible="visible" />
 </template>
 <script lang='ts' setup>
+import { ref } from 'vue'
 import { useUserStore } from '@/store/user'
 import { msgSuccess } from '@/utils/notice'
 import { userDropDownList, USER_DD } from '@/settings'
+import lockModal from './lockModal.vue'
 
 const userStore = useUserStore()
+const visible = ref<boolean>(false)
 /**
  * 退出
  *  1.主动退出
@@ -37,14 +41,14 @@ const logout = () => {
 const showDocument = () => {
     alert`showDocument`
 }
-const lockScreen = () => { alert`lockScreen` }
+const handleLock = () => { visible.value = true }
 const clickUserDropdownItem = (key: string) => {
     switch (key) {
         case USER_DD.DESC:
             showDocument()
             break;
         case USER_DD.LOCK_SCREEN:
-            lockScreen()
+            handleLock()
             break;
         case USER_DD.LOGOUT:
             logout()
