@@ -38,7 +38,9 @@
             <el-row mt10>
                 <el-col>
                     <el-card shadow="hover">
-                        <span>hover</span>
+                        <div style="height: 47px;">
+                            <span fz26 fw7>You are never second</span>
+                        </div>
                     </el-card>
                 </el-col>
             </el-row>

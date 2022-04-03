@@ -13,7 +13,7 @@
     >
       <template #logo v-if="getShowLogo">
         <el-menu-item index="/">
-          <img src="https://element-plus.gitee.io/images/element-plus-logo.svg" alt="logo" />
+          <img src="@/icons/svg/element+.svg" alt="logo" />
         </el-menu-item>
       </template>
     </m-menu>

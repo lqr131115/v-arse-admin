@@ -41,7 +41,7 @@ watchSwitchLanguage(() => {
   <div class="main">
     <router-view v-slot="{ Component, route }">
       <template v-if="Component">
-        <transition :name="getAnimationType" mode="out-in">
+        <transition :name="getAnimationType">
           <keep-alive>
             <suspense>
               <component :is="Component" :key="route.path"></component>

@@ -10,6 +10,7 @@
 </template>
 <script lang='ts' setup>
 import { computed } from '@vue/reactivity';
+import { PropType } from 'vue';
 
 const props = defineProps({
     shadow: {
@@ -17,18 +18,18 @@ const props = defineProps({
         default: 'always'
     },
     bodyStyle: {
-        type: CSSStyleDeclaration,
-        default: () => ({padding: '0px'})
+        type: Object as PropType<CSSStyleDeclaration>,
+        default: () => ({ padding: '0px' })
     },
     headerStyle: {
-        type: CSSStyleDeclaration,
+        type: Object as PropType<CSSStyleDeclaration>,
         default: () => ({ padding: '10px' })
     }
 })
 const elCardHeaderPadding = computed(() => props.headerStyle.padding)
 </script>
 <style lang='scss' scoped>
-:deep(.el-card__header){
-    padding:v-bind(elCardHeaderPadding)
+:deep(.el-card__header) {
+    padding: v-bind(elCardHeaderPadding);
 }
 </style>
