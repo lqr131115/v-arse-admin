@@ -1,5 +1,5 @@
 <template>
-   <m-dialog v-model:visible="dVisible">
+   <m-dialog v-model:visible="dVisible" draggable>
       <template #title>
          <span>{{ $t(`header.tooltipLock`) }}</span>
       </template>
@@ -39,8 +39,10 @@
 </template>
 <script lang='ts' setup>
 import { ref, watch } from 'vue'
-import { useUser } from '@/hooks'
+import md5 from 'md5';
 import { FormInstance } from 'element-plus';
+import { useUser } from '@/hooks'
+import { useAppStore } from '@/store/app';
 interface TFormItem {
    password: string
 }
@@ -56,19 +58,17 @@ const props = defineProps({
 })
 const emits = defineEmits(['update:visible'])
 const { getUserInfo } = useUser()
+const appStore = useAppStore()
 const lockRef = ref<FormInstance>()
 const dVisible = ref<boolean>(props.visible)
 const form = ref<TFormItem>({ password: '' })
-const rules = {
-   password: [
-      { required: true, message: '输入密码', trigger: 'change' },
-   ],
-}
+const rules = { password: [{ required: true, message: '输入锁屏密码', trigger: 'change' }] }
+
 const lockScreen = async (formEl: FormInstance | undefined) => {
    if (!formEl) return
    await formEl.validate((valid: any, fields: any) => {
       if (valid) {
-         alert('锁定')
+         appStore.setLockScreen({ password: md5(form.value.password) })
       } else {
          console.log('error submit!', fields)
       }

@@ -12,10 +12,14 @@ export function isNull(val: any): val is TNull {
   return !val || JSON.stringify(val) === "{}" || JSON.stringify(val) === "[]";
 }
 
-export function isNumber(val: any): val is Number {
+export function isNumber(val: any): val is number {
   return typeof val === "number";
 }
 
-export function isString(val: any): val is String {
+export function isString(val: any): val is string {
   return typeof val === "string";
+}
+
+export function isRegW(val: string): boolean {
+  return /\w/g.test(val)
 }

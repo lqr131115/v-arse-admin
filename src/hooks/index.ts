@@ -8,9 +8,11 @@ import { useUserStore } from "@/store/user";
 export const useUser = () => {
   const userStore = useUserStore();
   const getUserInfo = computed(() => userStore.gotUserInfo);
+  const token = computed(() => userStore.token);
 
   return {
-    getUserInfo
+    getUserInfo,
+    token
   }
 }
 
@@ -33,6 +35,8 @@ export const useTheme = () => {
 export const useAppConfig = () => {
   const appStore = useAppStore();
   const getLanguage = computed(() => appStore.getLanguage);
+  const getLockScreenPwd = computed(() => appStore.lockScreen.password);
+  const getScreenIsLock = computed(() => appStore.lockScreen.isLock);
   const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
   const getDefaultTheme = computed(() => appStore.getProjectConfig.defaultTheme);
   const getAnimationType = computed(() => appStore.getProjectConfig.animation);
@@ -46,6 +50,8 @@ export const useAppConfig = () => {
   
   return {
     getLanguage,
+    getLockScreenPwd,
+    getScreenIsLock,
     getShowLogo,
     getDefaultTheme,
     getAnimationType,

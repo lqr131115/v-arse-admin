@@ -21,3 +21,7 @@ export const PROJECT_CONFIG_KEY = 'PROJECT_CONFIG_KEY__'
 // multipleTab key
 
 export const MULTIPLE_TAB_LIST_KEY = 'MULTIPLE_TAB_LIST_KEY__'
+
+// lockScreen key
+
+export const LOCK_SCREEN_KEY = 'LOCK_SCREEN_KEY__'

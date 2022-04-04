@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import md5 from 'md5'
 import { Lock, User } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store/user'
+import { useAppStore } from '@/store/app';
 import { msgSuccess } from '@/utils/notice'
 import { setTimeStamp } from '@/utils/auth'
 import type { FormInstance } from 'element-plus'
@@ -26,6 +27,7 @@ const loginRules = {
 }
 let loginLoading = ref<boolean>(false)
 const userStore = useUserStore()
+const appStore = useAppStore()
 const router = useRouter()
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
@@ -35,6 +37,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 
       userStore.login({ username: loginForm.value.username, password: md5(loginForm.value.password) })
         .then(() => {
+          appStore.setLockScreen()
           setTimeStamp(Date.now())
           msgSuccess('登录成功')
           router.push({

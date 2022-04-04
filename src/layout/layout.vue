@@ -1,21 +1,22 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useThemeStore } from '@/store/theme'
+import { useTheme, useAppConfig } from '@/hooks'
 import SideBar from './components/sidebar/sidebar.vue'
 import NavBar from './components/navbar/navbar.vue'
 import AppMain from './components/appmain/appmain.vue'
-const themeStore = useThemeStore()
+import LockPage from '@/views/sys/lock/lockPage.vue'
+
 let collapse = ref<boolean>(false)
-const navBarTheme = computed(() => {
-  const backgroundColor = themeStore.getNavbarTheme.navBarBgColor
-  return {
-    backgroundColor
-  }
-})
+const { getNavbarBgColor } = useTheme()
+const { getScreenIsLock } = useAppConfig()
+const navBarTheme = computed(() => ({ backgroundColor: getNavbarBgColor.value }))
 </script>
 
 <template>
-  <div class="layout">
+  <div class="layout-lock" v-if="getScreenIsLock">
+    <LockPage />
+  </div>
+  <div class="layout" v-else>
     <el-container>
       <el-aside width="auto">
         <side-bar :collapse="collapse"></side-bar>
@@ -51,6 +52,9 @@ const navBarTheme = computed(() => {
       }
     }
   }
+}
+.layout-lock {
+  height: 100%;
 }
 </style>
   

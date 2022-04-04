@@ -10,7 +10,7 @@ export type EnvBaseConfig = {
   [P in EnvMode]: ApiUrlConfig;
 };
 
-export type LocaleType = "zh_CN" | "en";
+export type LocaleType = "zh-cn" | "en";
 
 export type DropDown = {
   text: string;
@@ -51,6 +51,11 @@ export type ProjectConfig = {
   openGuideBar?:boolean,
   openLocaleBar?:boolean,
   openScreenBar?:boolean,
+};
+
+export type LockScreen = {
+  password?:string ;
+  isLock?: boolean;
 };
 
 export type LabelValueOptions = {

@@ -2,7 +2,7 @@ import type { LocaleType, DropDown } from "@/types/app";
 
 // locale
 export const LOCALE: { [key: string]: LocaleType } = {
-  ZH_CN: "zh_CN",
+  ZH_CN: "zh-cn",
   EN_US: "en",
 };
 

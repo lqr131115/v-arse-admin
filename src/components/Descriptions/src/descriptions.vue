@@ -1,9 +1,9 @@
 <template>
     <el-descriptions :border="border" :column="column" v-bind="$attrs">
-        <template #title>
+        <template #title v-if="$slots.title">
             <slot name="title"></slot>
         </template>
-        <template #extra>
+        <template #extra v-if="$slots.extra">
             <slot name="extra"></slot>
         </template>
         <el-descriptions-item
@@ -30,9 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, PropType } from 'vue'
+import { PropType } from 'vue'
 import type { DescriptionsItem } from '@/types/component'
-import { computed } from '@vue/reactivity';
 defineProps({
     data: {
         type: Array as PropType<DescriptionsItem[]>,
@@ -47,20 +46,6 @@ defineProps({
         default: 3,
     }
 })
-
-const _this = getCurrentInstance()
-const showHeader = computed(() => {
-    if (_this && _this.slots && (_this.slots.title || _this.slots.extra)) {
-        return 'flex'
-    }else{
-        return 'none'
-    }
-})
-
 </script>
-
 <style lang="scss" scoped>
-:deep(.el-descriptions__header) {
-    display: v-bind(showHeader);
-}
 </style>

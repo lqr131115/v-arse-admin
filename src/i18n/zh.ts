@@ -156,10 +156,18 @@ export default {
     menuTitle: "菜单栏",
     menuDesc: "由此进入并浏览系统不同界面 ",
   },
+  lock: {
+    unlock: '点击解锁',
+    alert: '锁屏密码错误',
+    backToLogin: '返回登录',
+    entry: '进入系统',
+    placeholder: '请输入锁屏密码或者用户密码',
+  },
   buttons: {
     close: "关闭",
     next: "下一步",
     prev: "上一步",
     done: "完成",
+    back: "返回"
   },
 };

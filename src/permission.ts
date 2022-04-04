@@ -2,9 +2,9 @@
  * @description pp 验权
  * @author lqr
  */
-
 import router from "@/router";
 import { useUserStore } from "@/store/user";
+import { useAppStore } from "@/store/app";
 import { isTimeout } from "@/utils/auth";
 import { msgError } from "@/utils/notice";
 import { PageEnum } from "@/enums/pageEnum";
@@ -21,11 +21,15 @@ const whitePathList: string[] = [LOGIN_PATH, ERROR_404__PATH, ERROR_401__PATH];
 
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore();
-
+  const appStore = useAppStore();
   if (userStore.token) {
     // 用户已登录 不能回到login页
     if (to.path === LOGIN_PATH) {
-      next("/");
+      if (appStore.lockScreen.isLock) {
+        next()
+      }else{
+        next("/");
+      } 
     } else {
       // 被动退出 主动处理(前端记录token时效处理)
       if (isTimeout()) {

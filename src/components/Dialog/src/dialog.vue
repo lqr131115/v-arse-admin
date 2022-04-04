@@ -1,15 +1,22 @@
 <template>
-   <el-dialog :class="{ 'm--dialog': isScroll }" v-model="dVisible" v-bind="$attrs">
-      <template #title>
-         <slot name="title"></slot>
-      </template>
-      <template #default>
-         <slot name="default"></slot>
-      </template>
-      <template #footer>
-         <slot name="footer"></slot>
-      </template>
-   </el-dialog>
+   <div class="modal">
+      <el-dialog
+         v-model="dVisible"
+         :custom-class="isScroll ? 'body--scroll' : ''"
+         :draggable="draggable"
+         v-bind="$attrs"
+      >
+         <template #title v-if="$slots.title">
+            <slot name="title"></slot>
+         </template>
+         <template #default v-if="$slots.default">
+            <slot name="default"></slot>
+         </template>
+         <template #footer v-if="$slots.footer">
+            <slot name="footer"></slot>
+         </template>
+      </el-dialog>
+   </div>
 </template>
 <script lang='ts' setup>
 import { ref, watch } from 'vue';
@@ -18,6 +25,10 @@ const props = defineProps({
    isScroll: {
       type: Boolean,
       default: false
+   },
+   draggable: {
+      type: Boolean,
+      default: true
    },
    visible: {
       type: Boolean,
@@ -34,10 +45,15 @@ watch(() => dVisible.value, (newVal) => {
 })
 </script>
 <style lang='scss' scoped>
-.m--dialog {
-   :deep(.el-dialog__body) {
-      height: 400px;
-      overflow-y: scroll;
+.modal {
+   :deep(.body--scroll) {
+      .el-dialog__body {
+         max-height: 400px;
+         overflow-y: scroll;
+      }
+      .el-dialog__body::-webkit-scrollbar {
+         display: none;
+      }
    }
 }
 </style>

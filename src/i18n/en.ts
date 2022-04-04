@@ -154,10 +154,18 @@ export default {
     menuTitle: "Menu Bar",
     menuDesc: "Enter and Browse Interfaces of the System here",
   },
+  lock: {
+    unlock: 'Click to unlock',
+    alert: 'Lock screen password error',
+    backToLogin: 'Back to login',
+    entry: 'Enter the system',
+    placeholder: 'Please enter the lock screen password or user password',
+  },
   buttons:{
     close:'Close',
     next:'Next',
     prev:'Prev',
-    done:'Done'
+    done:'Done',
+    back:'Back',
   }
 };
