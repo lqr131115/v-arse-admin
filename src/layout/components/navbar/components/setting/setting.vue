@@ -83,10 +83,10 @@
         <el-divider>
             <span fz18>{{ $t('setting.defaultSetting') }}</span>
         </el-divider>
-        <switchItem
+        <buttonItem
             :title="$t('setting.defaultTheme')"
             :event="HandlerEnum.DEFAULT_THEME"
-            :def="unref(getDefaultTheme)"
+            :text="$t('buttons.restore')"
         />
     </el-scrollbar>
 </template>
@@ -98,8 +98,9 @@ import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_L
 import themeColorPickerVue from './components/themeColorPicker.vue';
 import switchItem from './components/switchItem.vue';
 import selectItem from './components/selectItem.vue';
+import buttonItem from './components/buttonItem.vue';
 const { getAppThemeColor, getNavbarBgColor, getMenuBgColor } = useTheme()
-const { getShowLogo, getDefaultTheme, getAnimationType, getShowQuickTabs, getShowBreadcrumb, getOpenBreadcrumbAn,
+const { getShowLogo,  getAnimationType, getShowQuickTabs, getShowBreadcrumb, getOpenBreadcrumbAn,
     getOpenSearchBar, getOpenGuideBar, getOpenLocaleBar, getOpenScreenBar } = useAppConfig()
 </script>
 <style lang='scss' scoped>

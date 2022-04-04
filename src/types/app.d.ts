@@ -42,7 +42,6 @@ export type AnimationType = 'zoom-fade' | 'zoom-out' | 'fade-slide' | 'fade' | '
 
 export type ProjectConfig = {
   showLogo?: boolean;
-  defaultTheme?: boolean;
   animation?: AnimationType;
   showQuick?:boolean,
   showBreadcrumb?:boolean,

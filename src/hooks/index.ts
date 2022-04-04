@@ -38,7 +38,6 @@ export const useAppConfig = () => {
   const getLockScreenPwd = computed(() => appStore.lockScreen.password);
   const getScreenIsLock = computed(() => appStore.lockScreen.isLock);
   const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
-  const getDefaultTheme = computed(() => appStore.getProjectConfig.defaultTheme);
   const getAnimationType = computed(() => appStore.getProjectConfig.animation);
   const getShowQuickTabs = computed(() => appStore.getProjectConfig.showQuick);
   const getShowBreadcrumb = computed(() => appStore.getProjectConfig.showBreadcrumb);
@@ -53,7 +52,6 @@ export const useAppConfig = () => {
     getLockScreenPwd,
     getScreenIsLock,
     getShowLogo,
-    getDefaultTheme,
     getAnimationType,
     getShowQuickTabs,
     getShowBreadcrumb,

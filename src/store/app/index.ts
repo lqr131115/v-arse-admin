@@ -9,7 +9,6 @@ import { LOCALE } from "@/settings";
 import type { LocaleType, ProjectConfig,LockScreen } from "@/types/app";
 const defaultProjectConfig: ProjectConfig = {
   showLogo: true,
-  defaultTheme: true,
   animation: "fade",
   showQuick: true,
   showBreadcrumb: true,

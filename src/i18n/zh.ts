@@ -168,6 +168,7 @@ export default {
     next: "下一步",
     prev: "上一步",
     done: "完成",
-    back: "返回"
+    back: "返回",
+    restore: "恢复",
   },
 };

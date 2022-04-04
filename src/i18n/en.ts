@@ -167,5 +167,6 @@ export default {
     prev:'Prev',
     done:'Done',
     back:'Back',
+    restore:'Restore',
   }
 };

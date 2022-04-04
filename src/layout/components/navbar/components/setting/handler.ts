@@ -10,7 +10,7 @@ import {
   defaultNavbarTheme,
 } from "@/store/theme";
 import type { MenuTheme } from "@/types/app";
-export const baseHandler = (event: HandlerEnum, value: any) => {
+export const baseHandler = (event: HandlerEnum, value?: any) => {
   const appStore = useAppStore();
   const themeStore = useThemeStore();
   switch (event) {
@@ -19,11 +19,9 @@ export const baseHandler = (event: HandlerEnum, value: any) => {
         writeNewStyle(res);
       });
       themeStore.setAppTheme({ primary: value });
-      appStore.setProjectConfig({ defaultTheme: false });
       break;
     case HandlerEnum.HEADER_THEME:
       themeStore.setNavbarTheme({ navBarBgColor: value });
-      appStore.setProjectConfig({ defaultTheme: false });
       break;
     case HandlerEnum.MENU_THEME:
       const menuTheme: MenuTheme = {};
@@ -32,7 +30,6 @@ export const baseHandler = (event: HandlerEnum, value: any) => {
         ...menuTheme,
         ...SIDE_BAR_THEME_COLOR_LIST[value],
       });
-      appStore.setProjectConfig({ defaultTheme: false });
       break;
     case HandlerEnum.OPEN_SEARCH_BAR:
       appStore.setProjectConfig({ openSearchBar: !!value });
@@ -60,15 +57,12 @@ export const baseHandler = (event: HandlerEnum, value: any) => {
       appStore.setProjectConfig({ showQuick: !!value });
       break;
     case HandlerEnum.DEFAULT_THEME:
-      appStore.setProjectConfig({ defaultTheme: !!value });
-      if (!!value) {
-        themeStore.setAppTheme(defaultAppTheme);
-        genNewStyle(defaultAppTheme.primary!).then((res) => {
-          writeNewStyle(res);
-        });
-        themeStore.setMenuTheme(defaultMenuTheme);
-        themeStore.setNavbarTheme(defaultNavbarTheme);
-      }
+      themeStore.setAppTheme(defaultAppTheme);
+      genNewStyle(defaultAppTheme.primary!).then((res) => {
+        writeNewStyle(res);
+      });
+      themeStore.setMenuTheme(defaultMenuTheme);
+      themeStore.setNavbarTheme(defaultNavbarTheme);
       break;
     case HandlerEnum.ROUTER_TRANSITION:
       if (!value) {
