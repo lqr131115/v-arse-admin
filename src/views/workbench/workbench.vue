@@ -1,56 +1,58 @@
 <template>
-    <div class="workbench__header">
-        <div class="workbench__header--left">
-            <el-avatar
-                :size="60"
-                src="https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800"
-            />
-        </div>
-        <div class="workbench__header--center">
-            <span fz24 fw5 mb15>早安, 开始您一天的工作吧！</span>
-            <span fz13>今日晴，20℃ - 32℃！</span>
-        </div>
-        <div class="workbench__header--right">
-            <div>
-                <span class="txt-primary">待办</span>
-                <span class="txt-secondary">2/10</span>
+    <div>
+        <div class="workbench__header">
+            <div class="workbench__header--left">
+                <el-avatar
+                    :size="60"
+                    src="https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800"
+                />
             </div>
-            <div>
-                <span class="txt-primary">项目</span>
-                <span class="txt-secondary">8</span>
+            <div class="workbench__header--center">
+                <span fz24 fw5 mb15>早安, 开始您一天的工作吧！</span>
+                <span fz13>今日晴，20℃ - 32℃！</span>
             </div>
-            <div>
-                <span class="txt-primary">团队</span>
-                <span class="txt-secondary">108</span>
+            <div class="workbench__header--right">
+                <div>
+                    <span class="txt-primary">待办</span>
+                    <span class="txt-secondary">2/10</span>
+                </div>
+                <div>
+                    <span class="txt-primary">项目</span>
+                    <span class="txt-secondary">8</span>
+                </div>
+                <div>
+                    <span class="txt-primary">团队</span>
+                    <span class="txt-secondary">108</span>
+                </div>
             </div>
         </div>
+        <el-row class="workbench__content" :gutter="10">
+            <el-col :span="16">
+                <ProjectCard />
+            </el-col>
+            <el-col :span="8">
+                <el-row>
+                    <el-col>
+                        <ShortcutCard />
+                    </el-col>
+                </el-row>
+                <el-row mt10>
+                    <el-col>
+                        <el-card shadow="hover">
+                            <div style="height: 47px;">
+                                <span fz26 fw7>You are never second</span>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
+            </el-col>
+        </el-row>
+        <el-row class="workbench__content" :gutter="10">
+            <el-col>
+                <LatestStatusCard />
+            </el-col>
+        </el-row>
     </div>
-    <el-row class="workbench__content" :gutter="10">
-        <el-col :span="16">
-            <ProjectCard />
-        </el-col>
-        <el-col :span="8">
-            <el-row>
-                <el-col>
-                    <ShortcutCard />
-                </el-col>
-            </el-row>
-            <el-row mt10>
-                <el-col>
-                    <el-card shadow="hover">
-                        <div style="height: 47px;">
-                            <span fz26 fw7>You are never second</span>
-                        </div>
-                    </el-card>
-                </el-col>
-            </el-row>
-        </el-col>
-    </el-row>
-    <el-row class="workbench__content" :gutter="10">
-        <el-col>
-            <LatestStatusCard />
-        </el-col>
-    </el-row>
 </template>
 <script lang='ts' setup>
 import ProjectCard from './projectCard.vue'

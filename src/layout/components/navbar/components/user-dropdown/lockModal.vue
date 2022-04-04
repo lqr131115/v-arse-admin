@@ -1,5 +1,5 @@
 <template>
-   <m-dialog v-model:visible="dVisible" draggable>
+   <m-dialog v-model:visible="dVisible" draggable width="40%">
       <template #title>
          <span>{{ $t(`header.tooltipLock`) }}</span>
       </template>
@@ -88,6 +88,7 @@ watch(() => dVisible.value, (newVal) => {
    .body__avatar {
       display: flex;
       flex-direction: column;
+      margin: 10px 0;
       align-items: center;
       justify-content: center;
    }

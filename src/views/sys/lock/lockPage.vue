@@ -8,10 +8,10 @@
         </div>
         <div class="lock__body">
             <div class="lock__body--card">
-                <span class="h">{{ formatTimeStamp(Date.now(), 'HH') }}</span>
+                <span class="h">{{ hour }}</span>
             </div>
             <div class="lock__body--card">
-                <span class="m">{{ formatTimeStamp(Date.now(), 'mm') }}</span>
+                <span class="m">{{ minute }}</span>
             </div>
         </div>
         <transition name="fade-slide">
@@ -53,12 +53,12 @@
             </div>
         </transition>
         <div class="lock__footer">
-            <div class="lock__footer--date">{{ formatTimeStamp(Date.now(), 'LLLL') }}</div>
+            <div class="lock__footer--date">{{ date }}</div>
         </div>
     </div>
 </template>
 <script lang='ts' setup>
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import md5 from 'md5';
 import { useRouter } from 'vue-router';
 import { formatTimeStamp } from '@/utils/moment'
@@ -70,6 +70,10 @@ const router = useRouter()
 const appStore = useAppStore()
 const show = ref<boolean>(false)
 const password = ref<string>('')
+const minute = ref<string>('')
+const hour = ref<string>('')
+const date = ref<string>('')
+
 const validatePwd = (pwd: string): boolean => {
     function validate(value: string): boolean {
         const { password } = getItem(LOCK_SCREEN_KEY)
@@ -88,7 +92,20 @@ const unLock = (val: string) => {
         msgError('锁屏密码或者用户密码错误')
     }
 }
-
+const updateTimeInfo = () => {
+    hour.value = formatTimeStamp(Date.now(), 'HH')
+    minute.value = formatTimeStamp(Date.now(), 'mm')
+    date.value = formatTimeStamp(Date.now(), 'LLLL')
+}
+let timer: any;
+const initTimeInfo = () => {
+    updateTimeInfo()
+    timer = setInterval(() => {
+        updateTimeInfo()
+    }, 30e3)
+}
+onMounted(() => { initTimeInfo() })
+onUnmounted(() => { clearInterval(timer) })
 </script>
 <style lang='scss' scoped>
 @use '@/styles/tools/mixin/BEM' as *;
