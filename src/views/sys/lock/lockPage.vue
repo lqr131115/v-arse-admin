@@ -16,7 +16,7 @@
         </div>
         <transition name="fade-slide">
             <div class="entry" v-show="show">
-                <div class="entry-content">
+                <div class="entry-content" @click.stop="() => {}">
                     <div class="entry__header">
                         <el-avatar
                             :size="60"
@@ -58,7 +58,7 @@
     </div>
 </template>
 <script lang='ts' setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import md5 from 'md5';
 import { useRouter } from 'vue-router';
 import { formatTimeStamp } from '@/utils/moment'
@@ -104,6 +104,13 @@ const initTimeInfo = () => {
         updateTimeInfo()
     }, 30e3)
 }
+watch(() => show.value, (newVal) => {
+    if (newVal) {
+        document.addEventListener('click', () => { show.value = false })
+    } else {
+        document.removeEventListener('click', () => { show.value = false })
+    }
+})
 onMounted(() => { initTimeInfo() })
 onUnmounted(() => { clearInterval(timer) })
 </script>
@@ -137,7 +144,7 @@ onUnmounted(() => { clearInterval(timer) })
     }
 
     @include b(entry) {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         display: flex;
@@ -190,14 +197,13 @@ onUnmounted(() => { clearInterval(timer) })
 
     @include e(footer) {
         display: flex;
-        margin: 40px 0;
+        height: 10%;
+        justify-content: center;
+        align-items: center;
         color: #fff;
         @include m(date) {
             font-size: 20px;
         }
     }
-}
-.lock::-webkit-scrollbar {
-    display: none;
 }
 </style>
