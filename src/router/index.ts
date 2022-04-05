@@ -56,7 +56,7 @@ const privateRoutes: RouteRecordRaw[] = [
   },
   {
     path: "/component",
-    redirect: "/component/picker",
+    redirect: "/component/parser",
     component: layout,
     children: [
       {
@@ -70,6 +70,12 @@ const privateRoutes: RouteRecordRaw[] = [
         name: "component-table",
         component: () => import("../views/component/cTable/cTable.vue"),
         meta: { title: "cTable", icon: "present" },
+      },
+      {
+        path: "/component/parser",
+        name: "component-parser",
+        component: () => import("../views/component/cParser/cParser.vue"),
+        meta: { title: "cParser", icon: "files" },
       },
     ],
     meta: { title: "component", icon: "grid" },
@@ -85,7 +91,7 @@ const publicRoutes: RouteRecordRaw[] = [
   {
     path: "/layout",
     name: "Layout",
-    redirect: "/workbench",
+    redirect: "/component",
     
     component: layout,
     children: [

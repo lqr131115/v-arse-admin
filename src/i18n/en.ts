@@ -16,6 +16,7 @@ export default {
     component: "Component",
     cPicker: "Picker",
     cTable: "Table",
+    cParser: "Parser",
     excelImport: "ExcelImport",
     userInfo: "UserInfo",
   },

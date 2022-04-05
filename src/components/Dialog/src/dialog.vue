@@ -5,6 +5,8 @@
          :custom-class="isScroll ? 'body--scroll' : ''"
          :draggable="draggable"
          v-bind="$attrs"
+         @open="onOpen"
+         @close="onClose"
       >
          <template #title v-if="$slots.title">
             <slot name="title"></slot>
@@ -35,8 +37,10 @@ const props = defineProps({
       default: false
    }
 })
-const emits = defineEmits(['update:visible'])
+const emits = defineEmits(['update:visible', 'closed', 'open', 'close'])
 const dVisible = ref<boolean>(props.visible)
+const onOpen = () => { emits('open') }
+const onClose = () => { emits('close') }
 watch(() => props.visible, (newVal) => {
    dVisible.value = newVal
 })

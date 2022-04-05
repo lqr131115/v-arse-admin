@@ -16,6 +16,7 @@ export default {
     component: "组件库",
     cPicker: "选择器",
     cTable: "表格",
+    cParser: "解析器",
     excelImport: "Excel导入",
     userInfo: "员工信息",
   },
