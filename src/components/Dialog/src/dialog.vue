@@ -6,7 +6,9 @@
          :draggable="draggable"
          v-bind="$attrs"
          @open="onOpen"
+         @opened="onOpened"
          @close="onClose"
+         @closed="onClosed"
       >
          <template #title v-if="$slots.title">
             <slot name="title"></slot>
@@ -37,8 +39,10 @@ const props = defineProps({
       default: false
    }
 })
-const emits = defineEmits(['update:visible', 'closed', 'open', 'close'])
+const emits = defineEmits(['update:visible', 'closed','opened', 'open', 'close'])
 const dVisible = ref<boolean>(props.visible)
+const onClosed = () => { emits('closed') }
+const onOpened = () => { emits('opened') }
 const onOpen = () => { emits('open') }
 const onClose = () => { emits('close') }
 watch(() => props.visible, (newVal) => {

@@ -1,10 +1,10 @@
 <template>
    <div class="parser">
-      <ExcelParser />
+      <FileParser />
    </div>
 </template>
 <script lang='ts' setup>
-import ExcelParser from './excelParser.vue'
+import FileParser from './fileParser.vue'
 
 </script>
 <style lang='scss' scoped>
