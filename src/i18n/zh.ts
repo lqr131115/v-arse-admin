@@ -5,7 +5,7 @@ export default {
     chart: "图表",
     about: "关于",
     user: "用户",
-    staffManage: "员工管理",
+    userManage: "用户管理",
     roleManage: "角色管理",
     permissionList: "权限列表",
     article: "文章",

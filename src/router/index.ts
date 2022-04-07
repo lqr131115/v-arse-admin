@@ -4,14 +4,14 @@ import layout from "../layout/layout.vue";
 const privateRoutes: RouteRecordRaw[] = [
   {
     path: "/user",
-    redirect: "/user/staff",
+    redirect: "/user/manage",
     component: layout,
     children: [
       {
-        path: "/user/staff",
-        name: "user-staff",
-        component: () => import("../views/user/staff/staffManage.vue"),
-        meta: { title: "staffManage", icon: "user" },
+        path: "/user/manage",
+        name: "user-manage",
+        component: () => import("../views/user/manage/userManage.vue"),
+        meta: { title: "userManage", icon: "user" },
       },
       {
         path: "/user/role",
@@ -91,7 +91,7 @@ const publicRoutes: RouteRecordRaw[] = [
   {
     path: "/layout",
     name: "Layout",
-    redirect: "/component",
+    redirect: "/user",
     
     component: layout,
     children: [

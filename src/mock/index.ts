@@ -11,4 +11,4 @@ Mock.mock("/mock/sys/login", "post", sys.login);
 Mock.mock("/mock/sys/profile", "get", sys.getUserProfile);
 
 // user
-Mock.mock('/mock/user/staff/list', 'get', user.getStaffList);
+Mock.mock('/mock/user/list', 'post', user.getUserList);

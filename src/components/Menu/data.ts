@@ -13,7 +13,7 @@ export const menusDemo: MenuItem[] = [
     children: [
       {
         index: "/user/staff",
-        name: "staffManage",
+        name: "userManage",
         icon: "user",
       },
       {

@@ -5,7 +5,7 @@ export default {
     chart: "Chart",
     about: "About",
     user: "User",
-    staffManage: "StaffManage",
+    userManage: "UserManage",
     roleManage: "RoleManage",
     permissionList: "PermissionList",
     article: "Article",

@@ -14,6 +14,7 @@
     "driver.js": "^0.9.8",
     "element-plus": "^2.1.4",
     "fast-glob": "^3.2.11",
+    "file-saver": "^2.0.5",
     "fuse.js": "^6.5.3",
     "hex-rgb": "^5.0.0",
     "lodash": "^4.17.21",
@@ -33,6 +34,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/lodash": "^4.14.181",
     "@types/md5": "^2.3.2",
     "@types/mockjs": "^1.0.6",

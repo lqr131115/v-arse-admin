@@ -1,44 +1,36 @@
 import Mock from "mockjs";
+import { userList } from "../data";
 
-export const getStaffList = (config: any) => {
+export const getUserList = (config: any) => {
+  const { currentPage, pageSize } = JSON.parse(config.body);
+  if (!currentPage && !pageSize) {
+    return Mock.mock({
+      code: 200,
+      data: {
+        list: userList,
+        total: userList.length,
+      },
+      msg: "success",
+    });
+  }
+  function _getUserList(pageIndex: number, pageSize: number) {
+    let offset = pageIndex - 1;
+    if (offset === 0) {
+      offset = pageSize;
+      return userList.slice(0, offset);
+    } else {
+      offset = offset * pageSize;
+      return userList.slice(offset, offset + pageSize);
+    }
+  }
+
   return Mock.mock({
     code: 200,
     data: {
-      list: [
-        {
-          role: [
-            {
-              id: "1",
-              title: "超级管理员",
-            },
-          ],
-          _id: "612710a0ec87aa543c9c341d",
-          id: "0",
-          openTime: "1648821814939",
-          username: "super-admin",
-          mobile: "188xxxx0001",
-          avatar:
-            "https://img1.baidu.com/it/u=4259449877,58809073&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400",
-        },
-        {
-          role: [
-            {
-              id: "2",
-              title: "管理员",
-            },
-          ],
-          _id: "612710a0ec87aa543c9c341e",
-          id: "1",
-          username: "admin",
-          openTime: "1648821000000",
-          mobile: "188xxxx0002",
-          avatar:
-            "https://img1.baidu.com/it/u=3890180243,28045940&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
-        },
-      ],
-      total: 7,
-      page: 1,
-      size: 2,
+      list: _getUserList(currentPage, pageSize),
+      total: userList.length,
+      page: currentPage,
+      size: pageSize,
     },
     msg: "success",
   });

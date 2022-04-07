@@ -113,11 +113,11 @@ const props = defineProps({
       type: Boolean,
       default: false
    },
-   defaultPagesize: {
+   pageSize: {
       type: Number,
-      default: 1
+      default: 5
    },
-   defaultCurrentPage: {
+   currentPage: {
       type: Number,
       default: 1
    },
@@ -154,8 +154,6 @@ const emits = defineEmits(['on-save-column-edit', 'on-close-column-edit', 'on-pa
 let editingId = ref<string>()
 let tableData = ref<any[]>(cloneDeep(props.data))
 let editRowAction = ref<string>(props.rowOperation)
-const currentPage = ref<number>(props.defaultCurrentPage)
-const pageSize = ref<number>(props.defaultPagesize)
 const isLoading = computed(() => !props.data || !props.data.length)
 const normalOptions = computed(() => props.options.filter((item: TableOption) => !item.action))
 const actionOptions = computed(() => props.options.find((item: TableOption) => item.action))
