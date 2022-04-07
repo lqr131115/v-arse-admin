@@ -2,64 +2,56 @@
     <div class="file-parser">
         <el-row>
             <el-col :span="12">
-                <el-row>
-                    <el-col>
-                        <el-form :model="form">
-                            <el-form-item label="数量">
-                                <el-input-number
-                                    v-model="form.limit"
-                                    :min="1"
-                                    :max="10"
-                                    :step="1"
-                                    size="small"
-                                />
-                            </el-form-item>
-                            <el-form-item label="类型">
-                                <el-checkbox-group v-model="form.type">
-                                    <el-checkbox
-                                        v-for="(item, index) in fileTypeCheckbox"
-                                        :label="item.label"
-                                        :key="item.label"
-                                        :disabled="index !== 0"
-                                    >{{ item.name }}</el-checkbox>
-                                </el-checkbox-group>
-                            </el-form-item>
-                            <el-form-item label="多选">
-                                <el-switch
-                                    v-model="form.multiple"
-                                    size="small"
-                                    inline-prompt
-                                    active-text="开"
-                                    inactive-text="关"
-                                />
-                            </el-form-item>
-                        </el-form>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col>
-                        <el-upload
-                            ref="uploadRef"
-                            drag
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :limit="form.limit"
-                            :multiple="form.multiple"
-                            :accept="form.type.join(',')"
-                            :on-change="onChange"
-                            :on-exceed="onExceed"
-                            :before-upload="beforeUpload"
-                        >
-                            <el-icon class="el-icon--upload">
-                                <upload-filled />
-                            </el-icon>
-                            <div class="el-upload__text">
-                                拖拽文件到此或
-                                <em>点击上传</em>
-                            </div>
-                        </el-upload>
-                        <el-button type="primary" @click="handleParse">开始解析</el-button>
-                    </el-col>
-                </el-row>
+                <el-form :model="form">
+                    <el-form-item label="数量">
+                        <el-input-number
+                            v-model="form.limit"
+                            :min="1"
+                            :max="10"
+                            :step="1"
+                            size="small"
+                        />
+                    </el-form-item>
+                    <el-form-item label="类型">
+                        <el-checkbox-group v-model="form.type">
+                            <el-checkbox
+                                v-for="(item, index) in fileTypeCheckbox"
+                                :label="item.label"
+                                :key="item.label"
+                                :disabled="index !== 0"
+                            >{{ item.name }}</el-checkbox>
+                        </el-checkbox-group>
+                    </el-form-item>
+                    <el-form-item label="多选">
+                        <el-switch
+                            v-model="form.multiple"
+                            size="small"
+                            inline-prompt
+                            active-text="开"
+                            inactive-text="关"
+                        />
+                    </el-form-item>
+                </el-form>
+                <el-upload
+                    ref="uploadRef"
+                    drag
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :limit="form.limit"
+                    :multiple="form.multiple"
+                    :accept="form.type.join(',')"
+                    :on-change="onChange"
+                    :on-exceed="onExceed"
+                    :before-upload="beforeUpload"
+                >
+                    <el-icon class="el-icon--upload">
+                        <upload-filled />
+                    </el-icon>
+                    <div class="el-upload__text">
+                        拖拽文件到此或
+                        <em>点击上传</em>
+                    </div>
+                </el-upload>
+                <el-button type="primary" @click="handleParse">开始解析</el-button>
             </el-col>
             <el-col :span="12">
                 <el-empty v-if="isNull(result)" description="NoData" />

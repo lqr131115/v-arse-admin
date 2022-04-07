@@ -36,6 +36,15 @@ export function isExcel(file: File): boolean {
   return fileType === "xlsx" || fileType === "xls";
 }
 
+// 校验是否是Word文件
+export function isWord(file: File): boolean {
+  const fileName = file.name;
+  const fileType = fileName.substring(
+    fileName.lastIndexOf(".") + 1,
+    fileName.length
+  );
+  return fileType === "doc" || fileType === "docx";
+}
 // 校验文件大小,默认10MB
 export function validateFileSize(file: File, maxSize: number = FILE_MAX_SIZE): boolean {
   return file.size / 1024 / 1024 < maxSize;
