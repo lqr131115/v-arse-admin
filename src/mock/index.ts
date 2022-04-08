@@ -12,3 +12,4 @@ Mock.mock("/mock/sys/profile", "get", sys.getUserProfile);
 
 // user
 Mock.mock('/mock/user/list', 'post', user.getUserList);
+Mock.mock('/mock/user/info', 'post', user.getUserInfoById);

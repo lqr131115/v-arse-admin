@@ -169,5 +169,6 @@ export default {
     done:'Done',
     back:'Back',
     restore:'Restore',
+    print:'Print',
   }
 };

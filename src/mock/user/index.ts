@@ -1,6 +1,6 @@
 import Mock from "mockjs";
 import { userList } from "../data";
-
+import { User } from "../model";
 export const getUserList = (config: any) => {
   const { currentPage, pageSize } = JSON.parse(config.body);
   if (!currentPage && !pageSize) {
@@ -34,4 +34,21 @@ export const getUserList = (config: any) => {
     },
     msg: "success",
   });
+};
+
+export const getUserInfoById = (config: any) => {
+  const { id } = JSON.parse(config.body);
+  const user = userList.find((item: User) => item._id === id);
+  if (user) {
+    return Mock.mock({
+      code: 200,
+      data: user,
+      msg: "success",
+    });
+  } else {
+    return Mock.mock({
+      code: 200,
+      msg: "用户不存在",
+    });
+  }
 };

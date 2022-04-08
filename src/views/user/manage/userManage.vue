@@ -40,11 +40,13 @@
 </template>
 <script lang='ts' setup>
 import { onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import { getUserList } from '@/api/user';
 import { TableOption } from '@/types/component';
 import { msgSuccess } from '@/utils/notice';
 import { formatTimeStamp } from '@/utils/moment';
 import ExportToModal from './component/export2Modal.vue';
+import { PageEnum } from '@/enums/pageEnum'
 const options: TableOption[] = [
     {
         label: '用户名',
@@ -85,11 +87,21 @@ const pageOptions = {
     pageSizes: [1, 2, 3, 4, 5],
     layout: 'total, sizes, prev, pager, next, jumper',
 }
+const router = useRouter()
 const onPageSizeChange = (val: number) => { pageSize.value = val }
 const onCurrentPageChange = (val: number) => { currentPage.value = val }
 
-const handleRowRole = (scope: any) => { rowOperation.value = 'check' }
-const handleRowCheck = (scope: any) => { rowOperation.value = 'role' }
+const handleRowRole = (scope: any) => { rowOperation.value = 'role' }
+const handleRowCheck = (scope: any) => {
+    rowOperation.value = 'check'
+    router.push({
+        path: PageEnum.USER_INFO,
+        query: {
+            id: scope.row._id
+        }
+    })
+
+}
 const handleRowDelete = (scope: any) => { rowOperation.value = 'delete' }
 const _getUserList = async (pageSize: number, currentPage: number) => {
     const res = await getUserList({ pageSize, currentPage });

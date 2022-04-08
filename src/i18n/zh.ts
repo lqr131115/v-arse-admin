@@ -171,5 +171,6 @@ export default {
     done: "完成",
     back: "返回",
     restore: "恢复",
+    print:"打印",
   },
 };

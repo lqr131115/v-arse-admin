@@ -25,6 +25,12 @@ const privateRoutes: RouteRecordRaw[] = [
         component: () => import("../views/user/permission/permissionList.vue"),
         meta: { title: "permissionList", icon: "key" },
       },
+      {
+        path: "/user/info",
+        name: "user-info",
+        component: () => import("../views/user/info/userInfo.vue"),
+        meta: { title: "userInfo" },
+      },
     ],
     meta: { title: "user", icon: "avatar" },
   },
