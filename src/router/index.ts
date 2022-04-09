@@ -26,9 +26,10 @@ const privateRoutes: RouteRecordRaw[] = [
         meta: { title: "permissionList", icon: "key" },
       },
       {
-        path: "/user/info",
+        path: "/user/info/:id",
         name: "user-info",
         component: () => import("../views/user/info/userInfo.vue"),
+        props: true,
         meta: { title: "userInfo" },
       },
     ],
@@ -98,7 +99,7 @@ const publicRoutes: RouteRecordRaw[] = [
     path: "/layout",
     name: "Layout",
     redirect: "/user",
-    
+
     component: layout,
     children: [
       {

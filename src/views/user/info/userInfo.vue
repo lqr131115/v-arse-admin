@@ -6,48 +6,56 @@
                     <el-skeleton :rows="5" />
                 </template>
                 <template v-else>
-                    <el-row>
-                        <el-col>
-                            <m-descriptions
-                                :data="userInfoDescData"
-                                :column="2"
-                                :title="$t('userInfo.baseInfo')"
-                                border
-                            >
-                                <template #extra>
-                                    <el-button
-                                        type="primary"
-                                        @click="handlePrint"
-                                    >{{ $t('buttons.print') }}</el-button>
-                                </template>
-                                <template #gender="{ item }">{{ item.content === 1 ? '男' : '女' }}</template>
-                                <template #entryTime="{ item }">{{ formatTimeStamp(item.content) }}</template>
-                                <template #role="{ item }">
-                                    <el-tag v-for="t in item.content" :key="t.id">{{ t.title }}</el-tag>
-                                </template>
-                            </m-descriptions>
-                        </el-col>
+                    <el-row justify="space-between" align="middle" mb10>
+                        <span fz16 fw7>{{ $t('userInfo.baseInfo') }}</span>
+                        <el-button
+                            type="primary"
+                            :loading="printLoading"
+                            v-print="printConfig"
+                        >{{ $t('buttons.print') }}</el-button>
                     </el-row>
-                    <el-row>
-                        <el-col>
-                            <el-descriptions :column="1" direction="vertical" border>
-                                <el-descriptions-item :label="$t('userInfo.experience')">
-                                    <span>...</span>
-                                </el-descriptions-item>
-                                <el-descriptions-item :label="$t('userInfo.honor')">
-                                    <div>
-                                        <el-divider content-position="left">2006.01 - 2006.12</el-divider>
-                                        <span>美国《时代周刊》年度风云人物</span>
-                                        <el-divider content-position="left">2008.01 - 2008.12</el-divider>
-                                        <span>《感动中国》特别奖</span>
-                                    </div>
-                                </el-descriptions-item>
-                                <el-descriptions-item :label="$t('userInfo.other')">
-                                    <span>...</span>
-                                </el-descriptions-item>
-                            </el-descriptions>
-                        </el-col>
-                    </el-row>
+                    <div id="userInfoBox">
+                        <el-row justify="center">
+                            <el-col :span="20">
+                                <m-descriptions :data="userInfoDescData" :column="2" border>
+                                    <template
+                                        #gender="{ item }"
+                                    >{{ item.content === 1 ? '男' : '女' }}</template>
+                                    <template
+                                        #entryTime="{ item }"
+                                    >{{ formatTimeStamp(item.content) }}</template>
+                                    <template #role="{ item }">
+                                        <el-tag v-for="t in item.content" :key="t.id">{{ t.title }}</el-tag>
+                                    </template>
+                                </m-descriptions>
+                            </el-col>
+                            <el-col :span="4">
+                                <div class="info__avatar">
+                                    <img id="avatar" :src="data.avatar" class="ava" />
+                                </div>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col>
+                                <el-descriptions :column="1" direction="vertical" border>
+                                    <el-descriptions-item :label="$t('userInfo.experience')">
+                                        <span>...</span>
+                                    </el-descriptions-item>
+                                    <el-descriptions-item :label="$t('userInfo.honor')">
+                                        <div>
+                                            <el-divider content-position="left">2006.01 - 2006.12</el-divider>
+                                            <span>美国《时代周刊》年度风云人物</span>
+                                            <el-divider content-position="left">2008.01 - 2008.12</el-divider>
+                                            <span>《感动中国》特别奖</span>
+                                        </div>
+                                    </el-descriptions-item>
+                                    <el-descriptions-item :label="$t('userInfo.other')">
+                                        <span>...</span>
+                                    </el-descriptions-item>
+                                </el-descriptions>
+                            </el-col>
+                        </el-row>
+                    </div>
                 </template>
             </div>
         </el-card>
@@ -55,34 +63,48 @@
 </template>
 <script lang='ts' setup>
 import { onMounted, ref, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { Configuration } from 'print-js'
 import { useUserInfoDescData } from './hooks';
 import { getUserInfoById } from '@/api/user';
 import { User } from '@/mock/model'
 import { formatTimeStamp } from '@/utils/moment';
-const route = useRoute()
+const props = defineProps({
+    id: {
+        type: String,
+        required: true
+    }
+})
 const data = ref<User>()
-const userInfoDescData = computed(() => useUserInfoDescData(data.value!))
-const handlePrint = () => {
-    alert`handlePrint`
+const printLoading = ref<boolean>(false)
+const printConfig: Configuration = {
+    printable: 'userInfoBox',
+    type: 'html',
+    header: '基本信息',
+    // "*" HTML中的图片无法显示 可能原因:没加载好就执行打印了
+    targetStyles: ['*'],
+    onLoadingStart: () => {
+        printLoading.value = true
+    },
+    onLoadingEnd: () => {
+        printLoading.value = false
+    }
 }
+const userInfoDescData = computed(() => useUserInfoDescData(data.value!))
+
 const _getUserInfoById = async (id: string) => {
     const res = await getUserInfoById({ id })
     data.value = res.data
 }
 onMounted(async () => {
-    await _getUserInfoById(route.query.id as string)
+    await _getUserInfoById(props.id)
 })
 </script>
 <style lang='scss' scoped>
 @use '@/styles/tools/mixin/BEM' as *;
 @include b(info) {
     padding: 10px;
-
-    @include e(action) {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+    :deep(table) {
+        height: 100%;
     }
 
     @include e(container) {
@@ -90,9 +112,20 @@ onMounted(async () => {
         flex-direction: column;
     }
 
-    @include e(body) {
+    @include e(avatar) {
         display: flex;
+        height: 100%;
         width: 100%;
+        border-top: 1px solid #ebeef5;
+        border-right: 1px solid #ebeef5;
+        justify-content: center;
+        align-items: center;
+        .ava {
+            height: 90%;
+            width: 90%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
     }
 }
 </style>

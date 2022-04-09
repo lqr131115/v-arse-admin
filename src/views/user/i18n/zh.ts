@@ -2,6 +2,7 @@ export default {
   userInfo: {
     baseInfo: "基本信息",
     username: "姓名",
+    avatar: "头像",
     gender: "性别",
     education: "学历",
     major: "专业",

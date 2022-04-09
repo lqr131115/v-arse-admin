@@ -2,6 +2,7 @@ export default {
   userInfo: {
     baseInfo:'Base Info',
     username: "Username",
+    avatar: "Avatar",
     gender: "Gender",
     education:"Education",
     major:"Major",

@@ -94,13 +94,7 @@ const onCurrentPageChange = (val: number) => { currentPage.value = val }
 const handleRowRole = (scope: any) => { rowOperation.value = 'role' }
 const handleRowCheck = (scope: any) => {
     rowOperation.value = 'check'
-    router.push({
-        path: PageEnum.USER_INFO,
-        query: {
-            id: scope.row._id
-        }
-    })
-
+    router.push(`${PageEnum.USER_INFO}/${scope.row._id}`)
 }
 const handleRowDelete = (scope: any) => { rowOperation.value = 'delete' }
 const _getUserList = async (pageSize: number, currentPage: number) => {
