@@ -18,8 +18,8 @@ export default {
     cTable: "表格",
     cParser: "解析器",
     excelImport: "Excel导入",
-    userInfo: "员工信息",
-  },
+    userInfo: "用户信息",
+  },  
   header: {
     // user dropdown
     dropdownItemDoc: "文档",

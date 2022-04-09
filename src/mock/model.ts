@@ -4,6 +4,14 @@ export type User = {
   id: string;
   openTime: string;
   username: string;
-  mobile: string;
   avatar: string;
+  mobile: string;
+  gender:number;
+  nation:string;
+  residence:string;
+  address:string;
+  entryTime:string;
+  remark:string;
+  education:string;
+  major:string;
 };

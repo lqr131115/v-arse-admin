@@ -39,4 +39,5 @@ export type DescriptionsItem = {
   content: any;
   align?: "left" | "center" | "right";
   width?: number;
+  span?:number;
 };

@@ -2,12 +2,11 @@ import { createI18n } from "vue-i18n";
 import { getItem } from "@/utils/storage";
 import { LOCALE_KEY } from "@/enums/cacheEnum";
 import { LOCALE } from "@/settings";
-import zh from "./zh";
-import en from "./en";
+import * as L from './locale'
 
 const messages = {
-  [LOCALE.ZH_CN]: { ...zh },
-  [LOCALE.EN_US]: { ...en },
+  [LOCALE.ZH_CN]: L.getZh(),
+  [LOCALE.EN_US]: L.getEn(),
 };
 const i18n = createI18n({
   // $t() 函数将注册到全局

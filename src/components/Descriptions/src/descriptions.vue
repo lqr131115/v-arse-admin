@@ -12,6 +12,7 @@
             :width="item.width"
             :align="item.align"
             :label-align="item.labelAlign"
+            :span="item.span"
         >
             <template #label>
                 <el-icon mr5 v-if="item.icon">
