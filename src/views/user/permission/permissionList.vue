@@ -1,14 +1,15 @@
 <template>
    <div class="permission">
       <el-card>
-            <m-table
-               row-key="id"
-               :data="data"
-               :options="options"
-               border
-               default-expand-all
-               cell-class-name="my-cell"
-            ></m-table>
+         <m-table
+            row-key="id"
+            :data="data"
+            :options="options"
+            border
+            default-expand-all
+            cell-class-name="my-cell"
+            :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+         ></m-table>
       </el-card>
    </div>
 </template>
@@ -25,6 +26,10 @@ const options: TableOption[] = [
       attrs: {
          sortable: true
       }
+   },
+   {
+      label: '权限标识',
+      prop: 'mark',
    },
    {
       label: '权限描述',

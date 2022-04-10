@@ -25,7 +25,7 @@
                                         #entryTime="{ item }"
                                     >{{ formatTimeStamp(item.content) }}</template>
                                     <template #role="{ item }">
-                                        <el-tag v-for="t in item.content" :key="t.id">{{ t.title }}</el-tag>
+                                        <el-tag v-for="r in item.content" :key="r.id" mr5>{{ $t(`role.${r.name}`) }}</el-tag>
                                     </template>
                                 </m-descriptions>
                             </el-col>

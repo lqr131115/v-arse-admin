@@ -23,7 +23,7 @@
                     <el-avatar :size="50" :src="scope.row.avatar" />
                 </template>
                 <template #role="{ scope }">
-                    <el-tag>{{ scope.row.role[0].title }}</el-tag>
+                    <el-tag v-for="r in scope.row.role" :key="r.id" mr5>{{ $t(`role.${r.name}`) }}</el-tag>
                 </template>
                 <template #open-time="{ scope }">
                     <span>{{ formatTimeStamp(scope.row.openTime) }}</span>
@@ -35,7 +35,7 @@
                 </template>
             </m-table>
         </el-card>
-        <RolesModal v-model:visible="visible" />
+        <RolesModal v-model:visible="visible" :id="userId" :role="rowRole" />
     </div>
 </template>
 <script lang='ts' setup>
@@ -45,9 +45,10 @@ import { getUserList } from '@/api/user';
 import { TableOption } from '@/types/component';
 import { msgSuccess } from '@/utils/notice';
 import { formatTimeStamp } from '@/utils/moment';
+import { PageEnum } from '@/enums/pageEnum'
+import { Role } from '@/mock/model';
 import ExportToModal from './component/export2Modal.vue';
 import RolesModal from './component/rolesModal.vue';
-import { PageEnum } from '@/enums/pageEnum'
 const options: TableOption[] = [
     {
         label: '用户名',
@@ -81,6 +82,8 @@ const options: TableOption[] = [
 ]
 const visible = ref<boolean>(false)
 const data = ref<any[]>([])
+const userId = ref<string>('')
+const rowRole = ref<string[]>([])
 const rowOperation = ref<string>('')
 const total = ref<number>(0)
 const currentPage = ref<number>(1)
@@ -93,7 +96,12 @@ const router = useRouter()
 const onPageSizeChange = (val: number) => { pageSize.value = val }
 const onCurrentPageChange = (val: number) => { currentPage.value = val }
 
-const handleRowRole = (scope: any) => { rowOperation.value = 'role', visible.value = true }
+const handleRowRole = (scope: any) => {
+    rowOperation.value = 'role'
+    userId.value = scope.row._id
+    rowRole.value = scope.row.role.map((r: Role) => r.name)
+    visible.value = true
+}
 const handleRowCheck = (scope: any) => {
     rowOperation.value = 'check'
     router.push(`${PageEnum.USER_INFO}/${scope.row._id}`)
@@ -110,6 +118,12 @@ const _getUserList = async (pageSize: number, currentPage: number) => {
 watch(() => [pageSize.value, currentPage.value], ([newSize, newPage]) => {
     _getUserList(newSize, newPage)
 })
+// watch(() => visible.value, (newVal: boolean) => {
+//     if (!newVal) {
+//         userId.value = ''
+//         rowRole.value = []
+//     }
+// })
 onMounted(() => {
     _getUserList(pageSize.value, currentPage.value)
 })

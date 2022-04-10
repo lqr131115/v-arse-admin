@@ -1,5 +1,5 @@
 <template>
-   <m-dialog v-model:visible="dVisible" draggable width="40%">
+   <m-dialog v-model:visible="visible" draggable width="40%" @close="onClose">
       <template #title>
          <span>{{ $t(`header.tooltipLock`) }}</span>
       </template>
@@ -38,7 +38,7 @@
    </m-dialog>
 </template>
 <script lang='ts' setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import md5 from 'md5';
 import { FormInstance } from 'element-plus';
 import { useUser } from '@/hooks'
@@ -60,7 +60,6 @@ const emits = defineEmits(['update:visible'])
 const { getUserInfo } = useUser()
 const appStore = useAppStore()
 const lockRef = ref<FormInstance>()
-const dVisible = ref<boolean>(props.visible)
 const form = ref<TFormItem>({ password: '' })
 const rules = { password: [{ required: true, message: '输入锁屏密码', trigger: 'change' }] }
 
@@ -74,12 +73,7 @@ const lockScreen = async (formEl: FormInstance | undefined) => {
       }
    })
 }
-watch(() => props.visible, (newVal) => {
-   dVisible.value = newVal
-})
-watch(() => dVisible.value, (newVal) => {
-   emits('update:visible', newVal)
-})
+const onClose = () => { emits('update:visible', false) }
 </script>
 <style lang='scss' scoped>
 .body {

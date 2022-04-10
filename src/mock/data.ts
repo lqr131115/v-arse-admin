@@ -5,7 +5,15 @@ export const userList: User[] = [
     role: [
       {
         id: "1",
-        title: "超级管理员",
+        name: "superAdmin",
+        desc: "我是唯一超管,可以操作系统所有功能",
+        level: "T0",
+      },
+      {
+        id: "2",
+        name: "director",
+        desc: "我是董事,我可以管理经理",
+        level: "T2",
       },
     ],
     _id: "612710a0ec87aa543c9c341d",
@@ -27,9 +35,12 @@ export const userList: User[] = [
   {
     role: [
       {
-        id: "2",
-        title: "管理员",
+        id: "1",
+        name: "admin",
+        desc: "我是管理员,协助超管管理系统",
+        level: "T1",
       },
+    
     ],
     _id: "612710a0ec87aa543c9c341e",
     id: "1",
@@ -50,8 +61,10 @@ export const userList: User[] = [
   {
     role: [
       {
-        id: "3",
-        title: "员工",
+        id: "1",
+        name: "director",
+        desc: "我是董事,我可以管理经理",
+        level: "T2",
       },
     ],
     _id: "612710a0ec87aa522c9c341e",
@@ -73,8 +86,16 @@ export const userList: User[] = [
   {
     role: [
       {
-        id: "4",
-        title: "员工",
+        id: "1",
+        name: "admin",
+        desc: "我是管理员,协助超管管理系统",
+        level: "T1",
+      },
+      {
+        id: "2",
+        name: "manager",
+        desc: "我是经理,我可以管理员工",
+        level: "T3",
       },
     ],
     _id: "612710a0ec87bb543c9c341e",
@@ -96,8 +117,10 @@ export const userList: User[] = [
   {
     role: [
       {
-        id: "5",
-        title: "员工",
+        id: "1",
+        name: "staff",
+        desc: "我是员工,打工人的人上人",
+        level: "T4",
       },
     ],
     _id: "612710a0ec87ca543c9c341e",
@@ -120,31 +143,31 @@ export const userList: User[] = [
 
 export const roleList: Role[] = [
   {
-    id: "superAdminId",
+    id: "1",
     name: "superAdmin",
     desc: "我是唯一超管,可以操作系统所有功能",
     level: "T0",
   },
   {
-    id: "adminId",
+    id: "2",
     name: "admin",
     desc: "我是管理员,协助超管管理系统",
     level: "T1",
   },
   {
-    id: "directorId",
+    id: "3",
     name: "director",
     desc: "我是董事,我可以管理经理",
     level: "T2",
   },
   {
-    id: "managerId",
+    id: "4",
     name: "manager",
     desc: "我是经理,我可以管理员工",
     level: "T3",
   },
   {
-    id: "staffId",
+    id: "5",
     name: "staff",
     desc: "我是员工,打工人的人上人",
     level: "T4",
@@ -165,17 +188,17 @@ export const permissionList: Permission[] = [
         desc: "为用户分配角色",
       },
       {
-        id:"1-2",
+        id: "1-2",
         name: "导入用户",
         mark: "importUser",
         desc: "通过Excel导入用户",
       },
       {
-        id:"1-3",
+        id: "1-3",
         name: "删除用户",
         mark: "deleteUser",
         desc: "通过Id删除用户",
-      }
+      },
     ],
   },
   {
@@ -191,12 +214,11 @@ export const permissionList: Permission[] = [
         desc: "打印文章",
       },
       {
-        id:"2-2",
+        id: "2-2",
         name: "删除文章",
         mark: "deleteArticle",
         desc: "删除文章",
       },
     ],
   },
-  
 ];

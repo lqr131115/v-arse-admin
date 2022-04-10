@@ -165,6 +165,8 @@ export default {
     placeholder: '请输入锁屏密码或者用户密码',
   },
   buttons: {
+    confirm:"确定",
+    cancel:"取消",
     close: "关闭",
     next: "下一步",
     prev: "上一步",

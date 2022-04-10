@@ -163,6 +163,8 @@ export default {
     placeholder: 'Please enter the lock screen password or user password',
   },
   buttons:{
+    confirm:"Confirm",
+    cancel:"Cancel",
     close:'Close',
     next:'Next',
     prev:'Prev',

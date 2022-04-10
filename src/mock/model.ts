@@ -1,5 +1,5 @@
 export type User = {
-  role: any[];
+  role: Role[];
   _id: string;
   id: string;
   openTime: string;

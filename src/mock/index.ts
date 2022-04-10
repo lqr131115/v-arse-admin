@@ -18,6 +18,8 @@ Mock.mock('/mock/user/info', 'post', user.getUserInfoById);
 
 // role
 Mock.mock('/mock/role/list', 'get', role.getRoleList);
+Mock.mock('/mock/role/info', 'post', role.getRoleInfoById);
+Mock.mock('/mock/role/update', 'post', role.updateRoleInfoById);
 
 // permission
 Mock.mock('/mock/permission/list', 'get', permission.getPermissionList);
