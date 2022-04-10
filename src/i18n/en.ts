@@ -170,5 +170,6 @@ export default {
     back:'Back',
     restore:'Restore',
     print:'Print',
+    assignPermission: "Assign Permission",
   }
 };

@@ -10,6 +10,7 @@
          :element-loading-background="elementLoadingBackground"
          @row-click="handleRowClick"
       >
+         <el-table-column v-if="type" :type="type"></el-table-column>
          <template v-for="item in normalOptions" :key="item.label">
             <el-table-column :label="item.label" :width="item.width" v-bind="item.attrs">
                <template #default="scope">
@@ -97,6 +98,9 @@ const props = defineProps({
    data: {
       type: Array,
       required: true
+   },
+   type: {
+      type: String,
    },
    // 列是否可编辑
    editable: {

@@ -17,4 +17,11 @@ export default {
     honor: "荣誉",
     other: "其他",
   },
+  role: {
+    superAdmin: "超级管理员",
+    admin: "管理员",
+    director: "董事长",
+    manager: "经理",
+    staff: "员工",
+  },
 };

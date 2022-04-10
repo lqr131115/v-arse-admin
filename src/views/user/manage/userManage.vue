@@ -32,10 +32,8 @@
                 <el-button type="primary" plain @click="handleRowRole(scope)" size="small">角色</el-button>
                 <el-button type="danger" @click="handleRowDelete(scope)" size="small">删除</el-button>
             </template>
-            <el-button size="small" type="info">查看</el-button>
-            <el-button size="small" type="primary">角色</el-button>
-            <el-button size="small" type="danger">删除</el-button>
         </m-table>
+        <RolesModal v-model:visible="visible" />
     </div>
 </template>
 <script lang='ts' setup>
@@ -46,6 +44,7 @@ import { TableOption } from '@/types/component';
 import { msgSuccess } from '@/utils/notice';
 import { formatTimeStamp } from '@/utils/moment';
 import ExportToModal from './component/export2Modal.vue';
+import RolesModal from './component/rolesModal.vue';
 import { PageEnum } from '@/enums/pageEnum'
 const options: TableOption[] = [
     {
@@ -78,6 +77,7 @@ const options: TableOption[] = [
         slot: 'action',
     }
 ]
+const visible = ref<boolean>(false)
 const data = ref<any[]>([])
 const rowOperation = ref<string>('')
 const total = ref<number>(0)
@@ -91,7 +91,7 @@ const router = useRouter()
 const onPageSizeChange = (val: number) => { pageSize.value = val }
 const onCurrentPageChange = (val: number) => { currentPage.value = val }
 
-const handleRowRole = (scope: any) => { rowOperation.value = 'role' }
+const handleRowRole = (scope: any) => { rowOperation.value = 'role', visible.value = true }
 const handleRowCheck = (scope: any) => {
     rowOperation.value = 'check'
     router.push(`${PageEnum.USER_INFO}/${scope.row._id}`)

@@ -1,11 +1,11 @@
 export default {
   userInfo: {
-    baseInfo:'Base Info',
+    baseInfo: "Base Info",
     username: "Username",
     avatar: "Avatar",
     gender: "Gender",
-    education:"Education",
-    major:"Major",
+    education: "Education",
+    major: "Major",
     nation: "Nation",
     role: "Role",
     mobile: "Mobile",
@@ -16,5 +16,12 @@ export default {
     experience: "Experience",
     honor: "Honor",
     other: "Other",
+  },
+  role: {
+    superAdmin: "SuperAdmin",
+    admin: "Admin",
+    director: "Director",
+    manager: "Manager",
+    staff: "Staff",
   },
 };

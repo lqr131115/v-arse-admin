@@ -4,7 +4,7 @@ import layout from "../layout/layout.vue";
 const privateRoutes: RouteRecordRaw[] = [
   {
     path: "/user",
-    redirect: "/user/manage",
+    redirect: "/user/role",
     component: layout,
     children: [
       {

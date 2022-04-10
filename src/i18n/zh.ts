@@ -172,5 +172,6 @@ export default {
     back: "返回",
     restore: "恢复",
     print:"打印",
+    assignPermission: "分配权限",
   },
 };

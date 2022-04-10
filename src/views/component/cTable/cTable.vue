@@ -7,7 +7,7 @@
             editable
             pagination
             :pageOptions="pageOptions"
-            :editRowActionIndex="editRowActionIndex"
+            :rowOperation="rowOperation"
             @on-save-column-edit="onSaveColumnEdit"
             @on-close-column-edit="onCloseColumnEdit"
             @on-pagesize-change="onPageSizeChange"
@@ -50,7 +50,7 @@ interface ITableData {
     address: string,
     [key: string]: string
 }
-let editRowActionIndex = ref<string>('')
+let rowOperation = ref<string>('')
 
 const data: ITableData[] = [
     {
@@ -91,8 +91,8 @@ const pageOptions = {
     pageSizes: [1, 2, 3, 4, 5],
     layout: "total, sizes, prev, pager, next, jumper",
 }
-const handleRowEdit = (scope: any) => { editRowActionIndex.value = 'edit' }
-const handleRowDelete = (scope: any) => { editRowActionIndex.value = 'delete' }
+const handleRowEdit = (scope: any) => { rowOperation.value = 'edit' }
+const handleRowDelete = (scope: any) => { rowOperation.value = 'delete' }
 const onSaveColumnEdit = (scope: any) => { data.splice(scope.$index, 1, scope.row) }
 const onCloseColumnEdit = (scope: any) => { }
 const onCurrentPageChange = (val: number) => { msgSuccess(`页码:${val},Api...`) }

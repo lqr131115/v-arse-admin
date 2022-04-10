@@ -31,7 +31,7 @@
                             </el-col>
                             <el-col :span="4">
                                 <div class="info__avatar">
-                                    <img id="avatar" :src="data.avatar" class="ava" />
+                                    <img id="avatar"  :src="data.avatar" crossOrigin='anonymous' class="ava" />
                                 </div>
                             </el-col>
                         </el-row>

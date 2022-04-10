@@ -1,6 +1,7 @@
 import Mock from "mockjs";
 import * as sys from "./sys";
 import * as user from "./user";
+import * as role from "./role";
 
 Mock.setup({
   timeout: "300-600",
@@ -13,3 +14,6 @@ Mock.mock("/mock/sys/profile", "get", sys.getUserProfile);
 // user
 Mock.mock('/mock/user/list', 'post', user.getUserList);
 Mock.mock('/mock/user/info', 'post', user.getUserInfoById);
+
+// role
+Mock.mock('/mock/role/list', 'get', role.getRoleList);
