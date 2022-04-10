@@ -1,38 +1,40 @@
 <template>
     <div class="staff-manage">
-        <div class="export">
-            <ExportToModal />
-        </div>
-        <m-table
-            :data="data"
-            :options="options"
-            :rowOperation="rowOperation"
-            :pageOptions="pageOptions"
-            :currentPage="currentPage"
-            :pageSize="pageSize"
-            :total="total"
-            stripe
-            border
-            editable
-            pagination
-            @on-pagesize-change="onPageSizeChange"
-            @on-current-page-change="onCurrentPageChange"
-        >
-            <template #avatar="{ scope }">
-                <el-avatar :size="50" :src="scope.row.avatar" />
-            </template>
-            <template #role="{ scope }">
-                <el-tag>{{ scope.row.role[0].title }}</el-tag>
-            </template>
-            <template #open-time="{ scope }">
-                <span>{{ formatTimeStamp(scope.row.openTime) }}</span>
-            </template>
-            <template #action="{ scope }">
-                <el-button type="info" @click="handleRowCheck(scope)" size="small">查看</el-button>
-                <el-button type="primary" plain @click="handleRowRole(scope)" size="small">角色</el-button>
-                <el-button type="danger" @click="handleRowDelete(scope)" size="small">删除</el-button>
-            </template>
-        </m-table>
+        <el-card>
+            <div class="export">
+                <ExportToModal />
+            </div>
+            <m-table
+                :data="data"
+                :options="options"
+                :rowOperation="rowOperation"
+                :pageOptions="pageOptions"
+                :currentPage="currentPage"
+                :pageSize="pageSize"
+                :total="total"
+                stripe
+                border
+                editable
+                pagination
+                @on-pagesize-change="onPageSizeChange"
+                @on-current-page-change="onCurrentPageChange"
+            >
+                <template #avatar="{ scope }">
+                    <el-avatar :size="50" :src="scope.row.avatar" />
+                </template>
+                <template #role="{ scope }">
+                    <el-tag>{{ scope.row.role[0].title }}</el-tag>
+                </template>
+                <template #open-time="{ scope }">
+                    <span>{{ formatTimeStamp(scope.row.openTime) }}</span>
+                </template>
+                <template #action="{ scope }">
+                    <el-button type="info" @click="handleRowCheck(scope)" size="small">查看</el-button>
+                    <el-button type="primary" plain @click="handleRowRole(scope)" size="small">角色</el-button>
+                    <el-button type="danger" @click="handleRowDelete(scope)" size="small">删除</el-button>
+                </template>
+            </m-table>
+        </el-card>
         <RolesModal v-model:visible="visible" />
     </div>
 </template>

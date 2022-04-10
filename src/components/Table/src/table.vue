@@ -59,6 +59,7 @@
             :label="actionOptions?.label"
             :width="actionOptions?.width"
             :align="actionOptions?.align"
+            v-if="actionOptions?.action"
          >
             <template #default="scope">
                <template v-if="scope.row.isEditing">
@@ -177,7 +178,7 @@ const handleRowClick = (row: any, column: any) => {
 
       if (props.editable && editRowAction.value === 'edit') {
          row.isEditing = !row.isEditing
-         // 其他行恢复为非编辑态
+         // 其他行为恢复为非编辑态
          tableData.value.map(item => {
             if (item !== row) {
                item.isEditing = false

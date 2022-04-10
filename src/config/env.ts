@@ -14,6 +14,5 @@ const config: EnvBaseConfig = {
 
 export default {
   mock: true,
-  namespace: "aries_admin",
   ...config[env],
 };

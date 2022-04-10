@@ -3,8 +3,7 @@
  * @author lqr
  */
 
-
-import envConfig from "@/config/env";
+import { CACHE_NAMESPACE } from "@/enums/cacheEnum";
 
 export const getItem = (key: string) => {
   const storage = getStorage();
@@ -24,14 +23,14 @@ export const removeItem = (key: string) => {
 };
 
 export const clearAll = () => {
-  window.localStorage.removeItem(envConfig.namespace);
+  window.localStorage.removeItem(CACHE_NAMESPACE);
 };
 
 /**
  * 获取存储值核心函数
  */
 const getStorage = () => {
-  const storage = window.localStorage.getItem(envConfig.namespace) || "{}";
+  const storage = window.localStorage.getItem(CACHE_NAMESPACE) || "{}";
   return JSON.parse(storage);
 };
 
@@ -43,5 +42,5 @@ const setStorage = (val: any) => {
   if (typeof val === "object") {
     val = JSON.stringify(val);
   }
-  window.localStorage.setItem(envConfig.namespace, val);
+  window.localStorage.setItem(CACHE_NAMESPACE, val);
 };

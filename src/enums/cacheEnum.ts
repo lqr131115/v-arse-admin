@@ -1,3 +1,6 @@
+// namespace
+export const CACHE_NAMESPACE = 'v-areas-admin'
+
 // token key
 export const TOKEN_KEY = 'TOKEN__';
 

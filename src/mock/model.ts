@@ -22,3 +22,11 @@ export type Role = {
   desc: string;
   level: string;
 };
+
+export type Permission = {
+  id:string,
+  name:string,
+  mark:string,
+  desc:string,
+  children?:Permission[]
+}

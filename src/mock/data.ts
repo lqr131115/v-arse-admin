@@ -1,4 +1,4 @@
-import { Role, User } from "./model";
+import { Role, User, Permission } from "./model";
 
 export const userList: User[] = [
   {
@@ -123,30 +123,80 @@ export const roleList: Role[] = [
     id: "superAdminId",
     name: "superAdmin",
     desc: "我是唯一超管,可以操作系统所有功能",
-    level: 'T0',
+    level: "T0",
   },
   {
     id: "adminId",
     name: "admin",
     desc: "我是管理员,协助超管管理系统",
-    level: 'T1',
+    level: "T1",
   },
   {
     id: "directorId",
     name: "director",
     desc: "我是董事,我可以管理经理",
-    level: 'T2',
+    level: "T2",
   },
   {
     id: "managerId",
     name: "manager",
-    desc:"我是经理,我可以管理员工",
-    level: 'T3',
+    desc: "我是经理,我可以管理员工",
+    level: "T3",
   },
   {
     id: "staffId",
     name: "staff",
-    desc:"我是员工,打工人的人上人",
-    level: 'T4',
+    desc: "我是员工,打工人的人上人",
+    level: "T4",
   },
+];
+
+export const permissionList: Permission[] = [
+  {
+    id: "1",
+    name: "用户管理",
+    mark: "userManage",
+    desc: "用户管理菜单",
+    children: [
+      {
+        id: "1-1",
+        name: "分配角色",
+        mark: "distributeRole",
+        desc: "为用户分配角色",
+      },
+      {
+        id:"1-2",
+        name: "导入用户",
+        mark: "importUser",
+        desc: "通过Excel导入用户",
+      },
+      {
+        id:"1-3",
+        name: "删除用户",
+        mark: "deleteUser",
+        desc: "通过Id删除用户",
+      }
+    ],
+  },
+  {
+    id: "2",
+    name: "文章管理",
+    mark: "articleManage",
+    desc: "用户管理菜单",
+    children: [
+      {
+        id: "2-1",
+        name: "打印文章",
+        mark: "printArticle",
+        desc: "打印文章",
+      },
+      {
+        id:"2-2",
+        name: "删除文章",
+        mark: "deleteArticle",
+        desc: "删除文章",
+      },
+    ],
+  },
+  
 ];
