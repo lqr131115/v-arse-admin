@@ -247,7 +247,7 @@ const shortcuts = [
 </script>
 <style lang='scss' scoped>
 .salesview-wrapper {
-   margin: 20px 0;
+   margin: 10px 0;
 
    :deep(.el-card__header) {
       padding: 0;
