@@ -38,8 +38,8 @@ router.beforeEach((to, from, next) => {
         return Promise.reject("token失效");
       }
       // 每次刷新都要请求用户信息
-      if (!userStore.hasUserInfo) {
-        userStore.getUserInfo();
+      if (!userStore.hasUserProfile) {
+        userStore.getUserProfile();
       }
       next();
     }

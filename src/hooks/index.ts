@@ -7,11 +7,11 @@ import { useUserStore } from "@/store/user";
 
 export const useUser = () => {
   const userStore = useUserStore();
-  const getUserInfo = computed(() => userStore.gotUserInfo);
+  const userProfile = computed(() => userStore.gotUserProfile);
   const token = computed(() => userStore.token);
 
   return {
-    getUserInfo,
+    userProfile,
     token
   }
 }

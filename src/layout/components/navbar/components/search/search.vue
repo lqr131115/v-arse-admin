@@ -12,6 +12,7 @@
         remote
         clearable
         default-first-option
+        :placeholder="$t('header.searchTip')"
         :remote-method="remoteMethod"
         @change="onChange"
         mh10

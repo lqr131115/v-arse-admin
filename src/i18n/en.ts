@@ -28,6 +28,7 @@ export default {
 
     // search
     search: "Search",
+    searchTip: "Enter Menu Name",
 
     // guide
     guide: "Guide",

@@ -28,6 +28,7 @@ export default {
 
     // search
     search: "搜索",
+    searchTip: "输入菜单名称",
 
     // guide
     guide: "引导",

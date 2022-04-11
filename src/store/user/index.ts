@@ -7,14 +7,14 @@ export const useUserStore = defineStore({
   id: "user",
   state: () => ({
     token: getItem(TOKEN_KEY) || "",
-    userInfo: {},
+    userProfile: {},
   }),
   getters: {
-    hasUserInfo: (state) => {
-      return JSON.stringify(state.userInfo) !== "{}";
+    hasUserProfile: (state) => {
+      return JSON.stringify(state.userProfile) !== "{}";
     },
-    gotUserInfo: (state) => {
-      return state.userInfo;
+    gotUserProfile: (state) => {
+      return state.userProfile;
     }
   },
   actions: {
@@ -22,12 +22,12 @@ export const useUserStore = defineStore({
       this.token = token;
       setItem(TOKEN_KEY, token);
     },
-    setUserInfo(info = {}) {
-      this.userInfo = info;
+    setUserProfile(profile = {}) {
+      this.userProfile = profile;
     },
     logout() {
       this.setToken("");
-      this.setUserInfo({});
+      this.setUserProfile({});
       removeItem(TOKEN_KEY);
       router.push("/login");
     },
@@ -36,9 +36,9 @@ export const useUserStore = defineStore({
       this.setToken(res.data.token);
       return res;
     },
-    async getUserInfo() {
-      const res = await sysApi.getUserInfo();
-      this.setUserInfo(res.data);
+    async getUserProfile() {
+      const res = await sysApi.getUserProfile();
+      this.setUserProfile(res.data);
       return res;
     },
   },

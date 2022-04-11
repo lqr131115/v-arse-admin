@@ -19,11 +19,16 @@ import { monthIncreaseOpts } from '../data'
 
 onMounted(() => {
     const ele = document.getElementById('monthincrease')!
+    if (!ele) {
+        location.reload()
+        console.log('mapChart-reload');
+        return
+    }
     const chart = echarts.init(ele);
     chart.setOption(monthIncreaseOpts)
 })
 
-</script>
+</script>   
 <style lang='scss' scoped>
 .liquid-wrapper {
     height: 200px;

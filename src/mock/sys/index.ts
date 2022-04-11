@@ -29,34 +29,30 @@ export const login = (config: any) => {
 
 export const getUserProfile = (config: any) => {
   return Mock.mock({
-    data: {
+    data:  {
       role: [
         {
           id: "1",
-          title: "超级管理员",
+          name: "superAdmin",
+          desc: "我是唯一超管,可以操作系统所有功能",
+          level: "T0",
         },
       ],
       _id: "612710a0ec87aa543c9c341d",
       id: "0",
+      openTime: "1648821814939",
       username: "super-admin",
-      title: "超级管理员",
+      mobile: "188xxxx0001",
       avatar:
-        "https://img1.baidu.com/it/u=2716398045,2043787292&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800",
-      permission: {
-        menus: [
-          "userManage",
-          "roleList",
-          "permissionList",
-          "articleRanking",
-          "articleCreate",
-        ],
-        points: [
-          "distributeRole",
-          "importUser",
-          "removeUser",
-          "distributePermission",
-        ],
-      },
+        "https://img1.baidu.com/it/u=4259449877,58809073&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400",
+      gender: 1,
+      education: "本科",
+      major: "软件工程",
+      nation: "汉族",
+      residence: "繁华大道",
+      address: "北京市朝阳区",
+      entryTime: "1648821814939",
+      remark: "I Miss U",
     },
     code: 200,
     msg: "请求成功",

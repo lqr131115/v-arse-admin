@@ -6,8 +6,8 @@
       <template #default>
          <div class="body">
             <div class="body__avatar">
-               <el-avatar :size="60" :src="(getUserInfo as any).avatar"></el-avatar>
-               <span mv20 fz15>{{ (getUserInfo as any).username }}</span>
+               <el-avatar :size="60" :src="(userProfile as User).avatar"></el-avatar>
+               <span mv20 fz15>{{ ( userProfile as User).username }}</span>
             </div>
             <el-form
                ref="lockRef"
@@ -43,6 +43,7 @@ import md5 from 'md5';
 import { FormInstance } from 'element-plus';
 import { useUser } from '@/hooks'
 import { useAppStore } from '@/store/app';
+import { User } from '@/mock/model';
 interface TFormItem {
    password: string
 }
@@ -57,7 +58,7 @@ const props = defineProps({
    }
 })
 const emits = defineEmits(['update:visible'])
-const { getUserInfo } = useUser()
+const { userProfile } = useUser()
 const appStore = useAppStore()
 const lockRef = ref<FormInstance>()
 const form = ref<TFormItem>({ password: '' })
