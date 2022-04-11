@@ -1,5 +1,5 @@
 <template>
-    <el-row >
+    <el-row :gutter="10">
         <el-col :span="6">
             <el-card shadow="hover">
                 <TotalSales />

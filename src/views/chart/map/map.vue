@@ -3,11 +3,15 @@
         <div class="map__container">
             <el-row :gutter="10">
                 <el-col :span="19">
-                    <MapChart />
+                    <div class="map__wrapper">
+                        <MapChart />
+                    </div>
                 </el-col>
                 <el-col :span="5">
-                    <MonthIncrease mb10/>
-                    <HotSearch />
+                    <div class="map__section">
+                        <MonthIncrease />
+                        <HotSearch />
+                    </div>
                 </el-col>
             </el-row>
         </div>
@@ -27,19 +31,33 @@ import MonthIncrease from './component/monthIncrease.vue'
     @include e(container) {
         padding: 10px;
     }
+
+
+    @include e(wrapper) {
+        height: 600px;
+        width: 100%;
+    }
+
+    @include e(section) {
+        height: 600px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 }
 </style>
 
 <style lang="scss">
 .header-title {
-  font-size: 14px;
-  font-weight: bold;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .header-wrapper {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
 }
 </style>

@@ -19,54 +19,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import * as echarts from 'echarts'
-import { EChartsOption } from 'echarts'
-const option = ref<EChartsOption>({
-  xAxis: {
-    type: 'value',
-    boundaryGap: false,
-    show: false,
-  },
-  yAxis: {
-    type: 'category',
-    show: false
-  },
-  grid: {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  },
-  series: [
-    {
-      type: 'bar',
-      stack: '总量',
-      barWidth: 15,
-      itemStyle: {
-        opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: 'rgb(255, 191, 0)'
-          },
-          {
-            offset: 1,
-            color: 'rgb(224, 62, 76)'
-          }
-        ])
-      },
-      data: [220],
-    },
-    {
-      type: 'bar',
-      stack: '总量',
-      itemStyle: {
-        opacity: 0.8,
-        color: '#eee'
-      },
-      data: [290],
-    },
-  ]
-});
+import {getTotalUsersOpts} from '../data'
+const option = ref<echarts.EChartsOption>(getTotalUsersOpts(echarts));
 </script>
 
 <style lang="scss" scoped>

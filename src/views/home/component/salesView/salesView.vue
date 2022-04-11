@@ -24,15 +24,8 @@
                   </el-row>
                </el-col>
                <el-col :span="6">
-                  <el-date-picker
-                     v-model="datetime"
-                     type="daterange"
-                     unlink-panels
-                     range-separator="-"
-                     start-placeholder="开始日期"
-                     end-placeholder="结束日期"
-                     :shortcuts="shortcuts"
-                  ></el-date-picker>
+                  <el-date-picker v-model="datetime" type="daterange" unlink-panels range-separator="-"
+                     start-placeholder="开始日期" end-placeholder="结束日期" :shortcuts="shortcuts"></el-date-picker>
                </el-col>
             </el-row>
          </template>
@@ -59,191 +52,16 @@
 <script lang='ts' setup>
 import { ref } from 'vue'
 import * as echarts from 'echarts'
-import { EChartsOption } from 'echarts'
-
-type rankItem = {
-   no: number,
-   name: string,
-   money: string
-}
+import {
+   getSalesViewOpts,
+   rankData,
+   shortcuts
+} from '../data'
 
 let activeIndex = ref<string>('sale')
 let radio = ref<string>('today')
 let datetime = ref<string>('')
-let option = ref<EChartsOption>({
-   title: {
-      text: '年度销售额',
-      textStyle:{
-         color:'#000'
-      }
-   },
-   xAxis: {
-      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-      axisTick: {
-         show: false
-      },
-      axisLine: {
-         show: false
-      },
-   },
-   yAxis: {
-      axisLine: {
-         show: false
-      },
-      axisTick: {
-         show: false
-      },
-      axisLabel: {
-         color: '#999'
-      }
-   },
-   tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-         type: 'shadow'
-      }
-   },
-   dataZoom: [
-      {
-         type: 'inside'
-      }
-   ],
-   grid: {
-      left: 40,
-      right: 10,
-   },
-   series: [
-      {
-         type: 'bar',
-         barWidth: 20,
-         itemStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-               { offset: 0, color: '#83bff6' },
-               { offset: 0.5, color: '#188df0' },
-               { offset: 1, color: '#188df0' }
-            ])
-         },
-         emphasis: {
-            itemStyle: {
-               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0, color: '#2378f7' },
-                  { offset: 0.7, color: '#2378f7' },
-                  { offset: 1, color: '#83bff6' }
-               ])
-            }
-         },
-         data: [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149]
-      }
-   ]
-})
-let rankData = ref<rankItem[]>(
-   [
-      {
-         no: 1,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 2,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 3,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 4,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 5,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 6,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 7,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 8,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 9,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 10,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 11,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 12,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 13,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 14,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-      {
-         no: 15,
-         name: '麦当劳',
-         money: '$ 1,234'
-      },
-   ]
-)
-const shortcuts = [
-   {
-      text: '前一周',
-      value: () => {
-         const end = new Date()
-         const start = new Date()
-         start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-         return [start, end]
-      },
-   },
-   {
-      text: '前一个月',
-      value: () => {
-         const end = new Date()
-         const start = new Date()
-         start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-         return [start, end]
-      },
-   },
-   {
-      text: '前三个月',
-      value: () => {
-         const end = new Date()
-         const start = new Date()
-         start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-         return [start, end]
-      },
-   },
-]
+const option = ref<echarts.EChartsOption>(getSalesViewOpts(echarts))
 </script>
 <style lang='scss' scoped>
 .salesview-wrapper {
@@ -251,11 +69,13 @@ const shortcuts = [
 
    :deep(.el-card__header) {
       padding: 0;
+
       .el-menu {
          height: 50px;
          border: none;
       }
    }
+
    .echart {
       height: 400px;
       width: 100%;
@@ -265,7 +85,8 @@ const shortcuts = [
       padding-left: 20px;
       max-height: 360px;
       overflow-y: scroll;
-      &::-webkit-scrollbar{
+
+      &::-webkit-scrollbar {
          display: none;
       }
 
@@ -277,6 +98,7 @@ const shortcuts = [
 
       .list-item-wrapper {
          margin-top: 15px;
+
          .list-item {
             display: flex;
             align-items: center;
@@ -291,6 +113,7 @@ const shortcuts = [
                width: 20px;
                height: 20px;
                color: #333;
+
                &.top-no {
                   background: #000;
                   border-radius: 50%;
