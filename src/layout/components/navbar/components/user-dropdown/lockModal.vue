@@ -6,8 +6,8 @@
       <template #default>
          <div class="body">
             <div class="body__avatar">
-               <el-avatar :size="60" :src="(userProfile as User).avatar"></el-avatar>
-               <span mv20 fz15>{{ ( userProfile as User).username }}</span>
+               <el-avatar :size="60" :src="(userProfile as any).avatar"></el-avatar>
+               <span mv20 fz15>{{ ( userProfile as any).username }}</span>
             </div>
             <el-form
                ref="lockRef"
@@ -38,12 +38,11 @@
    </m-dialog>
 </template>
 <script lang='ts' setup>
-import { ref } from 'vue'
+import { ref,reactive, watch } from 'vue'
 import md5 from 'md5';
 import { FormInstance } from 'element-plus';
 import { useUser } from '@/hooks'
 import { useAppStore } from '@/store/app';
-import { User } from '@/mock/model';
 interface TFormItem {
    password: string
 }
@@ -61,20 +60,26 @@ const emits = defineEmits(['update:visible'])
 const { userProfile } = useUser()
 const appStore = useAppStore()
 const lockRef = ref<FormInstance>()
-const form = ref<TFormItem>({ password: '' })
+const form = reactive<TFormItem>({ password: '' })
 const rules = { password: [{ required: true, message: '输入锁屏密码', trigger: 'change' }] }
 
 const lockScreen = async (formEl: FormInstance | undefined) => {
    if (!formEl) return
    await formEl.validate((valid: any, fields: any) => {
       if (valid) {
-         appStore.setLockScreen({ password: md5(form.value.password) })
+         appStore.setLockScreen({ password: md5(form.password) })
       } else {
          console.log('error submit!', fields)
       }
    })
 }
-const onClose = () => { emits('update:visible', false) }
+const onClose = () => { emits('update:visible', false),form.password = ''}
+watch(() => props.visible, (val: boolean) => {
+   if (val) {
+      lockRef.value!.resetFields()
+   }
+})
+
 </script>
 <style lang='scss' scoped>
 .body {

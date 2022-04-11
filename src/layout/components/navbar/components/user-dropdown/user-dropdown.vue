@@ -1,6 +1,6 @@
 <template>
     <el-dropdown>
-        <el-avatar shape="square" :size="40" :src="(userStore.userInfo as any).avatar" />
+        <el-avatar shape="square" :size="40" :src="(userStore.userProfile as any).avatar" />
         <template #dropdown>
             <el-dropdown-menu>
                 <el-dropdown-item

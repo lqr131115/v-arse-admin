@@ -87,7 +87,7 @@ const unLock = (val: string) => {
     const valid = validatePwd(val)
     if (valid) {
         appStore.setLockScreen()
-        show.value = false
+        onHide()
     } else {
         msgError('锁屏密码或者用户密码错误')
     }
@@ -104,11 +104,12 @@ const initTimeInfo = () => {
         updateTimeInfo()
     }, 30e3)
 }
+const onHide =() => {show.value = false,password.value = ''}
 watch(() => show.value, (newVal) => {
     if (newVal) {
-        document.addEventListener('click', () => { show.value = false })
+        document.addEventListener('click', onHide)
     } else {
-        document.removeEventListener('click', () => { show.value = false })
+        document.removeEventListener('click',onHide)
     }
 })
 onMounted(() => { initTimeInfo() })
