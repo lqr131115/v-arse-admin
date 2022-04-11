@@ -3,6 +3,7 @@ export default {
     home: "Home",
     workbench: "Workbench",
     chart: "Chart",
+    chartMap: "Map",
     about: "About",
     user: "User",
     userManage: "UserManage",

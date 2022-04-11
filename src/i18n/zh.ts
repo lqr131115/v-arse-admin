@@ -3,6 +3,7 @@ export default {
     home: "首页",
     workbench: "工作台",
     chart: "图表",
+    chartMap: "地图",
     about: "关于",
     user: "用户",
     userManage: "用户管理",

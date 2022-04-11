@@ -87,6 +87,20 @@ const privateRoutes: RouteRecordRaw[] = [
     ],
     meta: { title: "component", icon: "grid" },
   },
+  {
+    path: "/chart",
+    redirect:"/chart/map",
+    component: layout,
+    meta: { title: "chart", icon: "trend-charts" },
+    children: [
+      {
+        path: "/chart/map",
+        name: "chart-map",
+        component: () => import("../views/chart/map/map.vue"),
+        meta: { title: "chartMap", icon: "map-location" },
+      },
+    ],
+  },
 ];
 
 // 公有路由
@@ -113,12 +127,6 @@ const publicRoutes: RouteRecordRaw[] = [
         name: "workbench",
         component: () => import("../views/workbench/workbench.vue"),
         meta: { title: "workbench", icon: "briefcase" },
-      },
-      {
-        path: "/chart",
-        name: "chart",
-        component: () => import("../views/chart/chart.vue"),
-        meta: { title: "chart", icon: "trend-charts" },
       },
       {
         path: "/about",

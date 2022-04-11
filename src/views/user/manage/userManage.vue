@@ -118,6 +118,8 @@ const _getUserList = async (pageSize: number, currentPage: number) => {
 watch(() => [pageSize.value, currentPage.value], ([newSize, newPage]) => {
     _getUserList(newSize, newPage)
 })
+
+// 保证rolesModal关闭后 每次再打开都会触发rolesModal中props.id的watch
 // watch(() => visible.value, (newVal: boolean) => {
 //     if (!newVal) {
 //         userId.value = ''
