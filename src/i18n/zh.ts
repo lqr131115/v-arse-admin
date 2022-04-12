@@ -160,8 +160,6 @@ export default {
     menuDesc: "由此进入并浏览系统不同界面 ",
   },
   exception: {
-    backLogin: '返回登录',
-    backHome: '返回首页',
     subTitle403: '抱歉，您无权访问此页面。',
     subTitle404: '抱歉，您访问的页面不存在。',
     subTitle500: '抱歉，服务器报告错误。',
@@ -180,6 +178,7 @@ export default {
     confirm:"确定",
     cancel:"取消",
     close: "关闭",
+    reload:"重新加载",
     next: "下一步",
     prev: "上一步",
     done: "完成",
@@ -187,5 +186,7 @@ export default {
     restore: "恢复",
     print:"打印",
     assignPermission: "分配权限",
+    backLogin: '返回登录',
+    backHome: '返回首页',
   },
 };

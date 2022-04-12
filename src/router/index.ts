@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import layout from "../layout/layout.vue";
+import { PAGE_NOT_ACCESS_NAME, PAGE_NOT_FOUND_NAME } from "@/router/constants";
+
 // 私有路由
 const privateRoutes: RouteRecordRaw[] = [
   {
@@ -89,7 +91,7 @@ const privateRoutes: RouteRecordRaw[] = [
   },
   {
     path: "/chart",
-    redirect:"/chart/map",
+    redirect: "/chart/map",
     component: layout,
     meta: { title: "chart", icon: "trend-charts" },
     children: [
@@ -134,14 +136,14 @@ const publicRoutes: RouteRecordRaw[] = [
         meta: { title: "about", icon: "shop" },
       },
       {
-        path: "/401",
-        name: "401",
-        component: () => import("../views/sys/error/401.vue"),
+        path: "/403",
+        name: PAGE_NOT_ACCESS_NAME,
+        component: () => import("../views/sys/error/error.vue"),
       },
       {
         path: "/:pathMatch(.*)",
-        name: "404",
-        component: () => import("../views/sys/error/404.vue"),
+        name: PAGE_NOT_FOUND_NAME,
+        component: () => import("../views/sys/error/error.vue"),
       },
     ],
   },
@@ -151,9 +153,9 @@ const publicRoutes: RouteRecordRaw[] = [
     component: () => import("../views/sys/login/login.vue"),
   },
   {
-    path: '/redirect',
-    name: 'Redirect',
-    component: () => import('@/views/sys/redirect/redirect.vue'),
+    path: "/redirect",
+    name: "Redirect",
+    component: () => import("@/views/sys/redirect/redirect.vue"),
   },
   // {
   //   path: "/:pathMatch(.*)",

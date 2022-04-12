@@ -31,7 +31,6 @@ export const useTabStore = defineStore({
     },
     async refreshPage(router: Router) {
       const redo = useRedo(router);
-      debugger
       await redo();
     },
     closeAllTab() {

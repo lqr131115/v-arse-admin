@@ -158,8 +158,6 @@ export default {
     menuDesc: "Enter and Browse Interfaces of the System here",
   },
   exception: {
-    backLogin: 'Back Login',
-    backHome: 'Back Home',
     subTitle403: "Sorry, you don't have access to this page.",
     subTitle404: 'Sorry, the page you visited does not exist.',
     subTitle500: 'Sorry, the server is reporting an error.',
@@ -179,6 +177,7 @@ export default {
     confirm:"Confirm",
     cancel:"Cancel",
     close:'Close',
+    reload:"Reload",
     next:'Next',
     prev:'Prev',
     done:'Done',
@@ -186,5 +185,7 @@ export default {
     restore:'Restore',
     print:'Print',
     assignPermission: "Assign Permission",
+    backLogin: 'Back Login',
+    backHome: 'Back Home',
   }
 };
