@@ -1,7 +1,8 @@
+import type { Router, RouteLocationNormalized } from "vue-router";
 import { defineStore } from "pinia";
-import { Router, RouteLocationNormalized } from "vue-router";
 import { getItem, setItem } from "@/utils/storage";
 import { MULTIPLE_TAB_LIST_KEY } from "@/enums/cacheEnum";
+import { useRedo } from "@/hooks/web";
 export const useTabStore = defineStore({
   id: "tab",
   state: () => ({
@@ -28,8 +29,10 @@ export const useTabStore = defineStore({
       }
       this.setTabList(oldList);
     },
-    refreshPage(router: Router) {
-      router.go(0);
+    async refreshPage(router: Router) {
+      const redo = useRedo(router);
+      debugger
+      await redo();
     },
     closeAllTab() {
       this.setTabList([]);
@@ -67,20 +70,19 @@ export const useTabStore = defineStore({
       if (~index) {
         const { currentRoute } = router;
         if (item.path === currentRoute.value.path) {
-            const preTab = oldList[index - 1]
-            if (!preTab) {
-                const nextTab = oldList[index + 1]
-                if (!nextTab) {
-                    return
-                }else{
-                    router.push(nextTab.path)
-                }
-            }else{
-                router.push(preTab.path)
+          const preTab = oldList[index - 1];
+          if (!preTab) {
+            const nextTab = oldList[index + 1];
+            if (!nextTab) {
+              return;
+            } else {
+              router.push(nextTab.path);
             }
+          } else {
+            router.push(preTab.path);
+          }
         }
       }
-   
     },
   },
 });

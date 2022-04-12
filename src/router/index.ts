@@ -113,7 +113,6 @@ const publicRoutes: RouteRecordRaw[] = [
     path: "/layout",
     name: "Layout",
     redirect: "/user",
-
     component: layout,
     children: [
       {
@@ -150,6 +149,11 @@ const publicRoutes: RouteRecordRaw[] = [
     path: "/login",
     name: "Login",
     component: () => import("../views/sys/login/login.vue"),
+  },
+  {
+    path: '/redirect',
+    name: 'Redirect',
+    component: () => import('@/views/sys/redirect/redirect.vue'),
   },
   // {
   //   path: "/:pathMatch(.*)",

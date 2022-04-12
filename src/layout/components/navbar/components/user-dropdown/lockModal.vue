@@ -76,7 +76,7 @@ const lockScreen = async (formEl: FormInstance | undefined) => {
 const onClose = () => { emits('update:visible', false),form.password = ''}
 watch(() => props.visible, (val: boolean) => {
    if (val) {
-      lockRef.value!.resetFields()
+      lockRef.value && lockRef.value.resetFields()
    }
 })
 

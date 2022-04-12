@@ -1,16 +1,14 @@
-import type { RouteLocationRaw, Router } from 'vue-router';
-import { PageEnum } from '@/enums/pageEnum';
+import type { Router } from 'vue-router';
 import { unref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const REDIRECT_NAME = 'Redirect'
 
-export type RouteLocationRawEx = Omit<RouteLocationRaw, 'path'> & { path: PageEnum };
-
 export const useRedo = (_router?: Router) => {
   const { push, currentRoute } = _router || useRouter();
   const { query, params = {}, name, fullPath } = unref(currentRoute.value);
   function redo(): Promise<boolean> {
+    debugger
     return new Promise((resolve) => {
       if (name === REDIRECT_NAME) {
         resolve(false);

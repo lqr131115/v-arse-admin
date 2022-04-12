@@ -1,5 +1,6 @@
 import { computed } from "vue";
-import { Router, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
+import type { Router } from "vue-router";
 import { useTabStore } from "@/store/tab";
 
 enum MenuEventEnum {
