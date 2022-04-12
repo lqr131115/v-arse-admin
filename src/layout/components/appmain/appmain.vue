@@ -4,7 +4,8 @@ import { useRoute } from 'vue-router';
 import { useTabStore } from '@/store/tab';
 import { inWhiteList } from '@/utils/tabs'
 import { genRouteTitle, watchSwitchLanguage } from '@/utils/i18n'
-import { useAppConfig, useTabs } from '@/hooks';
+import { useTabs } from '@/hooks/setting/useTabs';
+import { useAppConfig } from '@/hooks/setting/useAppConfig';
 import MultipleTabs from './components/multiple-tabs/multiple-tabs.vue'
 
 const route = useRoute()

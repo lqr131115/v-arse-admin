@@ -112,7 +112,7 @@ const publicRoutes: RouteRecordRaw[] = [
   {
     path: "/layout",
     name: "Layout",
-    redirect: "/chart",
+    redirect: "/user",
 
     component: layout,
     children: [

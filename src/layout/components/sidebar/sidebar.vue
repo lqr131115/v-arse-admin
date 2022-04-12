@@ -23,7 +23,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute, useRouter, } from 'vue-router'
-import { useAppConfig, useTheme } from '@/hooks';
+import { useTheme, } from '@/hooks/setting/useTheme'
+import { useAppConfig } from '@/hooks/setting/useAppConfig'
 import { filterRoutes, generateMenus, formatMenus } from '@/utils/route'
 interface ISidebarProps { collapse: boolean }
 defineProps<ISidebarProps>();

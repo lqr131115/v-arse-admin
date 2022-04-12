@@ -18,7 +18,7 @@
 <script lang='ts' setup>
 import { ref, watch } from 'vue';
 import { useRouter, RouteLocationNormalized } from 'vue-router';
-import { useTabs } from '@/hooks';
+import { useTabs } from '@/hooks/setting/useTabs';
 import ContextMenu from './context-menu.vue';
 interface IContextMenuStyle {
     left: string,

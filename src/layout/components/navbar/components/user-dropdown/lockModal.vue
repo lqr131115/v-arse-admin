@@ -41,7 +41,7 @@
 import { ref,reactive, watch } from 'vue'
 import md5 from 'md5';
 import { FormInstance } from 'element-plus';
-import { useUser } from '@/hooks'
+import { useUser } from '@/hooks/sys'
 import { useAppStore } from '@/store/app';
 interface TFormItem {
    password: string

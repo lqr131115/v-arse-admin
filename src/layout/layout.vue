@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useTheme, useAppConfig } from '@/hooks'
+import { useTheme } from '@/hooks/setting/useTheme'
+import { useAppConfig } from '@/hooks/setting/useAppConfig'
 import SideBar from './components/sidebar/sidebar.vue'
 import NavBar from './components/navbar/navbar.vue'
 import AppMain from './components/appmain/appmain.vue'
@@ -34,10 +35,12 @@ const navBarTheme = computed(() => ({ backgroundColor: getNavbarBgColor.value })
 </template>
 
 <style lang="scss" scoped>
-@use '@/styles/tools/mixin/BEM' as *;
-@use '@/styles/tools/mixin/sprite-spirit' as *;
+@use '@/styles/tools/mixin/BEM'as *;
+@use '@/styles/tools/mixin/sprite-spirit'as *;
+
 @include b(layout) {
   @include dimensions(100%, 100%);
+
   .el-container {
     @include dimensions(100%, 100%);
 
@@ -47,12 +50,14 @@ const navBarTheme = computed(() => ({ backgroundColor: getNavbarBgColor.value })
 
     .el-main {
       padding: 0;
+
       &::-webkit-scrollbar {
         display: none;
       }
     }
   }
 }
+
 .layout-lock {
   height: 100%;
 }

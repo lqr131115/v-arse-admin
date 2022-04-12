@@ -93,7 +93,8 @@
 <script lang='ts' setup>
 import { unref } from 'vue'
 import { HandlerEnum, routerTransitionOptions } from './enum'
-import { useAppConfig, useTheme } from '@/hooks'
+import { useTheme } from '@/hooks/setting/useTheme'
+import { useAppConfig } from '@/hooks/setting/useAppConfig'
 import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from '@/settings'
 import themeColorPickerVue from './components/themeColorPicker.vue';
 import switchItem from './components/switchItem.vue';

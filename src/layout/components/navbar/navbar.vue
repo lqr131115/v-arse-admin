@@ -9,7 +9,7 @@ import FullScreen from './components/fullscreen/fullscreen.vue'
 import UserDropdown from './components/user-dropdown/user-dropdown.vue'
 import Setting from './components/setting/setting.vue'
 import { IListItem, IAction, tabListData, actionsData } from './components/notify/data'
-import { useAppConfig } from '@/hooks'
+import { useAppConfig } from '@/hooks/setting/useAppConfig'
 type definePropsType = {
   collapse: boolean
 }
