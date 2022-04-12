@@ -13,9 +13,12 @@ export const useUserStore = defineStore({
     hasUserProfile: (state) => {
       return JSON.stringify(state.userProfile) !== "{}";
     },
+    getToken: (state) => {
+      return state.token;
+    },
     gotUserProfile: (state) => {
       return state.userProfile;
-    }
+    },
   },
   actions: {
     setToken(token: string) {
@@ -37,7 +40,7 @@ export const useUserStore = defineStore({
       return res;
     },
     async getUserProfile() {
-      const res = await sysApi.getUserProfile();
+      const res = await sysApi.getUserProfile({ role: this.getToken });
       this.setUserProfile(res.data);
       return res;
     },

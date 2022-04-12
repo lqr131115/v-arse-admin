@@ -15,7 +15,7 @@ const publicRoutes: RouteRecordRaw[] = [
   {
     path: "/layout",
     name: C.LAYOUT_NAME,
-    redirect: "/user",
+    redirect: "/home",
     component: layout,
     children: [
       {

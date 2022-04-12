@@ -10,7 +10,7 @@ Mock.setup({
 
 // sys
 Mock.mock("/mock/sys/login", "post", sys.login);
-Mock.mock("/mock/sys/profile", "get", sys.getUserProfile);
+Mock.mock("/mock/sys/profile", "post", sys.getUserProfile);
 
 // user
 Mock.mock('/mock/user/list', 'post', user.getUserList);

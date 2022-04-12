@@ -10,10 +10,10 @@ import md5 from "md5";
 export const login = (config: any) => {
   const { username, password } = JSON.parse(config.body);
 
-  if (username === "admin" && password === md5("123123")) {
+  if (username && password === md5("123123")) {
     return Mock.mock({
       data: {
-        token: "Bearer 4378488sdsd29399281xjdjfkdf",
+        token: `${username} Bearer 4378488sdsd29399281xjdjfkdf`,
       },
       code: 200,
       msg: "请求成功",
@@ -28,8 +28,27 @@ export const login = (config: any) => {
 };
 
 export const getUserProfile = (config: any) => {
+  const { role = "" } = JSON.parse(config.body);
+  const permission: { menus: string[]; points: string[] } = {
+    menus: [],
+    points: [],
+  };
+  if (role.startsWith("superAdmin")) {
+    permission.menus = [];
+    permission.points = [];
+  } else if (role.startsWith("admin")) {
+    permission.menus = [
+      "user-manage",
+      "user-role",
+      "permission-list",
+      "user-info",
+      "article-detail",
+      "article-rank",
+    ];
+    permission.points = ["user-manage"];
+  }
   return Mock.mock({
-    data:  {
+    data: {
       role: [
         {
           id: "1",
@@ -53,19 +72,7 @@ export const getUserProfile = (config: any) => {
       address: "北京市朝阳区",
       entryTime: "1648821814939",
       remark: "I Miss U",
-      permission:{
-        menus:[
-          'user-manage',
-          'user-role',
-          'permission-list',
-          'user-info',
-          'article-detail',
-          'article-rank',
-        ],
-        points:[
-          'user-manage',
-        ]
-      }
+      permission,
     },
     code: 200,
     msg: "请求成功",
