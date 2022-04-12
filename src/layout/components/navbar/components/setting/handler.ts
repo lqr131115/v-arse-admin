@@ -1,14 +1,14 @@
 import { HandlerEnum } from "./enum";
 import { SIDE_BAR_THEME_COLOR_LIST } from "@/settings";
 import { genNewStyle, writeNewStyle } from "@/utils/theme";
-import { useAppStore } from "@/store/app";
-import { useTabStore } from "@/store/tab";
+import { useAppStore } from "@/store/modules/app";
+import { useTabStore } from "@/store/modules/tab";
 import {
   useThemeStore,
   defaultAppTheme,
   defaultMenuTheme,
   defaultNavbarTheme,
-} from "@/store/theme";
+} from "@/store/modules/theme";
 import type { MenuTheme } from "@/types/app";
 export const baseHandler = (event: HandlerEnum, value?: any) => {
   const appStore = useAppStore();

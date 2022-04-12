@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { useTabStore } from '@/store/tab';
+import { useTabStore } from '@/store/modules/tab';
 import { inWhiteList } from '@/utils/tabs'
 import { genRouteTitle, watchSwitchLanguage } from '@/utils/i18n'
 import { useTabs } from '@/hooks/setting/useTabs';

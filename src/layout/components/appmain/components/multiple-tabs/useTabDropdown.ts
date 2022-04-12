@@ -1,7 +1,7 @@
 import { computed, reactive } from "vue";
 import { useRouter, RouteLocationNormalized } from "vue-router";
 import i18n from "@/i18n";
-import { useTabStore } from "@/store/tab";
+import { useTabStore } from "@/store/modules/tab";
 import { MenuEventEnum, DropMenu } from "../type";
 import { useTabs } from "@/hooks/setting/useTabs";
 import { isNull } from "@/utils/validate";

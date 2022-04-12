@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import type { Router } from "vue-router";
-import { useTabStore } from "@/store/tab";
+import { useTabStore } from "@/store/modules/tab";
 
 enum MenuEventEnum {
   REFRESH,

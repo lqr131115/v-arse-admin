@@ -1,67 +1,57 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import layout from "../layout/layout.vue";
-import { PAGE_NOT_ACCESS_NAME, PAGE_NOT_FOUND_NAME } from "@/router/constants";
-
+import layout from "@/layout/layout.vue";
+import UserRoutes from "./modules/user";
+import * as C from "@/router/constants";
+import ArticleRoutes from "./modules/article";
 // 私有路由
-const privateRoutes: RouteRecordRaw[] = [
+export const privateRoutes: RouteRecordRaw[] = [UserRoutes, ArticleRoutes];
+
+// 公有路由
+const publicRoutes: RouteRecordRaw[] = [
   {
-    path: "/user",
-    redirect: "/user/permission",
-    component: layout,
-    children: [
-      {
-        path: "/user/manage",
-        name: "user-manage",
-        component: () => import("../views/user/manage/userManage.vue"),
-        meta: { title: "userManage", icon: "user" },
-      },
-      {
-        path: "/user/role",
-        name: "user-role",
-        component: () => import("../views/user/role/roleManage.vue"),
-        meta: { title: "roleManage", icon: "collection" },
-      },
-      {
-        path: "/user/permission",
-        name: "permission-list",
-        component: () => import("../views/user/permission/permissionList.vue"),
-        meta: { title: "permissionList", icon: "key" },
-      },
-      {
-        path: "/user/info/:id",
-        name: "user-info",
-        component: () => import("../views/user/info/userInfo.vue"),
-        props: true,
-        meta: { title: "userInfo" },
-      },
-    ],
-    meta: { title: "user", icon: "avatar" },
+    path: "/",
+    redirect: "/layout",
   },
   {
-    path: "/article",
-    redirect: "/article/detail",
+    path: "/layout",
+    name: C.LAYOUT_NAME,
+    redirect: "/user",
     component: layout,
     children: [
       {
-        path: "/article/detail",
-        name: "article-detail",
-        component: () => import("../views/article/detail/articleDetail.vue"),
-        meta: { title: "articleDetail", icon: "notebook" },
+        path: "/home",
+        name: C.HOME_NAME,
+        component: () => import("../views/home/home.vue"),
+        meta: { title: "home", icon: "home-filled" },
       },
       {
-        path: "/article/rank",
-        name: "article-rank",
-        component: () => import("../views/article/rank/articleRank.vue"),
-        meta: { title: "articleRank", icon: "trophy" },
+        path: "/workbench",
+        name: C.WORKBENCH_NAME,
+        component: () => import("../views/workbench/workbench.vue"),
+        meta: { title: "workbench", icon: "briefcase" },
       },
       {
-        path: "/article/create",
-        name: "article-create",
-        component: () => import("../views/article/create/articleCreate.vue"),
-        meta: { title: "articleCreate", icon: "edit-pen" },
+        path: "/about",
+        name: C.ABOUT_NAME,
+        component: () => import("../views/about/about.vue"),
+        meta: { title: "about", icon: "shop" },
+      },
+      {
+        path: "/403",
+        name: C.PAGE_NOT_ACCESS_NAME,
+        component: () => import("../views/sys/error/error.vue"),
+      },
+      {
+        path: "/:pathMatch(.*)",
+        name: C.PAGE_NOT_FOUND_NAME,
+        component: () => import("../views/sys/error/error.vue"),
       },
     ],
-    meta: { title: "article", icon: "management" },
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/sys/login/login.vue"),
   },
   {
     path: "/component",
@@ -90,6 +80,11 @@ const privateRoutes: RouteRecordRaw[] = [
     meta: { title: "component", icon: "grid" },
   },
   {
+    path: "/redirect",
+    name: "Redirect",
+    component: () => import("@/views/sys/redirect/redirect.vue"),
+  },
+  {
     path: "/chart",
     redirect: "/chart/map",
     component: layout,
@@ -103,60 +98,6 @@ const privateRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-];
-
-// 公有路由
-const publicRoutes: RouteRecordRaw[] = [
-  {
-    path: "/",
-    redirect: "/layout",
-  },
-  {
-    path: "/layout",
-    name: "Layout",
-    redirect: "/user",
-    component: layout,
-    children: [
-      {
-        path: "/home",
-        name: "home",
-        component: () => import("../views/home/home.vue"),
-        meta: { title: "home", icon: "home-filled" },
-      },
-      {
-        path: "/workbench",
-        name: "workbench",
-        component: () => import("../views/workbench/workbench.vue"),
-        meta: { title: "workbench", icon: "briefcase" },
-      },
-      {
-        path: "/about",
-        name: "about",
-        component: () => import("../views/about/about.vue"),
-        meta: { title: "about", icon: "shop" },
-      },
-      {
-        path: "/403",
-        name: PAGE_NOT_ACCESS_NAME,
-        component: () => import("../views/sys/error/error.vue"),
-      },
-      {
-        path: "/:pathMatch(.*)",
-        name: PAGE_NOT_FOUND_NAME,
-        component: () => import("../views/sys/error/error.vue"),
-      },
-    ],
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import("../views/sys/login/login.vue"),
-  },
-  {
-    path: "/redirect",
-    name: "Redirect",
-    component: () => import("@/views/sys/redirect/redirect.vue"),
-  },
   // {
   //   path: "/:pathMatch(.*)",
   //   name: "error",
@@ -166,7 +107,7 @@ const publicRoutes: RouteRecordRaw[] = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [...publicRoutes, ...privateRoutes],
+  routes: publicRoutes,
 });
 
 export default router;

@@ -17,7 +17,7 @@
 <script lang='ts' setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n'
-import { useAppStore } from '@/store/app'
+import { useAppStore } from '@/store/modules/app'
 import { localeList } from '@/settings'
 import type { LocaleType } from '@/types/app'
 const props = defineProps({

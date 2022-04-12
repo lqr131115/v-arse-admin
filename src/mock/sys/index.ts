@@ -53,6 +53,19 @@ export const getUserProfile = (config: any) => {
       address: "北京市朝阳区",
       entryTime: "1648821814939",
       remark: "I Miss U",
+      permission:{
+        menus:[
+          'user-manage',
+          'user-role',
+          'permission-list',
+          'user-info',
+          'article-detail',
+          'article-rank',
+        ],
+        points:[
+          'user-manage',
+        ]
+      }
     },
     code: 200,
     msg: "请求成功",

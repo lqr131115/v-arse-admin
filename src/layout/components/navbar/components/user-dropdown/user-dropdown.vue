@@ -17,7 +17,7 @@
 </template>
 <script lang='ts' setup>
 import { ref } from 'vue'
-import { useUserStore } from '@/store/user'
+import { useUserStore } from '@/store/modules/user'
 import { msgSuccess } from '@/utils/notice'
 import { userDropDownList, USER_DD } from '@/settings'
 import lockModal from './lockModal.vue'

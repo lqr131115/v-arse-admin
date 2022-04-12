@@ -3,8 +3,8 @@
  * @author lqr
  */
 import router from "@/router";
-import { useUserStore } from "@/store/user";
-import { useAppStore } from "@/store/app";
+import { useUserStore } from "@/store/modules/user";
+import { useAppStore } from "@/store/modules/app";
 import { isTimeout } from "@/utils/auth";
 import { msgError } from "@/utils/notice";
 import { PageEnum } from "@/enums/pageEnum";

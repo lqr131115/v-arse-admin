@@ -3,8 +3,8 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import md5 from 'md5'
 import { Lock, User } from '@element-plus/icons-vue'
-import { useUserStore } from '@/store/user'
-import { useAppStore } from '@/store/app';
+import { useUserStore } from '@/store/modules/user'
+import { useAppStore } from '@/store/modules/app';
 import { msgSuccess } from '@/utils/notice'
 import { setTimeStamp } from '@/utils/auth'
 import type { FormInstance } from 'element-plus'

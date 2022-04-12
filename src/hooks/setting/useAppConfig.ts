@@ -1,5 +1,5 @@
 import { computed } from "vue";
-import { useAppStore } from "@/store/app";
+import { useAppStore } from "@/store/modules/app";
 
 export const useAppConfig = () => {
   const appStore = useAppStore();

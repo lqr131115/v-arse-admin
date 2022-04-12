@@ -4,7 +4,7 @@
  */
 
 import axios, { AxiosRequestConfig } from "axios";
-import { useUserStore } from "@/store/user";
+import { useUserStore } from "@/store/modules/user";
 import { msgError, noticeError } from "@/utils/notice";
 import { ResultEnum, RequestEnum } from "@/enums/httpEnum";
 import envConfig from "../config/env";

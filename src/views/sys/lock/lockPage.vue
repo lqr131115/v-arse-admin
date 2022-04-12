@@ -64,7 +64,7 @@ import { useRouter } from 'vue-router';
 import { formatTimeStamp } from '@/utils/moment'
 import { getItem } from '@/utils/storage';
 import { msgError } from '@/utils/notice';
-import { useAppStore } from '@/store/app';
+import { useAppStore } from '@/store/modules/app';
 import { LOCK_SCREEN_KEY } from '@/enums/cacheEnum';
 const router = useRouter()
 const appStore = useAppStore()
