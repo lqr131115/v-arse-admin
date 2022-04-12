@@ -5,6 +5,8 @@
 import router from "@/router";
 import { useUserStore } from "@/store/modules/user";
 import { useAppStore } from "@/store/modules/app";
+import { usePermissionStore } from "@/store/modules/permission";
+
 import { isTimeout } from "@/utils/auth";
 import { msgError } from "@/utils/notice";
 import { PageEnum } from "@/enums/pageEnum";
@@ -19,9 +21,10 @@ const ERROR_404__PATH = PageEnum.ERROR_PAGE__404;
 const ERROR_401__PATH = PageEnum.ERROR_PAGE__401;
 const whitePathList: string[] = [LOGIN_PATH, ERROR_404__PATH, ERROR_401__PATH];
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
   const appStore = useAppStore();
+  const permissionStore = usePermissionStore();
   if (userStore.token) {
     // 用户已登录 不能回到login页
     if (to.path === LOGIN_PATH) {
@@ -39,7 +42,14 @@ router.beforeEach((to, from, next) => {
       }
       // 每次刷新都要请求用户信息
       if (!userStore.hasUserProfile) {
-        userStore.getUserProfile();
+        const {data} = await userStore.getUserProfile();
+        const routes = permissionStore.filterRoutes(data.permission.menus)
+        console.log('xxx',routes);
+        routes.forEach((r) => {
+          router.addRoute(r)
+        })
+        // 添加动态路由后 需要手动的进行一次跳转 使得路由更新生效
+        return next(to.path);
       }
       next();
     }

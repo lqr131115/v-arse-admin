@@ -20,6 +20,7 @@ import { ref } from 'vue'
 import { useUserStore } from '@/store/modules/user'
 import { msgSuccess } from '@/utils/notice'
 import { userDropDownList, USER_DD } from '@/settings'
+import { resetRoute } from '@/router'
 import lockModal from './lockModal.vue'
 
 const userStore = useUserStore()
@@ -36,6 +37,8 @@ const visible = ref<boolean>(false)
  */
 const logout = () => {
     userStore.logout()
+    // TODO: 重置权限相关配置
+    resetRoute()
     msgSuccess('退出登录')
 }
 const showDocument = () => {

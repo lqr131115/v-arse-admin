@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getItem, removeItem, setItem } from "@/utils/storage";
+import { getItem, setItem } from "@/utils/storage";
 import {
   LOCALE_KEY,
   PROJECT_CONFIG_KEY,

@@ -3,12 +3,12 @@ import * as C from '../constants'
 
 export default {
   path: "/user",
-  redirect: "/user/permission",
+  redirect: "/user/manage",
   component: layout,
+  name: C.USER_MANAGE_NAME,
   children: [
     {
       path: "/user/manage",
-      name: C.USER_MANAGE_NAME,
       component: () => import("@/views/user/manage/userManage.vue"),
       meta: { title: "userManage", icon: "user" },
     },

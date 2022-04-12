@@ -1,13 +1,15 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import layout from "@/layout/layout.vue";
 import UserRoutes from "./modules/user";
-import * as C from "@/router/constants";
 import ArticleRoutes from "./modules/article";
+import * as C from "@/router/constants";
+import { useUserStore } from "@/store/modules/user";
+import layout from "@/layout/layout.vue";
+
 // 私有路由
 export const privateRoutes: RouteRecordRaw[] = [UserRoutes, ArticleRoutes];
 
 // 公有路由
-const publicRoutes: RouteRecordRaw[] = [
+export const publicRoutes: RouteRecordRaw[] = [
   {
     path: "/",
     redirect: "/layout",
@@ -21,37 +23,42 @@ const publicRoutes: RouteRecordRaw[] = [
       {
         path: "/home",
         name: C.HOME_NAME,
-        component: () => import("../views/home/home.vue"),
+        component: () => import("@/views/home/home.vue"),
         meta: { title: "home", icon: "home-filled" },
       },
       {
         path: "/workbench",
         name: C.WORKBENCH_NAME,
-        component: () => import("../views/workbench/workbench.vue"),
+        component: () => import("@/views/workbench/workbench.vue"),
         meta: { title: "workbench", icon: "briefcase" },
       },
       {
         path: "/about",
         name: C.ABOUT_NAME,
-        component: () => import("../views/about/about.vue"),
+        component: () => import("@/views/about/about.vue"),
         meta: { title: "about", icon: "shop" },
       },
       {
         path: "/403",
         name: C.PAGE_NOT_ACCESS_NAME,
-        component: () => import("../views/sys/error/error.vue"),
+        component: () => import("@/views/sys/error/error.vue"),
       },
       {
         path: "/:pathMatch(.*)",
         name: C.PAGE_NOT_FOUND_NAME,
-        component: () => import("../views/sys/error/error.vue"),
+        component: () => import("@/views/sys/error/error.vue"),
       },
     ],
   },
   {
     path: "/login",
     name: "Login",
-    component: () => import("../views/sys/login/login.vue"),
+    component: () => import("@/views/sys/login/login.vue"),
+  },
+  {
+    path: "/redirect",
+    name: C.REDIRECT_NAME,
+    component: () => import("@/views/sys/redirect/redirect.vue"),
   },
   {
     path: "/component",
@@ -60,40 +67,35 @@ const publicRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: "/component/picker",
-        name: "component-picker",
-        component: () => import("../views/component/cPicker/cPicker.vue"),
+        name: C.COMPONENT_PICKER_NAME,
+        component: () => import("@/views/component/cPicker/cPicker.vue"),
         meta: { title: "cPicker", icon: "aim" },
       },
       {
         path: "/component/table",
-        name: "component-table",
-        component: () => import("../views/component/cTable/cTable.vue"),
+        name: C.COMPONENT_TABLE_NAME,
+        component: () => import("@/views/component/cTable/cTable.vue"),
         meta: { title: "cTable", icon: "present" },
       },
       {
         path: "/component/parser",
-        name: "component-parser",
-        component: () => import("../views/component/cParser/cParser.vue"),
+        name: C.COMPONENT_PARSER_NAME,
+        component: () => import("@/views/component/cParser/cParser.vue"),
         meta: { title: "cParser", icon: "files" },
       },
     ],
     meta: { title: "component", icon: "grid" },
   },
   {
-    path: "/redirect",
-    name: "Redirect",
-    component: () => import("@/views/sys/redirect/redirect.vue"),
-  },
-  {
     path: "/chart",
     redirect: "/chart/map",
     component: layout,
+    name: C.CHART_MAP_NAME,
     meta: { title: "chart", icon: "trend-charts" },
     children: [
       {
         path: "/chart/map",
-        name: "chart-map",
-        component: () => import("../views/chart/map/map.vue"),
+        component: () => import("@/views/chart/map/map.vue"),
         meta: { title: "chartMap", icon: "map-location" },
       },
     ],
@@ -101,7 +103,7 @@ const publicRoutes: RouteRecordRaw[] = [
   // {
   //   path: "/:pathMatch(.*)",
   //   name: "error",
-  //   component: () => import("../views/sys/error/404.vue"),
+  //   component: () => import("@/views/sys/error/404.vue"),
   // },
 ];
 
@@ -109,5 +111,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: publicRoutes,
 });
+
+export const resetRoute = () => {
+  const userStore = useUserStore();
+  const userProfile: any = userStore.getUserProfile;
+  if (userProfile && userProfile.permission && userProfile.permission.menus) {
+    userProfile.permission.menus.forEach((menu:string) => {
+      router.removeRoute(menu);
+    });
+  }
+};
 
 export default router;

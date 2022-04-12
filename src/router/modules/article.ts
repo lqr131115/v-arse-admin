@@ -4,10 +4,10 @@ export default {
   path: "/article",
   redirect: "/article/detail",
   component: layout,
+  name: C.ARTICLE_DETAIL_NAME,
   children: [
     {
       path: "/article/detail",
-      name: C.ARTICLE_DETAIL_NAME,
       component: () => import("@/views/article/detail/articleDetail.vue"),
       meta: { title: "articleDetail", icon: "notebook" },
     },

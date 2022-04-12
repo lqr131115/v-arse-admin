@@ -1,5 +1,6 @@
 import Mock from "mockjs";
 import md5 from "md5";
+import * as C from '@/router/constants'
 /**
  * @param config 对象 键值如下
  * body: "{\"username\":\"admin\",\"password\":\"123456\"}"
@@ -33,17 +34,14 @@ export const getUserProfile = (config: any) => {
     menus: [],
     points: [],
   };
-  if (role.startsWith("superAdmin")) {
+  if (role.startsWith("super")) {
     permission.menus = [];
     permission.points = [];
   } else if (role.startsWith("admin")) {
     permission.menus = [
-      "user-manage",
-      "user-role",
-      "permission-list",
-      "user-info",
-      "article-detail",
-      "article-rank",
+      C.USER_MANAGE_NAME,
+      C.PERMISSION_LIST_NAME,
+      C.ARTICLE_DETAIL_NAME,
     ];
     permission.points = ["user-manage"];
   }
