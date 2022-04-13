@@ -39,5 +39,13 @@ export type DescriptionsItem = {
   content: any;
   align?: "left" | "center" | "right";
   width?: number;
-  span?:number;
+  span?: number;
+};
+
+export type TreeProps = {
+  label: string | Function;
+  children: string;
+  isLeaf?: string | Function;
+  disabled?: string | Function;
+  class?: string | Function;
 };

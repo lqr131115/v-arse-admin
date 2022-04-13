@@ -8,6 +8,7 @@ import Form from "./Form";
 import Menu from "./Menu";
 import SvgIcon from "./SvgIcon";
 import Table from "./Table";
+import Tree from "./Tree";
 
 const components: any[] = [
   Form,
@@ -19,6 +20,7 @@ const components: any[] = [
   Dialog,
   Card,
   Chart,
+  Tree
 ];
 export default {
   install(app: App) {

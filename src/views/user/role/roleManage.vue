@@ -3,14 +3,13 @@
         <el-card>
             <m-table :options="options" :data="data" type="index">
                 <template #action="{ scope }">
-                    <el-button
-                        type="primary"
-                        @click="handleRowAssignPer(scope)"
-                        size="small"
-                    >{{ $t('buttons.assignPermission') }}</el-button>
+                    <el-button type="primary" @click="handleRowAssignPermission(scope)" size="small">{{
+                        $t('buttons.assignPermission')
+                    }}</el-button>
                 </template>
             </m-table>
         </el-card>
+        <PermissionModal v-model:visible="visible" />
     </div>
 </template>
 <script lang='ts' setup>
@@ -19,8 +18,11 @@ import { useTableData } from './hooks'
 import { Role } from '@/mock/model';
 import { getRoleList } from '@/api/role'
 import { TableOption } from '@/types/component';
+import PermissionModal from './component/permissionModal.vue';
 
 const data = ref<Role[]>([])
+const visible = ref<boolean>(false)
+const rowOperation = ref<string>('')
 const options: TableOption[] = [
     {
         label: '角色名称',
@@ -40,7 +42,7 @@ const options: TableOption[] = [
         action: true
     }
 ]
-const handleRowAssignPer = (scope: any) => { }
+const handleRowAssignPermission = (scope: any) => { rowOperation.value = 'assignPermission', visible.value = true }
 const _getRoleList = async () => {
     const res = await getRoleList()
     data.value = useTableData(res.data)
@@ -51,6 +53,7 @@ onMounted(() => {
 </script>
 <style lang='scss' scoped>
 @use '@/styles/tools/mixin/BEM' as *;
+
 @include b(role) {
     padding: 10px;
 }

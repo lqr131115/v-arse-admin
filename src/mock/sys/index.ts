@@ -1,5 +1,6 @@
 import Mock from "mockjs";
 import md5 from "md5";
+import {DEFAULT_PASSWORD} from '@/constants'
 import * as C from '@/router/constants'
 /**
  * @param config 对象 键值如下
@@ -11,7 +12,7 @@ import * as C from '@/router/constants'
 export const login = (config: any) => {
   const { username, password } = JSON.parse(config.body);
 
-  if (username && password === md5("123123")) {
+  if (username && password === md5(DEFAULT_PASSWORD)) {
     return Mock.mock({
       data: {
         token: `${username} Bearer 4378488sdsd29399281xjdjfkdf`,

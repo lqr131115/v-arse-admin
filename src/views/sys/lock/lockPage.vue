@@ -66,6 +66,7 @@ import { getItem } from '@/utils/storage';
 import { msgError } from '@/utils/notice';
 import { useAppStore } from '@/store/modules/app';
 import { LOCK_SCREEN_KEY } from '@/enums/cacheEnum';
+import { DEFAULT_PASSWORD} from '@/constants';
 const router = useRouter()
 const appStore = useAppStore()
 const show = ref<boolean>(false)
@@ -77,7 +78,7 @@ const date = ref<string>('')
 const validatePwd = (pwd: string): boolean => {
     function validate(value: string): boolean {
         const { password } = getItem(LOCK_SCREEN_KEY)
-        return password && (value === '123123' || password === md5(value))
+        return password && (value === DEFAULT_PASSWORD || password === md5(value))
     }
     return validate(pwd)
 }

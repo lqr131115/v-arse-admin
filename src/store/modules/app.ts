@@ -6,6 +6,7 @@ import {
   LOCK_SCREEN_KEY
 } from "@/enums/cacheEnum";
 import { LOCALE } from "@/settings";
+import { DEFAULT_PASSWORD } from "@/constants";
 import type { LocaleType, ProjectConfig,LockScreen } from "@/types/app";
 const defaultProjectConfig: ProjectConfig = {
   showLogo: true,
@@ -18,7 +19,7 @@ const defaultProjectConfig: ProjectConfig = {
   openLocaleBar: true,
   openScreenBar: true,
 };
-const defaultLockScreen: LockScreen = {password:'123123',isLock:false};
+const defaultLockScreen: LockScreen = {password:DEFAULT_PASSWORD,isLock:false};
 export const useAppStore = defineStore({
   id: "app",
   state: () => ({

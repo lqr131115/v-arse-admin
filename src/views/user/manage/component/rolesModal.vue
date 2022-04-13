@@ -1,7 +1,7 @@
 <template>
     <m-dialog v-model:visible="visible" @close="onClose">
         <template #title>
-            <span>角色分配</span>
+            <span fz16 fw6>角色分配</span>
         </template>
         <template #default>
             <el-checkbox-group v-model="checkedRoles">
