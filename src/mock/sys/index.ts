@@ -35,13 +35,23 @@ export const getUserProfile = (config: any) => {
     points: [],
   };
   if (role.startsWith("super")) {
-    permission.menus = [];
-    permission.points = [];
+    permission.menus = [
+      C.USER_MANAGE_NAME,
+      C.USER_ROLE_NAME,
+      C.PERMISSION_LIST_NAME,
+      C.USER_INFO_NAME,
+      C.ARTICLE_DETAIL_NAME,
+      C.ARTICLE_RANK_NAME,
+      C.ARTICLE_CREATE_NAME,
+      C.ARTICLE_MANAGE_NAME
+    ];
+    permission.points = [
+      'user-manage'
+    ];
   } else if (role.startsWith("admin")) {
     permission.menus = [
       C.USER_MANAGE_NAME,
-      C.PERMISSION_LIST_NAME,
-      C.ARTICLE_DETAIL_NAME,
+      C.ARTICLE_MANAGE_NAME
     ];
     permission.points = ["user-manage"];
   }

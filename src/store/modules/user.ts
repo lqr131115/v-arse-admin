@@ -3,6 +3,7 @@ import router from "@/router";
 import * as sysApi from "@/api/sys";
 import { TOKEN_KEY } from "@/enums/cacheEnum";
 import { setItem, getItem, removeItem } from "@/utils/storage";
+import { isNull } from "@/utils/validate";
 export const useUserStore = defineStore({
   id: "user",
   state: () => ({
@@ -11,7 +12,7 @@ export const useUserStore = defineStore({
   }),
   getters: {
     hasUserProfile: (state) => {
-      return JSON.stringify(state.userProfile) !== "{}";
+      return !isNull(state.userProfile)
     },
     getToken: (state) => {
       return state.token;
@@ -29,8 +30,8 @@ export const useUserStore = defineStore({
       this.userProfile = profile;
     },
     logout() {
+      console.log('logout');
       this.setToken("");
-      this.setUserProfile({});
       removeItem(TOKEN_KEY);
       router.push("/login");
     },

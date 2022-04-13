@@ -23,10 +23,11 @@ export const usePermissionStore = defineStore({
           result.push(...matchRoute);
         }
       });
-      //   result.push({
-      //     path: "/:pathMatch(.*)",
-      //     redirect: "/404",
-      //   });
+      //  手动添加404路由要至最后
+      result.push({
+        path: "/:pathMatch(.*)",
+        redirect: "/404",
+      });
       return result;
     },
   },

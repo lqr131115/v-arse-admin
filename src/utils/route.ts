@@ -92,3 +92,19 @@ export const formatMenus = (routes: any[]): MenuItem[] => {
   });
   return result;
 };
+
+/**
+ * @description 对展示的菜单栏进行顺序调整
+ * @param menus 符合Menu组件data格式的路由
+ * @returns 
+ */
+export const sortMenus = (menus:MenuItem[]):MenuItem[] => {
+  // 调整about页面到最后
+  const index = menus.findIndex((m) => m.index === '/about')
+  if (~index) {
+    const menu = menus[index]
+    menus.splice(index, 1)
+    menus.push(menu)
+  }
+  return menus
+}

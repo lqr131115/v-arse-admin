@@ -1,3 +1,4 @@
+import { unref } from "vue";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import UserRoutes from "./modules/user";
 import ArticleRoutes from "./modules/article";
@@ -6,7 +7,10 @@ import { useUserStore } from "@/store/modules/user";
 import layout from "@/layout/layout.vue";
 
 // 私有路由
-export const privateRoutes: RouteRecordRaw[] = [UserRoutes, ArticleRoutes];
+export const privateRoutes: RouteRecordRaw[] = [
+  ...UserRoutes,
+  ...ArticleRoutes,
+];
 
 // 公有路由
 export const publicRoutes: RouteRecordRaw[] = [
@@ -44,7 +48,7 @@ export const publicRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/sys/error/error.vue"),
       },
       {
-        path: "/:pathMatch(.*)",
+        path: "/404",
         name: C.PAGE_NOT_FOUND_NAME,
         component: () => import("@/views/sys/error/error.vue"),
       },
@@ -100,11 +104,6 @@ export const publicRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-  // {
-  //   path: "/:pathMatch(.*)",
-  //   name: "error",
-  //   component: () => import("@/views/sys/error/404.vue"),
-  // },
 ];
 
 const router = createRouter({
@@ -113,10 +112,17 @@ const router = createRouter({
 });
 
 export const resetRoute = () => {
+  console.log('resetRoute');
+  
   const userStore = useUserStore();
-  const userProfile: any = userStore.getUserProfile;
-  if (userProfile && userProfile.permission && userProfile.permission.menus) {
-    userProfile.permission.menus.forEach((menu:string) => {
+  const userProfile: any = userStore.userProfile;
+  if (
+    userProfile &&
+    userProfile.permission &&
+    userProfile.permission.menus &&
+    userProfile.permission.menus.length
+  ) {
+    userProfile.permission.menus.forEach((menu: string) => {
       router.removeRoute(menu);
     });
   }

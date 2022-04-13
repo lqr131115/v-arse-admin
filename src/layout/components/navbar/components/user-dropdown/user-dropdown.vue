@@ -36,9 +36,12 @@ const visible = ref<boolean>(false)
  *          - 单点登录 服务端返回特定状态码
  */
 const logout = () => {
-    userStore.logout()
-    // TODO: 重置权限相关配置
+    // TODO: 相关操作,如重置路由等
     resetRoute()
+    // 重置UserProfile必须在重置路由之后,因为重置路由会用到UserProfile
+    userStore.setUserProfile()
+    // logout(清除token)放在最后
+    userStore.logout()
     msgSuccess('退出登录')
 }
 const showDocument = () => {

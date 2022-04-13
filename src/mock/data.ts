@@ -31,6 +31,10 @@ export const userList: User[] = [
     address: "北京市朝阳区",
     entryTime: "1648821814939",
     remark: "I Miss U",
+    permission: {
+      menus: [],
+      points: [],
+    },
   },
   {
     role: [
@@ -40,7 +44,6 @@ export const userList: User[] = [
         desc: "我是管理员,协助超管管理系统",
         level: "T1",
       },
-    
     ],
     _id: "612710a0ec87aa543c9c341e",
     id: "1",
@@ -57,6 +60,10 @@ export const userList: User[] = [
     address: "湖北省武汉市",
     entryTime: "1648821000000",
     remark: "",
+    permission: {
+      menus: [],
+      points: [],
+    },
   },
   {
     role: [
@@ -82,6 +89,10 @@ export const userList: User[] = [
     address: "上海市浦西区",
     entryTime: "1648821220022",
     remark: "",
+    permission: {
+      menus: [],
+      points: [],
+    },
   },
   {
     role: [
@@ -113,6 +124,10 @@ export const userList: User[] = [
     address: "南京市玄武区",
     entryTime: "1648821110011",
     remark: "",
+    permission: {
+      menus: [],
+      points: [],
+    },
   },
   {
     role: [
@@ -138,6 +153,10 @@ export const userList: User[] = [
     address: "浙江省杭州市",
     entryTime: "1648821330033",
     remark: "",
+    permission: {
+      menus: [],
+      points: [],
+    },
   },
 ];
 

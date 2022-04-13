@@ -44,7 +44,6 @@ router.beforeEach(async (to, from, next) => {
       if (!userStore.hasUserProfile) {
         const {data} = await userStore.getUserProfile();
         const routes = permissionStore.filterRoutes(data.permission.menus)
-        console.log('xxx',routes);
         routes.forEach((r) => {
           router.addRoute(r)
         })

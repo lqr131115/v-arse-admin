@@ -14,6 +14,7 @@ export type User = {
   remark: string;
   education: string;
   major: string;
+  permission?: { menus?: string[]; points?: string[]; [key: string]: any };
 };
 
 export type Role = {
@@ -24,9 +25,9 @@ export type Role = {
 };
 
 export type Permission = {
-  id:string,
-  name:string,
-  mark:string,
-  desc:string,
-  children?:Permission[]
-}
+  id: string;
+  name: string;
+  mark: string;
+  desc: string;
+  children?: Permission[];
+};
