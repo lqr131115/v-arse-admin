@@ -20,6 +20,7 @@ export const ARTICLE_MANAGE_NAME = 'article-manage'
 
 export const COMPONENT_PICKER_NAME = 'component-picker'
 export const COMPONENT_TABLE_NAME = 'component-table'
+export const COMPONENT_FORM_NAME = 'component-form'
 export const COMPONENT_PARSER_NAME = 'component-parser'
 
 export const CHART_MAP_NAME = 'chart-map'

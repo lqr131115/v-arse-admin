@@ -37,6 +37,7 @@
     "vue-echarts": "^6.0.2",
     "vue-i18n": "^9.1.9",
     "vue-router": "^4.0.14",
+    "wangeditor": "^4.7.15",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

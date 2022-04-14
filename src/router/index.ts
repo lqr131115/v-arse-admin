@@ -1,4 +1,3 @@
-import { unref } from "vue";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import UserRoutes from "./modules/user";
 import ArticleRoutes from "./modules/article";
@@ -80,6 +79,12 @@ export const publicRoutes: RouteRecordRaw[] = [
         name: C.COMPONENT_TABLE_NAME,
         component: () => import("@/views/component/cTable/cTable.vue"),
         meta: { title: "cTable", icon: "present" },
+      },
+      {
+        path: "/component/form",
+        name: C.COMPONENT_FORM_NAME,
+        component: () => import("@/views/component/cForm/cForm.vue"),
+        meta: { title: "cForm", icon: "film" },
       },
       {
         path: "/component/parser",
