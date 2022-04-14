@@ -72,7 +72,8 @@ export type FormItem =
   | "time-select"
   | "transfer"
   | "upload"
-  | "editor";
+  | "editor"
+  | "markdown";
 
 export type FormOptions = {
   // 表单项的类型
