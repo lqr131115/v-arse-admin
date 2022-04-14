@@ -10,7 +10,7 @@ import MUI from './components'
 import Icons from './icons'
 import 'virtual:svg-icons-register'
 import './mock'
-import './permission'
+import './auth/permission'
 import 'normalize.css'
 import './styles/index.scss'
 

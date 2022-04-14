@@ -30,8 +30,8 @@
                 </template>
                 <template #action="{ scope }">
                     <el-button type="info" @click="handleRowCheck(scope)" size="small">查看</el-button>
-                    <el-button type="primary" plain @click="handleRowRole(scope)" size="small">角色</el-button>
-                    <el-button type="danger" @click="handleRowDelete(scope)" size="small">删除</el-button>
+                    <el-button type="primary" plain @click="handleRowRole(scope)" size="small" v-auth="[C.ROLE_ASSIGN_NAME]">角色</el-button>
+                    <el-button type="danger" @click="handleRowDelete(scope)" size="small" v-auth="[C.DELETE_USER_NAME]" >删除</el-button>
                 </template>
             </m-table>
         </el-card>
@@ -47,6 +47,7 @@ import { msgSuccess } from '@/utils/notice';
 import { formatTimeStamp } from '@/utils/moment';
 import { PageEnum } from '@/enums/pageEnum'
 import { Role } from '@/mock/model';
+import * as C from '@/auth/constants'
 import ExportToModal from './component/export2Modal.vue';
 import RolesModal from './component/rolesModal.vue';
 const options: TableOption[] = [

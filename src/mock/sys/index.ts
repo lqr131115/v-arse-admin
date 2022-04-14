@@ -1,7 +1,8 @@
 import Mock from "mockjs";
 import md5 from "md5";
 import {DEFAULT_PASSWORD} from '@/constants'
-import * as C from '@/router/constants'
+import * as R from '@/router/constants'
+import * as A from '@/auth/constants'
 /**
  * @param config 对象 键值如下
  * body: "{\"username\":\"admin\",\"password\":\"123456\"}"
@@ -37,24 +38,27 @@ export const getUserProfile = (config: any) => {
   };
   if (role.startsWith("super")) {
     permission.menus = [
-      C.USER_MANAGE_NAME,
-      C.USER_ROLE_NAME,
-      C.PERMISSION_LIST_NAME,
-      C.USER_INFO_NAME,
-      C.ARTICLE_DETAIL_NAME,
-      C.ARTICLE_RANK_NAME,
-      C.ARTICLE_CREATE_NAME,
-      C.ARTICLE_MANAGE_NAME
+      R.USER_MANAGE_NAME,
+      R.USER_ROLE_NAME,
+      R.PERMISSION_LIST_NAME,
+      R.USER_INFO_NAME,
+      R.ARTICLE_DETAIL_NAME,
+      R.ARTICLE_RANK_NAME,
+      R.ARTICLE_CREATE_NAME,
+      R.ARTICLE_MANAGE_NAME
     ];
     permission.points = [
-      'user-manage'
+      A.DELETE_USER_NAME,
+      A.ROLE_ASSIGN_NAME
     ];
   } else if (role.startsWith("admin")) {
     permission.menus = [
-      C.USER_MANAGE_NAME,
-      C.ARTICLE_MANAGE_NAME
+      R.USER_MANAGE_NAME,
+      R.ARTICLE_MANAGE_NAME
     ];
-    permission.points = ["user-manage"];
+    permission.points = [
+      A.ROLE_ASSIGN_NAME
+    ];
   }
   return Mock.mock({
     data: {

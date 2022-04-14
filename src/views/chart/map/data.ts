@@ -595,7 +595,7 @@ export const mapChartOpts: EChartsOption = {
   ],
 };
 
-export const hotSearchOpts: EChartsOption = {
+export const hotSearchOpts = {
   series: [
     {
       type: "wordCloud",
@@ -664,7 +664,7 @@ export const hotSearchOpts: EChartsOption = {
   ],
 };
 
-export const monthIncreaseOpts: EChartsOption = {
+export const monthIncreaseOpts = {
   series: [
     {
       type: "liquidFill",

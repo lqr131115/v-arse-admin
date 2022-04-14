@@ -22,6 +22,10 @@ export function isString(val: any): val is string {
   return typeof val === "string";
 }
 
+export function isArray(val: any): val is any[] {
+  return Array.isArray(val);
+}
+
 export function isRegW(val: string): boolean {
   return /\w/g.test(val);
 }
