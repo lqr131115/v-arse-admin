@@ -90,8 +90,6 @@ import { TableOption } from '@/types/component';
 import { initSortable } from '@/utils/sortable'
 import { useTheme } from '@/hooks/setting/useTheme';
 import type {ElTable} from 'element-plus'
-import type { Options, SortableEvent } from 'sortablejs'
-import { msgSuccess } from '@/utils/notice';
 
 const props = defineProps({
    options: {
@@ -119,6 +117,11 @@ const props = defineProps({
    draggable: {
       type: Boolean,
       default: false
+   },
+   // sortOptions
+   sortOptions: {
+      type: Object,
+      default:() => {}
    },
    // 行操作的标识
    rowOperation: {
@@ -213,18 +216,7 @@ const handleNextClick = (...val: any) => { emits('on-next-click', val) }
 const _initSortable = () => {
    // TODO: querySelector 选择器
    const el = tableRef.value && tableRef.value.$el.querySelector(`.el-table__body-wrapper`).querySelector('tbody')
-   const options: Options = {
-      ghostClass:'sortable-ghost',
-      onEnd: onSortEnd
-   }
-   initSortable(el, options)
-}
-const onSortEnd = (e: SortableEvent) => { 
-   const {oldIndex,newIndex} = e
-   if (oldIndex === newIndex) {
-      return
-   }
-   msgSuccess(`oldIndex:${oldIndex},newIndex:${newIndex},调用Api更新...`)
+   initSortable(el, props.sortOptions)
 }
 watch(() => props.data, newVal => {
    tableData.value = cloneDeep(newVal)

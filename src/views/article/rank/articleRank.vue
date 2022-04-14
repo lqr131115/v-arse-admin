@@ -1,6 +1,7 @@
 <template>
     <div class="article-rank">
-        <m-table :data="data" :options="options" :rowOperation="rowOperation" border dynamic draggable>
+        <m-table :data="data" :options="options" :rowOperation="rowOperation" :sortOptions="sortOptions" border dynamic
+            draggable>
             <template #ranking="{ scope }">
                 <el-tag type="danger">{{ scope.row.ranking }}</el-tag>
             </template>
@@ -19,7 +20,9 @@ import { onMounted, ref } from 'vue'
 import { Article } from '@/mock/model'
 import { getArticleList } from '@/api/article';
 import { formatTimeStamp } from '@/utils/moment';
+import { msgSuccess } from '@/utils/notice';
 import type { TableOption } from '@/types/component'
+import type { Options, SortableEvent } from 'sortablejs'
 
 const data = ref<Article[]>([])
 const rowOperation = ref<string>('')
@@ -53,18 +56,32 @@ const options: TableOption[] = [
         action: true
     }
 ]
+const onSortEnd = (e: SortableEvent) => {
+    const { oldIndex, newIndex } = e
+    if (oldIndex === newIndex) {
+        return
+    }
+    // TODO: 调用排序Api更新
+    msgSuccess(`oldIndex:${oldIndex},newIndex:${newIndex},调用Api更新...`)
+    // 重新获取数据,如排名没有即使更新 可先置空 data.value = []
+    // _getArticleList()
+}
+const sortOptions: Options = {
+    ghostClass: 'sortable-ghost',
+    onEnd: onSortEnd
+}
+const handleRowCheck = (scope: any) => { rowOperation.value = 'check' }
+const handleRowDelete = (scope: any) => { rowOperation.value = 'delete' }
 const _getArticleList = async () => {
     const res = await getArticleList()
     data.value = res.data
 }
-const handleRowCheck = (scope: any) => { rowOperation.value = 'check' }
-const handleRowDelete = (scope: any) => { rowOperation.value = 'delete' }
 onMounted(() => {
     _getArticleList()
 })
 </script>
 <style lang='scss' scoped>
-@use '@/styles/tools/mixin/BEM' as *;
+@use '@/styles/tools/mixin/BEM'as *;
 
 @include b(article-rank) {
     padding: 10px;
