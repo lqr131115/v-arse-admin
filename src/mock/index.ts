@@ -3,6 +3,7 @@ import * as sys from "./sys";
 import * as user from "./user";
 import * as role from "./role";
 import * as permission from "./permission";
+import * as article from "./article";
 
 Mock.setup({
   timeout: "300-600",
@@ -23,3 +24,6 @@ Mock.mock('/mock/role/update', 'post', role.updateRoleInfoById);
 
 // permission
 Mock.mock('/mock/permission/list', 'get', permission.getPermissionList);
+
+// article
+Mock.mock('/mock/article/list', 'get', article.getArticleList);

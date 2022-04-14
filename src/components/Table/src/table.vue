@@ -1,15 +1,22 @@
 <template>
    <div>
-      <el-table
-         :data="tableData"
-         v-bind="$attrs"
-         v-loading="isLoading"
-         :element-loading-text="elementLoadingText"
-         :element-loading-spinner="elementLoadingSpinner"
-         :element-loading-svg-view-box="elementLoadingSvgViewBox"
-         :element-loading-background="elementLoadingBackground"
-         @row-click="handleRowClick"
-      >
+      <el-card v-if="dynamic" shadow="never" :body-style="{ padding: '10px' }" mb10>
+         <el-row :gutter="10" align="middle" >
+            <el-col :span="2">
+               <span fz16 fw6>动态展示</span>
+            </el-col>
+            <el-col :span="22" >
+               <el-checkbox-group v-model="dynamicChecked" :min="1">
+                  <el-checkbox v-for="c in dynamicCheckbox" :key="c.prop" :label="c.prop">{{
+                     c.label
+                  }}</el-checkbox>
+               </el-checkbox-group>
+            </el-col>
+         </el-row>
+      </el-card>
+      <el-table :data="tableData" v-bind="$attrs" v-loading="isLoading" :element-loading-text="elementLoadingText"
+         :element-loading-spinner="elementLoadingSpinner" :element-loading-svg-view-box="elementLoadingSvgViewBox"
+         :element-loading-background="elementLoadingBackground" @row-click="handleRowClick">
          <el-table-column v-if="type" :type="type"></el-table-column>
          <template v-for="item in normalOptions" :key="item.label">
             <el-table-column :label="item.label" :width="item.width" v-bind="item.attrs">
@@ -55,12 +62,8 @@
             </el-table-column>
          </template>
          <!-- 操作列 -->
-         <el-table-column
-            :label="actionOptions?.label"
-            :width="actionOptions?.width"
-            :align="actionOptions?.align"
-            v-if="actionOptions?.action"
-         >
+         <el-table-column :label="actionOptions?.label" :width="actionOptions?.width" :align="actionOptions?.align"
+            v-if="actionOptions?.action">
             <template #default="scope">
                <template v-if="scope.row.isEditing">
                   <el-button type="primary" size="small">确定</el-button>
@@ -74,16 +77,9 @@
       </el-table>
       <!-- 分页器 -->
       <div class="pagination" v-if="pagination">
-         <el-pagination
-            v-model:current-page="currentPage"
-            v-model:page-size="pageSize"
-            :total="total || data.length"
-            v-bind="pageOptions"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            @prev-click="handlePrevClick"
-            @next-click="handleNextClick"
-         />
+         <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :total="total || data.length"
+            v-bind="pageOptions" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+            @prev-click="handlePrevClick" @next-click="handleNextClick" />
       </div>
    </div>
 </template>
@@ -102,6 +98,11 @@ const props = defineProps({
    },
    type: {
       type: String,
+   },
+   // 列动态展示
+   dynamic: {
+      type: Boolean,
+      required: false
    },
    // 列是否可编辑
    editable: {
@@ -159,9 +160,12 @@ const emits = defineEmits(['on-save-column-edit', 'on-close-column-edit', 'on-pa
 let editingId = ref<string>()
 let tableData = ref<any[]>(cloneDeep(props.data))
 let editRowAction = ref<string>(props.rowOperation)
+const columnOptions = ref<TableOption[]>(props.options)
+const dynamicCheckbox = ref<TableOption[]>(columnOptions.value)
+const dynamicChecked = ref<string[]>(dynamicCheckbox.value.map((c) => c.prop))
 const isLoading = computed(() => !props.data || !props.data.length)
-const normalOptions = computed(() => props.options.filter((item: TableOption) => !item.action))
-const actionOptions = computed(() => props.options.find((item: TableOption) => item.action))
+const normalOptions = computed(() => columnOptions.value.filter((item: TableOption) => !item.action))
+const actionOptions = computed(() => columnOptions.value.find((item: TableOption) => item.action))
 const handleEdit = (scope: any) => {
    editingId.value = scope.$index + scope.column.id
 }
@@ -198,9 +202,14 @@ watch(() => props.data, newVal => {
       item.isEditing = false
    })
 }, { deep: true })
-
+watch(() => props.options,(newVal) => {
+   columnOptions.value = newVal
+})
 watch(() => props.rowOperation, newVal => {
    editRowAction.value = newVal
+})
+watch(() => dynamicChecked.value,(newVal) => {
+   columnOptions.value = props.options.filter((opt) => newVal.includes(opt.prop))
 })
 onMounted(() => {
    tableData.value.map((item) => {
@@ -223,22 +232,26 @@ onMounted(() => {
 
    @include e(icons) {
       display: flex;
+
       svg {
          width: 1em;
          height: 1em;
          cursor: pointer;
       }
    }
+
    .edit-status {
       svg {
          width: 1.2em;
          height: 1.2em;
       }
+
       svg:hover {
          transform: scale(1.2);
       }
    }
 }
+
 .pagination {
    display: flex;
    margin: 10px 0;
