@@ -1,6 +1,6 @@
 <template>
     <div class="article-rank">
-        <m-table :data="data" :options="options" :rowOperation="rowOperation" border dynamic>
+        <m-table :data="data" :options="options" :rowOperation="rowOperation" border dynamic draggable>
             <template #ranking="{ scope }">
                 <el-tag type="danger">{{ scope.row.ranking }}</el-tag>
             </template>

@@ -1,11 +1,11 @@
 <template>
    <div>
       <el-card v-if="dynamic" shadow="never" :body-style="{ padding: '10px' }" mb10>
-         <el-row :gutter="10" align="middle" >
+         <el-row :gutter="10" align="middle">
             <el-col :span="2">
                <span fz16 fw6>动态展示</span>
             </el-col>
-            <el-col :span="22" >
+            <el-col :span="22">
                <el-checkbox-group v-model="dynamicChecked" :min="1">
                   <el-checkbox v-for="c in dynamicCheckbox" :key="c.prop" :label="c.prop">{{
                      c.label
@@ -14,7 +14,7 @@
             </el-col>
          </el-row>
       </el-card>
-      <el-table :data="tableData" v-bind="$attrs" v-loading="isLoading" :element-loading-text="elementLoadingText"
+      <el-table ref="tableRef" :data="tableData" v-bind="$attrs" v-loading="isLoading" :element-loading-text="elementLoadingText"
          :element-loading-spinner="elementLoadingSpinner" :element-loading-svg-view-box="elementLoadingSvgViewBox"
          :element-loading-background="elementLoadingBackground" @row-click="handleRowClick">
          <el-table-column v-if="type" :type="type"></el-table-column>
@@ -62,7 +62,7 @@
             </el-table-column>
          </template>
          <!-- 操作列 -->
-         <el-table-column :label="actionOptions?.label" :width="actionOptions?.width" :align="actionOptions?.align"
+         <el-table-column :label="actionOptions?.prop" :width="actionOptions?.width" :align="actionOptions?.align"
             v-if="actionOptions?.action">
             <template #default="scope">
                <template v-if="scope.row.isEditing">
@@ -87,6 +87,12 @@
 import { computed, onMounted, PropType, ref, watch } from 'vue';
 import cloneDeep from 'lodash/cloneDeep'
 import { TableOption } from '@/types/component';
+import { initSortable } from '@/utils/sortable'
+import { useTheme } from '@/hooks/setting/useTheme';
+import type {ElTable} from 'element-plus'
+import type { Options, SortableEvent } from 'sortablejs'
+import { msgSuccess } from '@/utils/notice';
+
 const props = defineProps({
    options: {
       type: Array as PropType<TableOption[]>,
@@ -106,6 +112,11 @@ const props = defineProps({
    },
    // 列是否可编辑
    editable: {
+      type: Boolean,
+      default: false
+   },
+   // 行课拖拽
+   draggable: {
       type: Boolean,
       default: false
    },
@@ -157,9 +168,11 @@ const props = defineProps({
 
 })
 const emits = defineEmits(['on-save-column-edit', 'on-close-column-edit', 'on-pagesize-change', 'on-current-page-change', 'on-prev-click', 'on-next-click'])
-let editingId = ref<string>()
-let tableData = ref<any[]>(cloneDeep(props.data))
-let editRowAction = ref<string>(props.rowOperation)
+const {getAppThemeColor} = useTheme()
+const tableRef = ref<InstanceType<typeof ElTable>>()
+const editingId = ref<string>()
+const tableData = ref<any[]>(cloneDeep(props.data))
+const editRowAction = ref<string>(props.rowOperation)
 const columnOptions = ref<TableOption[]>(props.options)
 const dynamicCheckbox = ref<TableOption[]>(columnOptions.value)
 const dynamicChecked = ref<string[]>(dynamicCheckbox.value.map((c) => c.prop))
@@ -178,7 +191,9 @@ const handleCloseColumnEdit = (scope: any) => {
    emits('on-close-column-edit', scope)
 }
 const handleRowClick = (row: any, column: any) => {
-   if (column.label === actionOptions.value?.label) {
+
+   // 点击操作列才会处理
+   if (column.label === actionOptions.value?.prop) {
 
       if (props.editable && editRowAction.value === 'edit') {
          row.isEditing = !row.isEditing
@@ -190,36 +205,52 @@ const handleRowClick = (row: any, column: any) => {
          })
       }
    }
-
 }
 const handleSizeChange = (val: number) => { emits('on-pagesize-change', val) }
 const handleCurrentChange = (val: number) => { emits('on-current-page-change', val) }
 const handlePrevClick = (...val: any) => { emits('on-prev-click', val) }
 const handleNextClick = (...val: any) => { emits('on-next-click', val) }
+const _initSortable = () => {
+   // TODO: querySelector 选择器
+   const el = tableRef.value && tableRef.value.$el.querySelector(`.el-table__body-wrapper`).querySelector('tbody')
+   const options: Options = {
+      ghostClass:'sortable-ghost',
+      onEnd: onSortEnd
+   }
+   initSortable(el, options)
+}
+const onSortEnd = (e: SortableEvent) => { 
+   const {oldIndex,newIndex} = e
+   if (oldIndex === newIndex) {
+      return
+   }
+   msgSuccess(`oldIndex:${oldIndex},newIndex:${newIndex},调用Api更新...`)
+}
 watch(() => props.data, newVal => {
    tableData.value = cloneDeep(newVal)
    tableData.value.map(item => {
       item.isEditing = false
    })
 }, { deep: true })
-watch(() => props.options,(newVal) => {
+watch(() => props.options, (newVal) => {
    columnOptions.value = newVal
 })
-watch(() => props.rowOperation, newVal => {
+watch(() => props.rowOperation, (newVal) => {
    editRowAction.value = newVal
 })
-watch(() => dynamicChecked.value,(newVal) => {
+watch(() => dynamicChecked.value, (newVal) => {
    columnOptions.value = props.options.filter((opt) => newVal.includes(opt.prop))
 })
 onMounted(() => {
    tableData.value.map((item) => {
       item.isEditing = false
    })
+   props.draggable && _initSortable()
 })
 </script>
 
 <style lang='scss' scoped>
-@use '@/styles/tools/mixin/BEM' as *;
+@use '@/styles/tools/mixin/BEM'as *;
 
 @include b(column) {
    display: flex;
@@ -251,10 +282,13 @@ onMounted(() => {
       }
    }
 }
-
 .pagination {
    display: flex;
    margin: 10px 0;
    justify-content: flex-end;
+}
+:deep(.sortable-ghost){
+   opacity: 0.5;
+   background-color: v-bind(getAppThemeColor);
 }
 </style>

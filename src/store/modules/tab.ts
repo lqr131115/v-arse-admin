@@ -29,6 +29,12 @@ export const useTabStore = defineStore({
       }
       this.setTabList(oldList);
     },
+    setTabSort(oldIndex: number, newIndex: number) {
+      const oldList = this.getTabList;
+      const sortTab = oldList.splice(oldIndex, 1);
+      oldList.splice(newIndex, 0, ...sortTab);
+      this.setTabList(oldList);
+    },
     async refreshPage(router: Router) {
       const redo = useRedo(router);
       await redo();
