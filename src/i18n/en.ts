@@ -13,7 +13,7 @@ export default {
     articleRank: "ArticleRanking",
     articleCreate: "ArticleCreate",
     articleDetail: "ArticleDetail",
-    articleEditor: "ArticleEditor",
+    articleEdit: "ArticleEdit",
     component: "Component",
     cPicker: "Picker",
     cTable: "Table",

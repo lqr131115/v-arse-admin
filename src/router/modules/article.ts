@@ -8,9 +8,10 @@ export default [
     name: C.ARTICLE_DETAIL_NAME,
     children: [
       {
-        path: "/article/detail",
+        path: "/article/detail/:id",
         component: () => import("@/views/article/detail/articleDetail.vue"),
-        meta: { title: "articleDetail", icon: "notebook" },
+        props: true,
+        meta: { title: "articleDetail"},
       },
     ],
     meta: { title: "article", icon: "management" },
@@ -41,10 +42,25 @@ export default [
         name: C.ARTICLE_CREATE_NAME,
         component: () => import("@/views/article/create/articleCreate.vue"),
         meta: { title: "articleCreate", icon: "edit-pen" },
+      }
+    ],
+    meta: { title: "article", icon: "management" },
+  },
+  {
+    path: "/article",
+    redirect: "/article/detail",
+    component: layout,
+    name: C.ARTICLE_EDIT_NAME,
+    children: [
+      {
+        path: "/article/edit/:id",
+        name: C.ARTICLE_EDIT_NAME,
+        component: () => import("@/views/article/create/articleCreate.vue"),
+        props:true,
+        meta: { title: "articleEdit" },
       },
     ],
     meta: { title: "article", icon: "management" },
   },
-  
 ]
 

@@ -45,6 +45,7 @@ export const getUserProfile = (config: any) => {
       R.ARTICLE_DETAIL_NAME,
       R.ARTICLE_RANK_NAME,
       R.ARTICLE_CREATE_NAME,
+      R.ARTICLE_EDIT_NAME,
       R.ARTICLE_MANAGE_NAME
     ];
     permission.points = [

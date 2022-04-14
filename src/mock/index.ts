@@ -27,3 +27,4 @@ Mock.mock('/mock/permission/list', 'get', permission.getPermissionList);
 
 // article
 Mock.mock('/mock/article/list', 'get', article.getArticleList);
+Mock.mock('/mock/article/detail', 'post', article.getArticleDetail);

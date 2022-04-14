@@ -17,13 +17,15 @@
 </template>
 <script lang='ts' setup>
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router';
 import { Article } from '@/mock/model'
 import { getArticleList } from '@/api/article';
 import { formatTimeStamp } from '@/utils/moment';
 import { msgSuccess } from '@/utils/notice';
 import type { TableOption } from '@/types/component'
 import type { Options, SortableEvent } from 'sortablejs'
-
+import { PageEnum } from '@/enums/pageEnum';
+const router = useRouter()
 const data = ref<Article[]>([])
 const rowOperation = ref<string>('')
 const options: TableOption[] = [
@@ -70,7 +72,10 @@ const sortOptions: Options = {
     ghostClass: 'sortable-ghost',
     onEnd: onSortEnd
 }
-const handleRowCheck = (scope: any) => { rowOperation.value = 'check' }
+const handleRowCheck = (scope: any) => {
+    rowOperation.value = 'check'
+    router.push(`${PageEnum.ARTICLE_DETAIL}/${scope.row._id}`)
+}
 const handleRowDelete = (scope: any) => { rowOperation.value = 'delete' }
 const _getArticleList = async () => {
     const res = await getArticleList()

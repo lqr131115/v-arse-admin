@@ -13,7 +13,7 @@ export default {
     articleRank: "文章排名",
     articleCreate: "创建文章",
     articleDetail: "文章详情",
-    articleEditor: "文章编辑",
+    articleEdit: "文章编辑",
     component: "组件库",
     cPicker: "选择器",
     cTable: "表格",

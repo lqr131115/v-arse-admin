@@ -15,6 +15,7 @@ export const USER_INFO_NAME = 'user-info'
 export const ARTICLE_DETAIL_NAME = 'article-detail'
 export const ARTICLE_RANK_NAME = 'article-rank'
 export const ARTICLE_CREATE_NAME = 'article-create'
+export const ARTICLE_EDIT_NAME = 'article-edit'
 export const ARTICLE_MANAGE_NAME = 'article-manage'
 
 export const COMPONENT_PICKER_NAME = 'component-picker'
