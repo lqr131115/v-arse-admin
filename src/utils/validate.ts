@@ -26,6 +26,10 @@ export function isArray(val: any): val is any[] {
   return Array.isArray(val);
 }
 
+export function isDate(val:any): val is Date {
+  return val instanceof Date;
+}
+
 export function isRegW(val: string): boolean {
   return /\w/g.test(val);
 }

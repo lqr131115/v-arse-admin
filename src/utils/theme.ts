@@ -3,7 +3,7 @@
  * @author lqr
  */
 import axios from "axios";
-import formula from "@/constants/formula.json";
+import formula from "@/constants/json/formula.json";
 import { convert } from "@/utils/color";
 
 /**

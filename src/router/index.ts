@@ -69,12 +69,6 @@ export const publicRoutes: RouteRecordRaw[] = [
     component: layout,
     children: [
       {
-        path: "/component/picker",
-        name: C.COMPONENT_PICKER_NAME,
-        component: () => import("@/views/component/cPicker/cPicker.vue"),
-        meta: { title: "cPicker", icon: "aim" },
-      },
-      {
         path: "/component/table",
         name: C.COMPONENT_TABLE_NAME,
         component: () => import("@/views/component/cTable/cTable.vue"),
@@ -85,6 +79,12 @@ export const publicRoutes: RouteRecordRaw[] = [
         name: C.COMPONENT_FORM_NAME,
         component: () => import("@/views/component/cForm/cForm.vue"),
         meta: { title: "cForm", icon: "film" },
+      },
+      {
+        path: "/component/picker",
+        name: C.COMPONENT_PICKER_NAME,
+        component: () => import("@/views/component/cPicker/cPicker.vue"),
+        meta: { title: "cPicker", icon: "aim" },
       },
       {
         path: "/component/parser",
