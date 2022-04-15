@@ -171,7 +171,7 @@ export const options: FormOptions[] = [
   },
   {
     type: "editor",
-    value: "默认值",
+    value: "",
     prop: "desc",
     label: "描述",
     placeholder: "请输入描述",
@@ -182,5 +182,12 @@ export const options: FormOptions[] = [
         trigger: "blur",
       },
     ],
+  },
+  {
+    type: "markdown",
+    value: "",
+    prop: "detail",
+    label: "详情",
+    placeholder: "请输入描述",
   },
 ];

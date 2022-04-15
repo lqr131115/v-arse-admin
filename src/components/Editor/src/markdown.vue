@@ -2,21 +2,24 @@
     <div ref="mkRef"></div>
 </template>
 <script lang='ts' setup>
-import { onMounted, PropType, watch, ref } from 'vue';
-import MK, { EditorOptions, EditorCore } from '@toast-ui/editor'
+import { onMounted, watch, ref } from 'vue';
+import MK, { EditorCore } from '@toast-ui/editor'
 import '@toast-ui/editor/dist/toastui-editor.css'
-import { Article } from '@/mock/model';
+import { MKEditorOptions, defaultMarkdownOpts } from './data'
 
-type MKEditorOptions = Omit<EditorOptions, 'el'>
 const props = defineProps({
-    detail: {
-        type: Object as PropType<Article>,
-        default: () => ({}),
+    options: {
+        type: Object,
+        default: () => defaultMarkdownOpts,
     },
     content: {
         type: String
     },
+    onContentChange: {
+        type: Function
+    }
 })
+const emits = defineEmits(['change'])
 let editor: EditorCore;
 const mkRef = ref<any>()
 const getHtmlContent = () => {
@@ -25,24 +28,21 @@ const getHtmlContent = () => {
 const initMKEditor = (el: HTMLElement, options: MKEditorOptions) => {
     return new MK({
         el,
-        ...options
+        ...options,
+        events:{
+            change:() => {
+                emits('change', getHtmlContent())
+            }
+        }
     })
 }
 const _initMKEditor = () => {
-    if (!mkRef.value) {return}
-    const options: MKEditorOptions = {
-        height: '450px',
-        previewStyle: 'vertical',
-        // events: {
-        //     change: onContentChange
-        // }
-        // language: getLanguage.value === LOCALE.EN_US ? 'en' : 'zh-CN',
-    }
-    editor = initMKEditor(mkRef.value, options)
+    if (!mkRef.value) { return }
+    editor = initMKEditor(mkRef.value, props.options)
     editor.getMarkdown()
 }
-const resetMKEditor = () => {
-    editor.setMarkdown('')
+const resetMKEditor = (val: string = '') => {
+    editor.setMarkdown(val)
 }
 watch(() => props.content, (newVal) => {
     if (newVal) {

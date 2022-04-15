@@ -1,7 +1,8 @@
 <template>
     <div class="form">
         <el-card>
-            <c-form ref="cFromRef" :options="options" label-position="top" hide-required-asterisk @on-change="handleChange">
+            <c-form ref="cFromRef" :options="options" label-position="top" hide-required-asterisk
+                @on-change="handleChange">
                 <template #default>
                     <el-button type="primary">上传</el-button>
                 </template>
@@ -28,18 +29,20 @@ const submitForm = (scope: any) => {
     if (!scope.form) return
     scope.form.validate((valid: any) => {
         if (valid) {
-            msgSuccess('提交成功')
+            msgSuccess('提交成功,查看控制台')
         } else {
             console.log('error', scope.model);
             return false
         }
     })
 }
-const resetForm = () => { cFromRef.value && cFromRef.value.resetFields() }
+const resetForm = () => {
+    cFromRef.value && cFromRef.value.resetFields()
+}
 </script>
 
 <style lang='scss' scoped>
-@use '@/styles/tools/mixin/BEM'as *;
+@use '@/styles/tools/mixin/BEM' as *;
 
 @include b(form) {
     padding: 10px

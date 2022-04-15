@@ -2,37 +2,44 @@
     <div ref="richRef"></div>
 </template>
 <script lang='ts' setup>
-import { watch, onMounted, PropType,ref } from 'vue';
-import { Article } from '@/mock/model';
 import E from 'wangeditor'
+import { watch, onMounted, ref } from 'vue';
+import { defaultRichTextOpts } from './data'
 const props = defineProps({
-    detail: {
-        type: Object as PropType<Article>,
-        default: () => ({}),
+    options: {
+        type: Object,
+        default: () => defaultRichTextOpts,
     },
     content: {
         type: String,
+    },
+    onContentChange: {
+        type: Function
     }
 })
+const emits = defineEmits(['change'])
 let editor: E;
 const richRef = ref<any>()
 const getHtmlContent = () => {
     return editor.txt.html()
 }
-const resetRichEditor = () => {
-    editor.txt.html('')
+const resetRichEditor = (val: string = '') => {
+    editor.txt.html(val)
 }
 const _initWEditor = () => {
-  
+
     if (!richRef.value) { return }
     editor = new E(richRef.value)
-    editor.config.height = 400
-    editor.config.zIndex = 100
-    editor.config.showMenuTooltips = true
-    // editor.config.onchange = onContentChange
-
+    for (const key in props.options) {
+        if (Object.prototype.hasOwnProperty.call(props.options, key)) {
+            const optVal = props.options[key]
+            editor.config[key] = optVal
+        }
+    }
+    editor.config.onchange = (newHtml: string) => {
+        emits('change', newHtml)
+    }
     editor.create()
-
 }
 watch(() => props.content, (newVal) => {
     if (newVal) {

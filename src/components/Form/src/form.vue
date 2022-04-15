@@ -27,11 +27,13 @@
         </template>
         <!-- WangEditor -->
         <template v-else-if="item.type === 'editor'">
-          <div id="editor"></div>
+          <m-rich-text ref="richRef" :content="formModel[item.prop!]"
+            @change="(val: string) => { onContentChange(val, item) }"></m-rich-text>
         </template>
-        <!-- TODO: MarkDown -->
+        <!-- MarkDown -->
         <template v-else-if="item.type === 'markdown'">
-          <div id="markdown">I AM markdown</div>
+          <m-markdown ref="mkRef" :content="formModel[item.prop!]"
+            @change="(val: string) => { onContentChange(val, item) }"></m-markdown>
         </template>
         <template v-else>
           <component :is="`el-${item.type}`" :placeholder="item.placeholder" v-model="formModel[item.prop!]"
@@ -46,8 +48,7 @@
   </el-form>
 </template>
 <script lang='ts' setup>
-import { nextTick, onMounted, ref } from 'vue';
-import E from 'wangeditor'
+import { getCurrentInstance, onMounted, ref } from 'vue';
 import cloneDeep from 'lodash/cloneDeep'
 import type { PropType } from 'vue'
 import type { UploadFile, FormInstance } from 'element-plus'
@@ -60,70 +61,58 @@ const props = defineProps({
   },
   httpRequest: {
     type: Function
-  }
+  },  
+  richTextOptions: {
+    type: Object
+  },
+  markdownOptions: {
+    type: Object
+  },
 })
+
 const emits = defineEmits(['on-preview', 'on-remove', 'on-success', 'on-error', 'on-progress', 'on-change', 'before-upload', 'before-remove', 'on-exceed'])
+const _this = getCurrentInstance()
 const formModel = ref<any>(null)
 const formRules = ref<any>([])
 const formRef = ref<FormInstance>()
-const wEditor = ref()
-const init = () => {
+const richRef = ref<any>()
+const mkRef = ref<any>()
+
+const onContentChange = (val: string, item: FormOptions) => { formModel.value[item.prop!] = val }
+const initData = () => {
   if (props.options && props.options.length) {
     const m: any = {}
     const r: any = {}
     props.options.map((item: FormOptions) => {
       m[item.prop!] = item.value
       r[item.prop!] = item.rule
-      if (item.type === 'editor') {
-        nextTick(() => {
-          if (document.getElementById('editor')) {
-            _initWEditor(item)
-          }
-        })
-      }
     })
     formModel.value = cloneDeep(m)
     formRules.value = cloneDeep(r)
   }
 }
 
+const resetOther = () => {
+  if (props.options && props.options.length) {
+    const editorItem = props.options.find((item: FormOptions) => (item.type === 'editor' || item.type === 'markdown'))
+    if (editorItem) {
+      // richRef.value && richRef.value.resetRichEditor(editorItem.value)
+      // mkRef.value && mkRef.value.resetMKEditor(editorItem.value)
+      (_this as any).refs.richRef[0].resetRichEditor(editorItem.value);
+      (_this as any).refs.mkRef[0].resetMKEditor(editorItem.value)
+    }
+    // TODO:其他reset
+  }
+}
+
 const resetFields = () => {
   // 重置form 表单
   formRef.value && formRef.value.resetFields()
-  // 重置富文本
-  _resetWEditor()
+  // 重置其他
+  resetOther()
 }
-
-const _initWEditor = (item: FormOptions) => {
-  const editor = new E('#editor')
-  editor.config.placeholder = item.placeholder!
-  editor.create()
-
-  // 富文本内容 
-  editor.txt.html(item.value)
-  // 富文本内容改变时触发
-  editor.config.onchange = (newHtml: string) => {
-    formModel.value[item.prop!] = newHtml
-  }
-
-  wEditor.value = editor
-}
-
-const _resetWEditor = () => {
-  if (props.options && props.options.length) {
-    const editorItem = props.options.find((item: FormOptions) => item.type === 'editor')
-    if (editorItem) {
-      wEditor.value.txt.html(editorItem.value)
-    }
-  }
-}
-
-const validate = () => {
-  return formRef.value && formRef.value.validate
-}
-const getFormModel = () => {
-  return formModel.value
-}
+const validate = () => { return formRef.value && formRef.value.validate }
+const getFormModel = () => { return formModel.value }
 
 // 分发
 defineExpose({
@@ -164,7 +153,7 @@ const onExceed = (files: any, fileList: UploadFile[]) => {
   emits('on-exceed', { files, fileList })
 }
 onMounted(() => {
-  init()
+  initData()
 })
 </script>
 <style lang='scss' scoped>

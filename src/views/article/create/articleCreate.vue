@@ -4,10 +4,10 @@
             <el-input v-model="title"></el-input>
             <el-tabs v-model="activeName" @tab-click="handleToggle">
                 <el-tab-pane label="Markdown" :name="EditorTypeEnum.MARKDOWN">
-                    <Markdown ref="mkRef" :content="content" />
+                    <m-markdown ref="mkRef" :content="content" />
                 </el-tab-pane>
                 <el-tab-pane label="富文本" :name="EditorTypeEnum.RICH_TEXT">
-                    <RichText ref="richRef" :content="content" />
+                    <m-rich-text ref="richRef" :content="content" />
                 </el-tab-pane>
             </el-tabs>
             <div style="text-align: right;" mv10>
@@ -23,8 +23,6 @@ import { EditorTypeEnum } from './data'
 import { getArticleDetail } from '@/api/article'
 import { msgSuccess } from '@/utils/notice';
 import type { TabsPaneContext } from 'element-plus'
-import RichText from './richText.vue';
-import Markdown from './markdown.vue';
 const props = defineProps({
     id: {
         type: String,
