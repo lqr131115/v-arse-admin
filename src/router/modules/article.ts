@@ -9,6 +9,7 @@ export default [
     children: [
       {
         path: "/article/detail/:id",
+        name: C.ARTICLE_DETAIL_NAME,
         component: () => import("@/views/article/detail/articleDetail.vue"),
         props: true,
         meta: { title: "articleDetail"},
@@ -24,6 +25,7 @@ export default [
     children: [
       {
         path: "/article/rank",
+        name: C.ARTICLE_RANK_NAME,
         component: () => import("@/views/article/rank/articleRank.vue"),
         meta: { title: "articleRank", icon: "trophy" },
       },
@@ -38,6 +40,7 @@ export default [
     children: [
       {
         path: "/article/create",
+        name: C.ARTICLE_CREATE_NAME,
         component: () => import("@/views/article/create/articleCreate.vue"),
         meta: { title: "articleCreate", icon: "edit-pen" },
       }
@@ -52,6 +55,7 @@ export default [
     children: [
       {
         path: "/article/edit/:id",
+        name: C.ARTICLE_EDIT_NAME,
         component: () => import("@/views/article/create/articleCreate.vue"),
         props:true,
         meta: { title: "articleEdit" },

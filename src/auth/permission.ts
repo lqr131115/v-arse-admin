@@ -10,6 +10,7 @@ import { usePermissionStore } from "@/store/modules/permission";
 import { isTimeout } from "@/utils/auth";
 import { msgError } from "@/utils/notice";
 import { PageEnum } from "@/enums/pageEnum";
+import i18n from "@/i18n";
 
 /**
  * 路由前置守卫
@@ -25,6 +26,10 @@ router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
   const appStore = useAppStore();
   const permissionStore = usePermissionStore();
+  if (to.meta.title)   {
+    // TODO: 简单处理动态title
+    document.title = i18n.global.t(`route.${to.meta.title}`);
+  }
   if (userStore.token) {
     // 用户已登录 不能回到login页
     if (to.path === LOGIN_PATH) {
