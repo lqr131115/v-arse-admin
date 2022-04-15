@@ -117,7 +117,6 @@ const router = createRouter({
 });
 
 export const resetRoute = () => {
-  console.log('resetRoute');
   
   const userStore = useUserStore();
   const userProfile: any = userStore.userProfile;

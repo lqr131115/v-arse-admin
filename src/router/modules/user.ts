@@ -24,7 +24,6 @@ export default [
     children: [
       {
         path: "/user/role",
-        name: C.USER_ROLE_NAME,
         component: () => import("@/views/user/role/roleManage.vue"),
         meta: { title: "roleManage", icon: "collection" },
       },
@@ -39,7 +38,6 @@ export default [
     children: [
       {
         path: "/user/permission",
-        name: C.PERMISSION_LIST_NAME,
         component: () => import("@/views/user/permission/permissionList.vue"),
         meta: { title: "permissionList", icon: "key" },
       },
@@ -54,7 +52,6 @@ export default [
     children: [
       {
         path: "/user/info/:id",
-        name: C.USER_INFO_NAME,
         component: () => import("@/views/user/info/userInfo.vue"),
         props: true,
         meta: { title: "userInfo" },

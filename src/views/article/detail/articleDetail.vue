@@ -14,7 +14,7 @@
                 </span>
             </div>
             <div class="detail__content">
-                <p fz14>{{ data?.desc }}</p>
+                <div v-html="data?.content"></div>
             </div>
 
         </el-card>

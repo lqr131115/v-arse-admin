@@ -39,4 +39,5 @@ export type Article = {
   author: string;
   publicDate: string;
   desc?: string;
+  content?: string;
 };

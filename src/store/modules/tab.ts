@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import { getItem, setItem } from "@/utils/storage";
 import { MULTIPLE_TAB_LIST_KEY } from "@/enums/cacheEnum";
 import { useRedo } from "@/hooks/web";
+import { isNull } from "@/utils/validate";
 export const useTabStore = defineStore({
   id: "tab",
   state: () => ({
@@ -22,9 +23,13 @@ export const useTabStore = defineStore({
       setItem(MULTIPLE_TAB_LIST_KEY, list);
     },
     addTabItem(item: any) {
+      // 有params参数的(动态路由)暂时不添加或者添加一份白名单
+      if (!isNull(item.params)) {
+        return
+      }
       const oldList = this.getTabList;
       const isFind = oldList.find((t: any) => t.path === item.path);
-      if (!isFind) {
+      if (!isFind) {  
         oldList.push(item);
       }
       this.setTabList(oldList);

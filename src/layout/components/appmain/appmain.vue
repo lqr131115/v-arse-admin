@@ -28,13 +28,13 @@ watch(() => route, (to, _) => {
   }
 }, { deep: true })
 
-watchSwitchLanguage(() => {
-  let oldList = tabStore.getTabList
-  oldList = oldList.map((route: any) => {
-    return { ...route, title: genRouteTitle(route.meta.title as string) }
-  })
-  tabStore.setTabList(oldList)
-})
+// watchSwitchLanguage(() => {
+//   let oldList = tabStore.getTabList
+//   oldList = oldList.map((route: any) => {
+//     return { ...route, title: genRouteTitle(route.meta.title as string) }
+//   })
+//   tabStore.setTabList(oldList)
+// })
 </script>
 
 <template>
