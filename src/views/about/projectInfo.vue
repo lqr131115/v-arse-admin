@@ -11,20 +11,28 @@
                 <el-tag size="small">{{ item.content }}</el-tag>
             </template>
             <template #document-link="{ item }">
-                <el-link type="primary" :underline="false">{{ item.content }}</el-link>
+                <el-link type="primary" :underline="false" href="https://github.com/lqr131115/v-arse-admin"
+                    target="_blank">{{
+                        item.content
+                    }}</el-link>
             </template>
             <template #preview-link="{ item }">
-                <el-link type="primary" :underline="false">{{ item.content }}</el-link>
+                <el-link type="primary" :underline="false" href="https://github.com/lqr131115/v-arse-admin"
+                    target="_blank">{{
+                        item.content
+                    }}</el-link>
             </template>
             <template #github="{ item }">
-                <el-link type="primary" :underline="false">{{ item.content }}</el-link>
+                <el-link type="primary" :underline="false" href="https://github.com/lqr131115/v-arse-admin"
+                    target="_blank">{{
+                        item.content
+                    }}</el-link>
             </template>
         </m-descriptions>
     </el-card>
 </template>
 <script lang='ts' setup>
 import type { DescriptionsItem } from '@/types/component'
-
 const data: DescriptionsItem[] = [
     {
         label: '版本',
@@ -52,6 +60,9 @@ const data: DescriptionsItem[] = [
         slot: 'github',
     }
 ]
+const handleClick = () => {
+    window.open('www.baidu.com', '_blank')
+}
 </script>
 <style lang='scss' scoped>
 </style>

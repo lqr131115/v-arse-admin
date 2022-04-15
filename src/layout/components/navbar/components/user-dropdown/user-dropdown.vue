@@ -45,7 +45,7 @@ const logout = () => {
     msgSuccess('退出登录')
 }
 const showDocument = () => {
-    alert`showDocument`
+    window.open('https://github.com/lqr131115/v-arse-admin', '_blank')
 }
 const handleLock = () => { visible.value = true }
 const clickUserDropdownItem = (key: string) => {

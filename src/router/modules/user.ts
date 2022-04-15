@@ -40,7 +40,7 @@ export default [
     children: [
       {
         path: "/user/permission",
-        name: C.USER_ROLE_NAME,
+        name: C.PERMISSION_LIST_NAME,
         component: () => import("@/views/user/permission/permissionList.vue"),
         meta: { title: "permissionList", icon: "key" },
       },
