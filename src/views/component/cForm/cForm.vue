@@ -31,6 +31,7 @@
 import { ref, watch } from 'vue'
 import { options, richTextOpt, markdownOpt } from './data'
 import { msgSuccess } from '@/utils/notice';
+import { FormItem } from '@/types/component'
 
 const cFromRef = ref<any>()
 const richText = ref<boolean>(false)
@@ -53,33 +54,36 @@ const submitForm = (scope: any) => {
 const resetForm = () => {
     cFromRef.value && cFromRef.value.resetFields()
 }
-watch(() => [richText.value, markdown.value], ([newRichTextVal, newMarkdownVal]) => {
-    if (newRichTextVal) {
-        options.push(richTextOpt)
+const hideOrShowEditor = (show: boolean, type: FormItem) => {
+    if (show) {
+        if (type === 'rich-text') {
+            options.push(richTextOpt)
+        } else if (type === 'markdown') {
+            options.push(markdownOpt)
+        } else {
+            // 其他 Editor
+        }
         optionsVal.value = options
     } else {
-        const index = options.findIndex((item: any) => item.type === 'rich-text')
+        const index = options.findIndex((item: any) => item.type === type)
         if (~index) {
             options.splice(index, 1)
             optionsVal.value = options
         }
     }
-    if (newMarkdownVal) {
-        options.push(markdownOpt)
-        optionsVal.value = options
-    } else {
-        const index = options.findIndex((item: any) => item.type === 'markdown')
-        if (~index) {
-            options.splice(index, 1)
-            optionsVal.value = options
-        }
-    }
-    msgSuccess('更新成功,下拉查看')
+    msgSuccess('更新成功,下来查看')
+}
+watch(() => richText.value, (newRichTextVal) => {
+    hideOrShowEditor(newRichTextVal, 'rich-text')
+})
+
+watch(() => markdown.value, (newMarkdownVal) => {
+    hideOrShowEditor(newMarkdownVal, 'markdown')
 })
 </script>
 
 <style lang='scss' scoped>
-@use '@/styles/tools/mixin/BEM'as *;
+@use '@/styles/tools/mixin/BEM' as *;
 
 @include b(form) {
     padding: 10px;
