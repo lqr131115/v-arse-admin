@@ -26,7 +26,7 @@
           </el-upload>
         </template>
         <!-- WangEditor -->
-        <template v-else-if="item.type === 'editor'">
+        <template v-else-if="item.type === 'rich-text'">
           <m-rich-text ref="richRef" :content="formModel[item.prop!]"
             @change="(val: string) => { onContentChange(val, item) }"></m-rich-text>
         </template>
@@ -94,7 +94,7 @@ const initData = () => {
 
 const resetOther = () => {
   if (props.options && props.options.length) {
-    const editorItem = props.options.find((item: FormOptions) => (item.type === 'editor' || item.type === 'markdown'))
+    const editorItem = props.options.find((item: FormOptions) => (item.type === 'rich-text' || item.type === 'markdown'))
     if (editorItem) {
       // richRef.value && richRef.value.resetRichEditor(editorItem.value)
       // mkRef.value && mkRef.value.resetMKEditor(editorItem.value)

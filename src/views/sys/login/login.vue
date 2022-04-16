@@ -71,13 +71,13 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         label-position="top"
       >
         <el-form-item label="Username" prop="username">
-          <el-input v-model="loginForm.username" placeholder="super/admin" :prefix-icon="User" />
+          <el-input v-model="loginForm.username" placeholder="用户名为admin或者super" :prefix-icon="User" />
         </el-form-item>
         <el-form-item label="Password" prop="password">
           <el-input
             v-model="loginForm.password"
             type="password"
-            placeholder="123123"
+            placeholder="密码为123123"
             :prefix-icon="Lock"
             show-password
           />

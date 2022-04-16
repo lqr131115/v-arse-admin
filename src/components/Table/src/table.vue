@@ -14,9 +14,10 @@
             </el-col>
          </el-row>
       </el-card>
-      <el-table ref="tableRef" :data="tableData" v-bind="$attrs" v-loading="isLoading" :element-loading-text="elementLoadingText"
-         :element-loading-spinner="elementLoadingSpinner" :element-loading-svg-view-box="elementLoadingSvgViewBox"
-         :element-loading-background="elementLoadingBackground" @row-click="handleRowClick">
+      <el-table ref="tableRef" :data="tableData" v-bind="$attrs" v-loading="isLoading"
+         :element-loading-text="elementLoadingText" :element-loading-spinner="elementLoadingSpinner"
+         :element-loading-svg-view-box="elementLoadingSvgViewBox" :element-loading-background="elementLoadingBackground"
+         @row-click="handleRowClick">
          <el-table-column v-if="type" :type="type"></el-table-column>
          <template v-for="item in normalOptions" :key="item.label">
             <el-table-column :label="item.label" :width="item.width" v-bind="item.attrs">
@@ -62,8 +63,8 @@
             </el-table-column>
          </template>
          <!-- 操作列 -->
-         <el-table-column :label="actionOptions?.prop" :width="actionOptions?.width" :align="actionOptions?.align"
-            v-if="actionOptions?.action">
+         <el-table-column :label="actionOptions?.label" :prop="actionOptions?.prop" :width="actionOptions?.width"
+            :align="actionOptions?.align" v-if="actionOptions?.action">
             <template #default="scope">
                <template v-if="scope.row.isEditing">
                   <el-button type="primary" size="small">确定</el-button>
@@ -89,7 +90,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import { TableOption } from '@/types/component';
 import { initSortable } from '@/utils/sortable'
 import { useTheme } from '@/hooks/setting/useTheme';
-import type {ElTable} from 'element-plus'
+import type { ElTable } from 'element-plus'
 
 const props = defineProps({
    options: {
@@ -121,7 +122,7 @@ const props = defineProps({
    // sortOptions
    sortOptions: {
       type: Object,
-      default:() => {}
+      default: () => { }
    },
    // 行操作的标识
    rowOperation: {
@@ -171,7 +172,7 @@ const props = defineProps({
 
 })
 const emits = defineEmits(['on-save-column-edit', 'on-close-column-edit', 'on-pagesize-change', 'on-current-page-change', 'on-prev-click', 'on-next-click'])
-const {getAppThemeColor} = useTheme()
+const { getAppThemeColor } = useTheme()
 const tableRef = ref<InstanceType<typeof ElTable>>()
 const editingId = ref<string>()
 const tableData = ref<any[]>(cloneDeep(props.data))
@@ -194,10 +195,8 @@ const handleCloseColumnEdit = (scope: any) => {
    emits('on-close-column-edit', scope)
 }
 const handleRowClick = (row: any, column: any) => {
-
    // 点击操作列才会处理
-   if (column.label === actionOptions.value?.prop) {
-
+   if (column.property === actionOptions.value?.prop) {
       if (props.editable && editRowAction.value === 'edit') {
          row.isEditing = !row.isEditing
          // 其他行为恢复为非编辑态
@@ -229,6 +228,9 @@ watch(() => props.options, (newVal) => {
 })
 watch(() => props.rowOperation, (newVal) => {
    editRowAction.value = newVal
+})
+watch(() => props.draggable, (newVal) => {
+   newVal && _initSortable()
 })
 watch(() => dynamicChecked.value, (newVal) => {
    columnOptions.value = props.options.filter((opt) => newVal.includes(opt.prop))
@@ -274,12 +276,14 @@ onMounted(() => {
       }
    }
 }
+
 .pagination {
    display: flex;
    margin: 10px 0;
    justify-content: flex-end;
 }
-:deep(.sortable-ghost){
+
+:deep(.sortable-ghost) {
    opacity: 0.5;
    background-color: v-bind(getAppThemeColor);
 }

@@ -72,7 +72,7 @@ export type FormItem =
   | "time-select"
   | "transfer"
   | "upload"
-  | "editor"
+  | "rich-text"
   | "markdown";
 
 export type FormOptions = {

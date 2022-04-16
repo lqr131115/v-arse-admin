@@ -55,10 +55,10 @@ export const getUserProfile = (config: any) => {
   } else if (role.startsWith("admin")) {
     permission.menus = [
       R.USER_MANAGE_NAME,
-      R.ARTICLE_MANAGE_NAME
+      R.USER_INFO_NAME,
     ];
     permission.points = [
-      A.ROLE_ASSIGN_NAME
+      A.CHECK_USER_INFO_NAME
     ];
   }
   return Mock.mock({

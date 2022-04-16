@@ -18,6 +18,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  server: {
+    // Listening on all local IPs
+    host: true,
+  },
   css: {
     preprocessorOptions: {
       scss: {

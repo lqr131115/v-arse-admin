@@ -169,25 +169,20 @@ export const options: FormOptions[] = [
       limit: 2,
     },
   },
-  {
-    type: "editor",
-    value: "",
-    prop: "desc",
-    label: "描述",
-    placeholder: "请输入描述",
-    rule: [
-      {
-        required: true,
-        message: "描述不能为空",
-        trigger: "blur",
-      },
-    ],
-  },
-  {
-    type: "markdown",
-    value: "",
-    prop: "detail",
-    label: "详情",
-    placeholder: "请输入描述",
-  },
 ];
+
+export const richTextOpt:FormOptions =  {
+  type: "rich-text",
+  value: "",
+  prop: "desc",
+  label: "富文本描述",
+  placeholder: "请输入描述",
+}
+
+export const markdownOpt:FormOptions =   {
+  type: "markdown",
+  value: "",
+  prop: "detail",
+  label: "Markdown详情",
+  placeholder: "请输入描述",
+}
