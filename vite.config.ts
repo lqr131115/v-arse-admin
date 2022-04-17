@@ -18,6 +18,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 2000,
+  },
   server: {
     // Listening on all local IPs
     host: true,
@@ -28,6 +31,8 @@ export default defineConfig({
         additionalData: `
           @use "@/styles/global.scss" as *;
         `,
+        javascriptEnabled: true,
+        charset: false,
       },
     },
   },
