@@ -1,4 +1,5 @@
 import { EChartsOption } from "echarts";
+import { BAIDU_MAP_AK } from "@/constants";
 
 const data: { name: string; value: number }[] = [
   { name: "海门", value: 9 },
@@ -412,7 +413,7 @@ export const mapChartOpts: EChartsOption = {
     trigger: "item",
   },
   bmap: {
-    key: "GugePIPLORdrHGvCKGCSLLNBdZzAMu3W",
+    key: BAIDU_MAP_AK,
     center: [104.114129, 37.550339],
     zoom: 5,
     roam: true,

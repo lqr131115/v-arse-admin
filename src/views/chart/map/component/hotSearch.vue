@@ -17,7 +17,10 @@ import { onMounted } from 'vue';
 import { hotSearchOpts } from '../data'
 
 onMounted(() => {
-    const ele = document.getElementById('main')!
+    const ele = document.getElementById('main')
+    if (!ele) {
+        return
+    }
     const chart = echarts.init(ele);
     chart.setOption(hotSearchOpts)
 })

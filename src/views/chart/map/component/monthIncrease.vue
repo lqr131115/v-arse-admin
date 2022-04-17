@@ -20,8 +20,7 @@ import { monthIncreaseOpts } from '../data'
 onMounted(() => {
     const ele = document.getElementById('monthincrease')!
     if (!ele) {
-        location.reload()
-        console.log('mapChart-reload');
+        // location.reload()
         return
     }
     const chart = echarts.init(ele);
