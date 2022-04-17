@@ -28,6 +28,7 @@ const navBarTheme = computed(() => ({ backgroundColor: getNavbarBgColor.value })
         </el-header>
         <el-main>
           <app-main></app-main>
+          <el-backtop target=".el-main" />
         </el-main>
       </el-container>
     </el-container>

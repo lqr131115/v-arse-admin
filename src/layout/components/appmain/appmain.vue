@@ -26,7 +26,7 @@ watch(() => route, (to, _) => {
   } else {
     return
   }
-}, { deep: true })
+}, { deep: true ,immediate:true})
 
 // watchSwitchLanguage(() => {
 //   let oldList = tabStore.getTabList
@@ -38,24 +38,26 @@ watch(() => route, (to, _) => {
 </script>
 
 <template>
-  <MultipleTabs v-if="showMultipleTabs" />
-  <div class="main">
-    <router-view v-slot="{ Component, route }">
-      <template v-if="Component">
-        <transition :name="getAnimationType || 'fade'" mode="out-in">
-          <keep-alive>
-            <suspense>
-              <component :is="Component" :key="route.path"></component>
-              <template #fallback>
-                <div>Loading...</div>
-              </template>
-            </suspense>
-          </keep-alive>
-        </transition>
-      </template>
-    </router-view>
+  <div>
+    <MultipleTabs v-if="showMultipleTabs" />
+    <div class="main">
+      <router-view v-slot="{ Component, route }">
+        <template v-if="Component">
+          <transition :name="getAnimationType || 'fade'" mode="out-in">
+            <keep-alive>
+              <suspense>
+                <component :is="Component" :key="route.path"></component>
+                <template #fallback>
+                  <div>Loading...</div>
+                </template>
+              </suspense>
+            </keep-alive>
+          </transition>
+        </template>
+
+      </router-view>
+    </div>
   </div>
-  <!-- <el-backtop /> -->
 </template>
 
 <style lang="scss" scoped>

@@ -17,7 +17,7 @@
                     }}</el-link>
             </template>
             <template #preview-link="{ item }">
-                <el-link type="primary" :underline="false" href="https://github.com/lqr131115/v-arse-admin"
+                <el-link type="primary" :underline="false" href="http://ares.echo.ah.cn/"
                     target="_blank">{{
                         item.content
                     }}</el-link>
