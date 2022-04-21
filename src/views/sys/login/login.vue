@@ -5,7 +5,7 @@
         <span class="text_1">Call Me <span>Ares</span></span>
         <img class="login-box-bg" src="@/icons/svg/login-box-bg.svg" alt="">
         <span class="text_2">一个简约的、开箱即用的后台管理系统解决方案</span>
-        <p fz16>我自由向往水乡风光 可我从未去过江南</p>
+        <p fz16>我自幼向往水乡风光 可我从未去过江南</p>
         <p fz16>你说你是姑苏人 在我看来</p>
         <p fz16>你和那到不了的江南一样</p>
       </div>
@@ -99,6 +99,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       console.log('error submit!', fields)
     }
   })
+}
+
+const _login = () => {
+  
 }
 
 </script>

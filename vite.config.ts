@@ -24,6 +24,12 @@ export default defineConfig({
   server: {
     // Listening on all local IPs
     host: true,
+    // proxy: {
+    //   "/api": {
+    //     target: "http://localhost:3000",
+    //     changeOrigin: true,
+    //   },
+    // },
   },
   css: {
     preprocessorOptions: {
