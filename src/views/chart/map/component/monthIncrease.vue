@@ -1,5 +1,5 @@
 <template>
-    <c-common-card2 :style="{ width: '100%' }" shadow="hover">
+    <c-common-card2 :style="{ width: '100%'}" shadow="hover">
         <template #header>
             <div class="header-wrapper">
                 <div class="header-title">用户月同比增长</div>
@@ -16,15 +16,12 @@ import { useRouter } from 'vue-router';
 import * as echarts from 'echarts';
 import 'echarts-liquidfill'
 import { monthIncreaseOpts } from '../data'
-import { useTabStore } from '@/store/modules/tab';
-const useTab = useTabStore()
 const router = useRouter()
 const initChart = async () => {
     const ele = document.getElementById('monthincrease')
     if (!ele) {
-        await useTab.refreshPage(router)
-        // router.go(0)
-        // location.reload()
+        router.go(0)
+        //or location.reload()
         return
     }
     const chart = echarts.init(ele);
@@ -33,7 +30,6 @@ const initChart = async () => {
 onMounted(() => {
     initChart()
 })
-
 
 </script>   
 <style lang='scss' scoped>
