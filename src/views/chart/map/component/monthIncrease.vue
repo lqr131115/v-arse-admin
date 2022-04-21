@@ -11,21 +11,29 @@
     </c-common-card2>
 </template>
 <script lang='ts' setup>
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import * as echarts from 'echarts';
 import 'echarts-liquidfill'
-import { onMounted } from 'vue';
 import { monthIncreaseOpts } from '../data'
-
-
-onMounted(() => {
-    const ele = document.getElementById('monthincrease')!
+import { useTabStore } from '@/store/modules/tab';
+const useTab = useTabStore()
+const router = useRouter()
+const initChart = async () => {
+    const ele = document.getElementById('monthincrease')
     if (!ele) {
+        await useTab.refreshPage(router)
+        // router.go(0)
         // location.reload()
         return
     }
     const chart = echarts.init(ele);
     chart.setOption(monthIncreaseOpts)
+}
+onMounted(() => {
+    initChart()
 })
+
 
 </script>   
 <style lang='scss' scoped>

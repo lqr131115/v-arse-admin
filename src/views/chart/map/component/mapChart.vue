@@ -7,7 +7,7 @@ import 'echarts/extension/bmap/bmap'
 import { EChartsOption } from 'echarts'
 import { mapChartOpts } from '../data'
 import { initBMapScript } from '@/utils/script'
-let option = ref<EChartsOption>()
+const option = ref<EChartsOption>()
 onMounted(() => {
     initBMapScript().then(() => {
         option.value = mapChartOpts
@@ -15,4 +15,5 @@ onMounted(() => {
         console.log('err', err);
     })
 })
+
 </script>

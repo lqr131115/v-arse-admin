@@ -11,19 +11,23 @@
     </c-common-card2>
 </template>
 <script lang='ts' setup>
+import { onMounted } from 'vue';
 import * as echarts from 'echarts'
 import 'echarts-wordcloud'
-import { onMounted } from 'vue';
 import { hotSearchOpts } from '../data'
 
-onMounted(() => {
+const initChart = () => {
     const ele = document.getElementById('main')
     if (!ele) {
         return
     }
     const chart = echarts.init(ele);
     chart.setOption(hotSearchOpts)
+}
+onMounted(() => {
+    initChart()
 })
+
 </script>
 <style lang='scss' scoped>
 .chart {
