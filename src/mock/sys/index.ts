@@ -31,12 +31,12 @@ export const login = (config: any) => {
 };
 
 export const getUserProfile = (config: any) => {
-  const { role = "" } = JSON.parse(config.body);
+  const { username } = JSON.parse(config.body);
   const permission: { menus: string[]; points: string[] } = {
     menus: [],
     points: [],
   };
-  if (role.startsWith("super")) {
+  if (username === 'super') {
     permission.menus = [
       R.USER_MANAGE_NAME,
       R.USER_ROLE_NAME,
@@ -52,7 +52,7 @@ export const getUserProfile = (config: any) => {
       A.DELETE_USER_NAME,
       A.ROLE_ASSIGN_NAME
     ];
-  } else if (role.startsWith("admin")) {
+  } else if (username === 'admin') {
     permission.menus = [
       R.USER_MANAGE_NAME,
       R.USER_INFO_NAME,
@@ -71,7 +71,6 @@ export const getUserProfile = (config: any) => {
           level: "T0",
         },
       ],
-      _id: "612710a0ec87aa543c9c341d",
       id: "0",
       openTime: "1648821814939",
       username: "super-admin",

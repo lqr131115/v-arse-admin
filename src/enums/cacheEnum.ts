@@ -4,6 +4,9 @@ export const CACHE_NAMESPACE = 'v-areas-admin'
 // token key
 export const TOKEN_KEY = 'TOKEN__';
 
+// role key
+export const ROLE_KEY = 'ROLE__';
+
 export const TOKEN_TIME_STAMP = 'TOKEN_TIME_STAMP__'
 
 // locale key
