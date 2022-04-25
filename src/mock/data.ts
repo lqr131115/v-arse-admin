@@ -16,7 +16,6 @@ export const userList: User[] = [
         level: "T2",
       },
     ],
-    _id: "612710a0ec87aa543c9c341d",
     id: "0",
     openTime: "1648821814939",
     username: "super-admin",
@@ -45,7 +44,6 @@ export const userList: User[] = [
         level: "T1",
       },
     ],
-    _id: "612710a0ec87aa543c9c341e",
     id: "1",
     username: "admin",
     openTime: "1648821000000",
@@ -74,7 +72,6 @@ export const userList: User[] = [
         level: "T2",
       },
     ],
-    _id: "612710a0ec87aa522c9c341e",
     id: "3",
     username: "ZhangSan",
     openTime: "1648821220022",
@@ -109,7 +106,6 @@ export const userList: User[] = [
         level: "T3",
       },
     ],
-    _id: "612710a0ec87bb543c9c341e",
     id: "4",
     username: "ZaoSi",
     openTime: "1648821110011",
@@ -138,7 +134,6 @@ export const userList: User[] = [
         level: "T4",
       },
     ],
-    _id: "612710a0ec87ca543c9c341e",
     id: "5",
     username: "WangWu",
     openTime: "1648821330033",
@@ -244,7 +239,7 @@ export const permissionList: Permission[] = [
 
 export const articleList: Article[] = [
   {
-    _id: "612a198d218e733440da07e6",
+    id: "612a198d218e733440da07e6",
     ranking: 1,
     title: "ESLint + Git Hooks",
     author: "Cool",
@@ -253,27 +248,25 @@ export const articleList: Article[] = [
     content:'<h1>编码规范1</h1><h2>编码规范2</h2><h3>编码规范3</h3><h4>编码规范4</h4><h5>编码规范5</h5>',
   },
   {
-    _id: "612a198d218e733440da07ec",
+    id: "612a198d218e733440da07ec",
     ranking: 2,
     title: "Tags View",
     author: "Cool",
     publicDate: "1629099597000",
     desc: "便签快捷导航功能",
     content:'<h1>便签快捷导航功能1</h1><h2>便签快捷导航功能2</h2><h3>便签快捷导航功能3</h3><h4>便签快捷导航功能4</h4><h5>便签快捷导航功能5</h5>',
-
   },
   {
-    _id: "612a198d218e733440da07e4",
+    id: "612a198d218e733440da07e4",
     ranking: 3,
     title: "Element-Plus",
     author: "Cool",
     publicDate: "1629099597000",
     desc: "基于 Vue 3.0 的桌面端组件库",
     content:'<h1>基于 Vue 3.0 的桌面端组件库1</h1><h2>基于 Vue 3.0 的桌面端组件库2</h2><h3>基于 Vue 3.0 的桌面端组件库3</h3><h4>基于 Vue 3.0 的桌面端组件库4</h4><h5>基于 Vue 3.0 的桌面端组件库5</h5>',
-
   },
   {
-    _id: "612a198d218e733440da07ea",
+    id: "612a198d218e733440da07ea",
     ranking: 4,
     title: "侧边栏",
     author: "Cool",
@@ -282,17 +275,16 @@ export const articleList: Article[] = [
     content:'<h1>根据路由动态生成的 Menu 菜单1</h1><h2>根据路由动态生成的 Menu 菜单2</h2><h3>根据路由动态生成的 Menu 菜单3</h3><h4>根据路由动态生成的 Menu 菜单4</h4><h5>根据路由动态生成的 Menu 菜单5</h5>',
   },
   {
-    _id: "612a198d218e733440da07eb",
+    id: "612a198d218e733440da07eb",
     ranking: 5,
     title: "动态面包屑",
     author: "Cool",
     publicDate: "1629099597000",
     desc: "动态生成的面包屑数据",
     content:'<h1>动态生成的面包屑数据1</h1><h2>动态生成的面包屑数据2</h2><h3>动态生成的面包屑数据3</h3><h4>动态生成的面包屑数据4</h4><h5>动态生成的面包屑数据5</h5>',
-
   },
   {
-    _id: "612a198d218e733440da07e8",
+    id: "612a198d218e733440da07e8",
     ranking: 6,
     title: "权限验证",
     author: "Cool",
@@ -302,7 +294,7 @@ export const articleList: Article[] = [
 
   },
   {
-    _id: "612a198d218e733440da07e5",
+    id: "612a198d218e733440da07e5",
     ranking: 7,
     title: "vue-element-admin",
     author: "Cool",

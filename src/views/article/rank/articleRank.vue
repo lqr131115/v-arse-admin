@@ -74,7 +74,7 @@ const sortOptions: Options = {
 }
 const handleRowCheck = (scope: any) => {
     rowOperation.value = 'check'
-    router.push(`${PageEnum.ARTICLE_DETAIL}/${scope.row._id}`)
+    router.push(`${PageEnum.ARTICLE_DETAIL}/${scope.row.id}`)
 }
 const handleRowDelete = (scope: any) => { rowOperation.value = 'delete' }
 const _getArticleList = async () => {

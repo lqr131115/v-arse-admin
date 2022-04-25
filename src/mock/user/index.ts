@@ -38,7 +38,7 @@ export const getUserList = (config: any) => {
 
 export const getUserInfoById = (config: any) => {
   const { id } = JSON.parse(config.body);
-  const user = userList.find((item: User) => item._id === id);
+  const user = userList.find((item: User) => item.id === id);
   if (user) {
     return Mock.mock({
       code: 200,

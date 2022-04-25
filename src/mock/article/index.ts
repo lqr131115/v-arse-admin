@@ -10,7 +10,7 @@ export const getArticleList = (config: any) => {
 
 export const getArticleDetail = (config: any) => {
   const { id } = JSON.parse(config.body);
-  const detail = articleList.find((r) => r._id === id);
+  const detail = articleList.find((r) => r.id === id);
   if (detail) {
     return Mock.mock({
       code: 200,

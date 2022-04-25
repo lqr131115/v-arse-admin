@@ -11,7 +11,7 @@ export const getRoleList = (config: any) => {
 
 export const getRoleInfoById = (config: any) => {
   const { id } = JSON.parse(config.body);
-  const user = userList.find((item: User) => item._id === id);
+  const user = userList.find((item: User) => item.id === id);
   if (user) {
     return Mock.mock({
       code: 200,
@@ -28,7 +28,7 @@ export const getRoleInfoById = (config: any) => {
 
 export const updateRoleInfoById = (config: any) => {
   const { id, roles } = JSON.parse(config.body);
-  const user = userList.find((item: User) => item._id === id);
+  const user = userList.find((item: User) => item.id === id);
   if (user) {
     return Mock.mock({
       code: 200,

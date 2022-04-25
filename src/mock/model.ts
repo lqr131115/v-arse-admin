@@ -1,7 +1,6 @@
 export type User = {
-  role: Role[];
-  _id: string;
-  id: string;
+  id: string|number;
+  role?: Role[];
   openTime: string;
   username: string;
   avatar: string;
@@ -18,14 +17,14 @@ export type User = {
 };
 
 export type Role = {
-  id: string;
+  id: string|number;
   name: string;
   desc: string;
   level: string;
 };
 
 export type Permission = {
-  id: string;
+  id: string|number;
   name: string;
   mark: string;
   desc: string;
@@ -33,7 +32,7 @@ export type Permission = {
 };
 
 export type Article = {
-  _id: string;
+  id: string | number;
   ranking: number;
   title: string;
   author: string;

@@ -99,13 +99,13 @@ const onCurrentPageChange = (val: number) => { currentPage.value = val }
 
 const handleRowRole = (scope: any) => {
     rowOperation.value = 'role'
-    userId.value = scope.row._id
+    userId.value = scope.row.id
     rowRole.value = scope.row.role.map((r: Role) => r.name)
     visible.value = true
 }
 const handleRowCheck = (scope: any) => {
     rowOperation.value = 'check'
-    router.push(`${PageEnum.USER_INFO}/${scope.row._id}`)
+    router.push(`${PageEnum.USER_INFO}/${scope.row.id}`)
 }
 const handleRowDelete = (scope: any) => { rowOperation.value = 'delete' }
 const _getUserList = async (pageSize: number, currentPage: number) => {
