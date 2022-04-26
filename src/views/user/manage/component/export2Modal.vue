@@ -33,10 +33,10 @@ const handleClick = () => { visible.value = true }
 const onClosed = () => { fileName.value = DEFAULT_FILE_NAME }
 const handleConfirm = async () => { visible.value = false, await exportAndDownload() }
 const formatJson = (rows: User[], header: object) => {
-   return rows.map((item) => {
+   return rows.map((item:any) => {
       return Object.keys(header).map((key) => {
          if (key === UserRelationEnum.ROLE) {
-            return item[key].map((r: any) => r.title).join(',')
+            return (item[key] || []).map((r: any) => r.title).join(',')
          }
          // export2Excel做了时间戳的格式化
          if (key === UserRelationEnum.OPEN_TIME) {
