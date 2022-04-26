@@ -27,7 +27,7 @@ export default defineConfig({
     port: 8080,
     proxy: {
       "/api": {
-        target: "http://localhost:3000",
+        target: "http://ares.echo.ah.cn:8889/",
         changeOrigin: true,
       },
     },

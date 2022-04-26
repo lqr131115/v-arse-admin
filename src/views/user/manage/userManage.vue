@@ -100,7 +100,7 @@ const onCurrentPageChange = (val: number) => { currentPage.value = val }
 const handleRowRole = (scope: any) => {
     rowOperation.value = 'role'
     userId.value = scope.row.id
-    rowRole.value = scope.row.role.map((r: Role) => r.name)
+    rowRole.value = (scope.row.role || []).map((r: Role) => r.name)
     visible.value = true
 }
 const handleRowCheck = (scope: any) => {

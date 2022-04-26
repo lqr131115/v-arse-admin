@@ -16,7 +16,7 @@ export const login = (config: any) => {
   if (username && password === md5(DEFAULT_PASSWORD)) {
     return Mock.mock({
       data: {
-        token: `${username} Bearer 4378488sdsd29399281xjdjfkdf`,
+        token: `Bearer 4378488sdsd29399281xjdjfkdf`,
       },
       code: 200,
       msg: "请求成功",
