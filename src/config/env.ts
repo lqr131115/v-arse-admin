@@ -13,6 +13,6 @@ const config: EnvBaseConfig = {
 };
 
 export default {
-  mock: false,
+  mock: true,
   ...config[env],
 };
