@@ -5,6 +5,7 @@ import { useAppConfig } from '@/hooks/setting/useAppConfig'
 import SideBar from './components/sidebar/sidebar.vue'
 import NavBar from './components/navbar/navbar.vue'
 import AppMain from './components/appmain/appmain.vue'
+import Footer from './components/footer/footer.vue'
 import LockPage from '@/views/sys/lock/lockPage.vue'
 
 let collapse = ref<boolean>(false)
@@ -28,6 +29,7 @@ const navBarTheme = computed(() => ({ backgroundColor: getNavbarBgColor.value })
         </el-header>
         <el-main>
           <app-main></app-main>
+          <Footer></Footer>
           <el-backtop target=".el-main" />
         </el-main>
       </el-container>

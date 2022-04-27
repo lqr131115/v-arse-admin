@@ -36,7 +36,10 @@
         <div mb10>
           <OtherSignIn />
         </div>
-      </el-card>
+        </el-card>
+      <!-- <div class="icp">
+        <el-link :underline="false" href="https://beian.miit.gov.cn" target="_blank">皖ICP备2022006209号</el-link>
+      </div> -->
     </div>
   </div>
 </template>
@@ -102,7 +105,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 }
 
 const _login = () => {
-  
+
 }
 
 </script>
@@ -168,6 +171,11 @@ const _login = () => {
         width: 100%;
       }
     }
+
+    // .icp{
+    //   position: relative;
+    //   top:10%
+    // }
   }
 
   &::before {
