@@ -1,4 +1,5 @@
-export const TOKEN_TIMEOUT_VALUE = 1 * 24 * 3600 * 1e3;
+// 2h
+export const TOKEN_TIMEOUT_VALUE = 2 * 3600 * 1e3;
 
 export const FILE_MAX_SIZE = 10;
 
