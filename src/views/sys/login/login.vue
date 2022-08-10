@@ -11,7 +11,7 @@
             <img class="login-box-bg" src="@/icons/svg/login-box-bg.svg" alt="logo" />
           </div>
           <div class="desc">
-            <span class="text_2">一个简约的、开箱即用的后台管理系统解决方案</span>
+            <span class="text_2">一个简约的、开箱即用的后台管理方案</span>
           </div>
           <div class="miss-xwt">
             <p fz16>我自幼向往水乡风光 可我从未去过江南</p>
@@ -133,10 +133,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       console.log('error submit!', fields)
     }
   })
-}
-
-const _login = () => {
-
 }
 
 </script>

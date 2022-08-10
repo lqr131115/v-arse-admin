@@ -21,6 +21,7 @@ const LOGIN_PATH = PageEnum.BASE_LOGIN;
 const ERROR_404__PATH = PageEnum.ERROR_PAGE__404;
 const ERROR_401__PATH = PageEnum.ERROR_PAGE__401;
 const whitePathList: string[] = [LOGIN_PATH, ERROR_404__PATH, ERROR_401__PATH];
+const ENV_MODE = import.meta.env.MODE
 
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
@@ -40,7 +41,8 @@ router.beforeEach(async (to, from, next) => {
       } 
     } else {
       // 被动退出 主动处理(前端记录token时效处理)
-      if (isTimeout()) {
+      // 本地前端处理  线上后端处理
+      if (isTimeout() && ENV_MODE === "development") {
         userStore.logout();
         msgError("token失效");
         return Promise.reject("token失效");
