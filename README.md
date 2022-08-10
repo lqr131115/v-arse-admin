@@ -53,11 +53,9 @@ npm run dev
 ## Contact
 
 :beers: 加个好友 深入交流?
-
-<img width='180' height='190' src="https://s3.bmp.ovh/imgs/2022/04/16/6648f81652c78c33.jpg"/>
+<img src="./src/assets/chat.jpg" width = "180" height = "190" alt="交流"  />
 
 ## Support
 
 :dollar: 支持一波? 协助奔小康
-
-<img width='160' height='200' src="https://s3.bmp.ovh/imgs/2022/04/16/10c41e57f796ff01.jpg" />
+<img src="./src/assets/support.jpg" width = "180" height = "190" alt="支持"  />
