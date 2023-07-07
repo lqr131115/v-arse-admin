@@ -41,7 +41,7 @@
         </template>
       </template>
     </el-form-item>
-    <!-- 操作项目 -->
+    <!-- 操作项 -->
     <el-form-item>
       <slot name="action" :form="formRef" :model="formModel"></slot>
     </el-form-item>

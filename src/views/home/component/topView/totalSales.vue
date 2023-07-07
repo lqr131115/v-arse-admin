@@ -1,5 +1,5 @@
 <template>
-  <c-common-card title="累计销售额" value="￥ 12,332,122">
+  <c-common-chart title="累计销售额" value="￥ 12,332,122">
     <template #chart>
       <div class="compare-wrapper">
         <div class="compare">
@@ -18,7 +18,7 @@
       <span>昨日销售额&nbsp;</span>
       <span class="emphasis">￥32,123</span>
     </template>
-  </c-common-card>
+  </c-common-chart>
 </template>
 
 <script lang="ts" setup>

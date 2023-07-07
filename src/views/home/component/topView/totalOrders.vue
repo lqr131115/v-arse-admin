@@ -1,5 +1,5 @@
 <template>
-  <c-common-card title="累计订单量" value="45,312">
+  <c-common-chart title="累计订单量" value="45,312">
     <template #chart>
       <v-chart class="chart" :option="option" autoresize />
     </template>
@@ -7,7 +7,7 @@
       <span>昨日订单量&nbsp;</span>
       <span class="emphasis">2,123</span>
     </template>
-  </c-common-card>
+  </c-common-chart>
 </template>
 
 <script lang="ts" setup>

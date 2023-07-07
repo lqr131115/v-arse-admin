@@ -1,5 +1,5 @@
 <template>
-  <div class="common-card">
+  <div class="common-chart">
     <div class="title">{{ title }}</div>
     <div class="value">{{ value }}</div>
     <div class="chart">

@@ -88,7 +88,7 @@ export const options: FormOptions[] = [
     prop: "hobby",
     rule: [
       {
-        required: true,
+        required: false,
         message: "爱好不能为空",
         trigger: "change",
       },
@@ -171,18 +171,18 @@ export const options: FormOptions[] = [
   },
 ];
 
-export const richTextOpt:FormOptions =  {
+export const richTextOpt: FormOptions = {
   type: "rich-text",
   value: "",
   prop: "desc",
   label: "富文本描述",
   placeholder: "请输入描述",
-}
+};
 
-export const markdownOpt:FormOptions =   {
+export const markdownOpt: FormOptions = {
   type: "markdown",
   value: "",
   prop: "detail",
   label: "Markdown详情",
   placeholder: "请输入描述",
-}
+};

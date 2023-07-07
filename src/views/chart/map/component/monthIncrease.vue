@@ -1,5 +1,5 @@
 <template>
-    <c-common-card2 :style="{ width: '100%'}" shadow="hover">
+    <c-common-chart-card :style="{ width: '100%'}" shadow="hover">
         <template #header>
             <div class="header-wrapper">
                 <div class="header-title">用户月同比增长</div>
@@ -8,7 +8,7 @@
         <template #default>
             <div class="liquid-wrapper" id="monthincrease"></div>
         </template>
-    </c-common-card2>
+    </c-common-chart-card>
 </template>
 <script lang='ts' setup>
 import { onMounted } from 'vue';

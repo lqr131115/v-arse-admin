@@ -1,5 +1,5 @@
 <template>
-  <c-common-card title="累计用户数" value="76,433">
+  <c-common-chart title="累计用户数" value="76,433">
     <template #chart>
       <v-chart class="chart" :option="option" autoresize/>
     </template>
@@ -13,7 +13,7 @@
         <div class="decrease" />
       </div>
     </template>
-  </c-common-card>
+  </c-common-chart>
 </template>
 
 <script lang="ts" setup>
