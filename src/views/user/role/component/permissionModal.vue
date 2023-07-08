@@ -19,7 +19,7 @@ import { getPermissionList } from '@/api/permission'
 import type { TreeProps } from '@/types/component'
 import { msgSuccess } from '@/utils/notice';
 const emits = defineEmits(['update:visible'])
-const props = defineProps({
+defineProps({
     visible: {
         type: Boolean,
         default: false

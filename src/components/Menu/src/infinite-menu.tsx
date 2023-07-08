@@ -1,6 +1,9 @@
+import { useI18n } from 'vue-i18n';
 import { defineComponent, PropType } from "vue";
 import * as Icons from "@element-plus/icons-vue";
 import type { MenuItem } from '@/types/component';
+
+// const { $t } = i18n;
 export default defineComponent({
   props: {
     data: {
@@ -18,24 +21,30 @@ export default defineComponent({
     },
   },
   setup(props) {
-    let renderMenu = (data: MenuItem[]) => {
+    const {t} = useI18n();
+    const genItemSlots = (item: MenuItem) => {
+      return {
+        title: () => {
+          return (
+            <>
+              {item.i && (
+                <el-icon>
+                  {item.i.render()}
+                </el-icon>
+              )}
+              <span>{ t(`route.${item.name}`) }</span>
+            </>
+          );
+        },
+      };
+    }
+    const renderMenu = (data: MenuItem[]) => {
       return data.map((item: MenuItem) => {
-        item.i = (Icons as any)[item.icon!];
-        let slots = {
-          title: () => {
-            return (
-              <>
-                {item.i && (
-                  <el-icon>
-                    <item.i />
-                  </el-icon>
-                )}
-                <span>{item.name}</span>
-              </>
-            );
-          },
-        };
+        // 图标组件对象
+        item.i = item.i ? Icons[item.i] : null;
+        
         if (item.children && item.children.length) {
+          const slots = genItemSlots(item);
           return (
             <>
               <el-sub-menu v-slots={slots} index={item.index}>
@@ -49,15 +58,16 @@ export default defineComponent({
             <el-menu-item index={item.index}>
               {item.i && (
                 <el-icon>
-                  <item.i />
+                  {item.i.render()}
                 </el-icon>
               )}
-              <span>{item.name}</span>
+              <span>{ t(`route.${item.name}`) }</span>
             </el-menu-item>
           </>
         );
       });
     };
+
     return () => {
       return <el-menu router={props.router}>{renderMenu(props.data)}</el-menu>;
     };

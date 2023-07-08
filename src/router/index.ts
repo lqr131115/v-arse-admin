@@ -92,6 +92,12 @@ export const publicRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/component/cParser/cParser.vue"),
         meta: { title: "cParser", icon: "files" },
       },
+      {
+        path: "/component/menu",
+        name: C.COMPONENT_PARSER_NAME,
+        component: () => import("@/views/component/cMenu/cMenu.vue"),
+        meta: { title: "cMenu", icon: "icon-menu" },
+      },
     ],
     meta: { title: "component", icon: "grid" },
   },
@@ -117,7 +123,6 @@ const router = createRouter({
 });
 
 export const resetRoute = () => {
-  
   const userStore = useUserStore();
   const userProfile: any = userStore.userProfile;
   if (

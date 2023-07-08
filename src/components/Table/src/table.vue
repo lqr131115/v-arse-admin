@@ -196,7 +196,7 @@ const handleCloseColumnEdit = (scope: any) => {
 }
 const handleRowClick = (row: any, column: any) => {
    // 点击操作列才会处理
-   if (column.property === actionOptions.value?.prop) {
+   if (column?.property === actionOptions.value?.prop) {
       if (props.editable && editRowAction.value === 'edit') {
          row.isEditing = !row.isEditing
          // 其他行为恢复为非编辑态
